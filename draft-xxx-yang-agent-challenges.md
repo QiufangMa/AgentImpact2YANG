@@ -19,11 +19,11 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Rethinking YANG-based Service and Network Management in the Era of Agentic AI"
+abbrev: "Agent implications for YANG"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-xxx-yang-agent-challenges-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:

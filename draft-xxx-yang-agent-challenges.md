@@ -55,7 +55,7 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
  * The network digital twin and agentic AI based architecture for AI driven network operations described in {{?I-D.wmz-nmrg-agent-ndt-arch}}, which deploys hybrid agent systems within the network autonomous domain, and allows agents to invoke network operational function modules and collaborate to solve non-trivial tasks.
 
- * The Network Management Agent (NMA) concept presented in {{?I‑D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.
+ * The Network Management Agent (NMA) concept presented in test {{?I-D.smith-vxlan-group-policy}} {{?I‑D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.
 
 * The applicability of MCP for Network Management {{?I‑D.yang-nmrg-mcp-nm}}, which explores how the Model Context Protocol can refactor network management operations and network capabilities as LLM-callable tools.
 

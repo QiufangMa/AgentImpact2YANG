@@ -138,16 +138,16 @@ This document targets a two-layer agent deployment architecture as specified in 
 A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.
 
 Step 1:
-: A network operator submits an E2E service request expressed in natural language.
+: A network operator submits an end-to-end service request expressed in natural language including eplicit service requirements. The intent may imply some constraints such as not affecting existing network services.
 
 Step 2:
-: The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured configuration using network model.
+: The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model and parameters for user confirmation, and then decomposes it into structured configuration using network model.
 
 Step 3:
 : YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.
 
 Step 4:
-: The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF.
+: The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF. Validation checks such as syntax and semantic validation may be performed before the device configuration is delivered.
 
 Step 5:
 : Network devices receive incoming configuration, execute changes, and report execution response.

@@ -38,6 +38,15 @@ normative:
 
 informative:
 
+MCP:
+  title: Model Context Protocol
+  target: https://modelcontextprotocol.io/
+  date: November 2024
+
+gNMIBuddy:
+  title: gNMIBuddy
+  target: https://github.com/jillesca/gNMIBuddy
+  date: February 2026
 
 --- abstract
 
@@ -58,7 +67,7 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
  * The Network Management Agent (NMA) concept presented in {{?I-D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.
 
-* The applicability of MCP for Network Management {{?I-D.yang-nmrg-mcp-nm}}, which explores how the Model Context Protocol can refactor network management operations and network capabilities as LLM-callable tools.
+* The applicability of MCP {{MCP}} for Network Management {{?I-D.yang-nmrg-mcp-nm}}, which explores how the Model Context Protocol can refactor network management operations and network capabilities as LLM-callable tools.
 
  * The applicability of A2A to Network Management {{?I-D.yang-nmrg-a2a-nm}}, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.
 
@@ -199,13 +208,13 @@ This section explores several operational directions to try to bridge the gaps i
 
 A promising direction for partially addressing Gap 1 (Semantic Incompleteness) is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
 
-The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
+The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy {{gNMIBuddy}} provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
 
 ## Semantic Enrichment via Knowledge Graphs
 
 Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.
 
-IETF work in this area includes {{I-D.mackey-nmop-kg-for-netops}} and {{I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
+IETF work in this area includes {{?I-D.mackey-nmop-kg-for-netops}} and {{?I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
 
 When a user expresses an high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.
 

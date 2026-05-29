@@ -94,7 +94,7 @@ This section uses a simplied layered agentic AI reference architecture compliant
 
 ## Layered AI Agent Deployment Architecture
 
-This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplied view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplied view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
 
 
 ~~~~

@@ -41,8 +41,9 @@ informative:
 
 --- abstract
 
- to be completed...
- discussion on the impacts imposed on YANG ecosystems (including device, network and service models) remain insufficient.
+The industry today is actively exploring the application of agentic AI to autonomous network operations. However, insufficient attention has been paid to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation.
+
+Based on an end-to-end intent translation workflow that engages YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
 
 
 --- middle
@@ -87,11 +88,14 @@ The following definitions are used throughout this document:
 Agentic AI:
 : to be completed...
 
-# A Reference Intent Workflow: From Natural Language to YANG Configuration
+# A Reference Architecture and Typical Workflows
+
+This section uses a simplied layered agentic AI reference architecture compliant with {{I-D.draft-wmz-nmrg-agent-ndt-arch}} and describes two typical workflows: network service provisioning/optimization and fault troubleshooting. The workflows cover scenarios from configuration generation to YANG data consumption, which are essential to expose and derive the gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
 
 ## Layered AI Agent Deployment Architecture
 
-This document targets a two-layer agent deployment architecture as specified in {{arch}}:
+This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplied view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+
 
 ~~~~
 +---------------------+
@@ -119,13 +123,16 @@ This document targets a two-layer agent deployment architecture as specified in 
 ~~~~
 {: #arch title="A simplified reference architecture" artwork-align="center"}
 
-A complete end-to-end workflow is defined as follows. Note that the following flow is not the only possible one. The intent flow shown here is an example — a typical workflow that illustrates how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
+
+## Workflow 1: Service Provisioning/Optimization
+
+A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.
 
 Step 1:
 : A network operator submits an E2E service request expressed in natural language.
 
 Step 2:
-: The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured network model layer YANG data.
+: The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured configuration using network model.
 
 Step 3:
 : YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.
@@ -134,18 +141,33 @@ Step 4:
 : The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF.
 
 Step 5:
-: Network devices receive incoming configurations against YANG models, execute changes, and report execution response.
+: Network devices receive incoming configuration, execute changes, and report execution response.
 
+## Workflow 2: Network Troubleshooting
 
-# Gap Analysis
+Step 1:
+: A network operator submits a high-level operational intent, requesting the network AI agent to continuously monitor the network, perceive emerging anomalies, perform active diagnosis, and conduct autonomous repair while reporting root causes and handling results.
+
+Step 2:
+: Network AI agent receives the comprehensive telemetry data which provides a holistic view of the network operational state across multiple network devices and YANG modules. By analyzing the real-time data, it could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.
+
+Step 3:
+: Once a issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, such as when a failure is caused by misconfiguration.
+
+Step 4:
+: The network AI agent autonomously executes the formulated repair actions by delivering corresponding YANG configuration changes to devices, after invoking the network digital twin to simulate the proposed repair solution successfully.
+
+# Gap Analysis {#gaps}
 
 ## Gap 1: Semantic Incompleteness
 
+### Description
+
 Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as when, must and leafref.
 
-When the AI agent translates natural language into YANG-structured data, two outstanding issues arise. First, AI hallucinations are commonly observed: it may generate a non-existent YANG node, invalid enumeration values or out-of-range parameters, or overlook a "when"/"must" constraints on configuration data defined by YANG. This problem is even amplified in multi-vendor and cross-version model scenarios. Second, implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
+When the AI agent translates natural language into YANG-structured data, two outstanding issues arise. First, AI hallucinations are commonly observed: it may generate a non-existent YANG node, invalid enumeration values or out-of-range parameters, or overlook a "when"/"must" constraints on configuration data defined by YANG. This problem is even amplified in multi-vendor and cross-version model scenarios. Second, implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process. As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.
 
-As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.
+When analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
 ## Gap 2: Expressiveness Limits
 
@@ -159,17 +181,19 @@ In short, the fixed-state design of YANG creates a hard boundary for carrying in
 
 In the reference two-layer agentic AI architecture, orchestrator AI agent and network AI agent could operate autonomously and asynchronously with no centralized global scheduling. Different agents may initiate independent tasks simultaneously against the same set of network devices and configuration data.
 
-A typical conflicting scenario occurs when an orchestrator AI agent is executing a service provisioning task, while a network AI agent triggers real-time network incident diagnosis and resolution, based on continuous telemetry streams and analysis.
+A typical conflicting scenario occurs when an orchestrator AI agent is executing a service provisioning task, while a network AI agent triggers real-time network fault diagnosis and resolution, based on continuous telemetry streams and analysis.
 
 Concurrent write operations on identical YANG nodes may lead to configuration overwriting and policy conflicts, which might cause critical risks in asynchronous multi-agent operational environments.
 
-## Gap 4: Explainability
+## Gap 4:
+
+## Gap 5: Explainability
 
 YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
 
 Currently, YANG and YANG-driven network management protocols has no standard fields for such explanatory metadata. An agent may silently send an \<edit-config\> RPC operation that deletes a leaf, without any indication of why the deletion was necessary.
 
-
+# Possible Way Forward
 
 
 

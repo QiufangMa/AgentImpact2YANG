@@ -4,8 +4,8 @@
 
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                    Huawei
-Intended status: Informational                               28 May 2026
-Expires: 29 November 2026
+Intended status: Informational                               29 May 2026
+Expires: 30 November 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -14,9 +14,20 @@ Expires: 29 November 2026
 
 Abstract
 
-   to be completed...  discussion on the impacts imposed on YANG
-   ecosystems (including device, network and service models) remain
-   insufficient.
+   The industry today is actively exploring the application of agentic
+   AI to autonomous network operations.  However, insufficient attention
+   has been paid to the impacts that the introduction of agentic AI may
+   impose on YANG modeling, which serves as the foundation of model-
+   driven network automation.
+
+   Based on an end-to-end intent translation workflow that engages YANG
+   models across service, network, and device layers, this document
+   identifies some critical gaps when AI agents generate and operate on
+   YANG data.  The purpose of this document is not to propose YANG
+   extensions or new modeling languages.  Instead, it aims to facilitate
+   discussion on how existing YANG ecosystems can be better leveraged,
+   and how complementary mechanisms can bridge these gaps while
+   preserving YANG’s interoperability.
 
 About This Document
 
@@ -45,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2026.
+   This Internet-Draft will expire on 30 November 2026.
 
 Copyright Notice
 
@@ -65,19 +76,23 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  A Reference Intent Workflow: From Natural Language to YANG
-           Configuration
+   3.  A Reference Architecture and Typical Workflows
      3.1.  Layered AI Agent Deployment Architecture
+     3.2.  Workflow 1: Service Provisioning/Optimization
+     3.3.  Workflow 2: Network Troubleshooting
    4.  Gap Analysis
      4.1.  Gap 1: Semantic Incompleteness
+       4.1.1.  Description
      4.2.  Gap 2: Expressiveness Limits
      4.3.  Gap 3: Transaction Conflicts
-     4.4.  Gap 4: Explainability
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+     4.4.  Gap 4:
+     4.5.  Gap 5: Explainability
+   5.  Possible Way Forward
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -157,13 +172,26 @@ Table of Contents
 
    Agentic AI:  to be completed...
 
-3.  A Reference Intent Workflow: From Natural Language to YANG
-    Configuration
+3.  A Reference Architecture and Typical Workflows
+
+   This section uses a simplied layered agentic AI reference
+   architecture compliant with [I-D.draft-wmz-nmrg-agent-ndt-arch] and
+   describes two typical workflows: network service provisioning/
+   optimization and fault troubleshooting.  The workflows cover
+   scenarios from configuration generation to YANG data consumption,
+   which are essential to expose and derive the gaps in Section 4.  Note
+   that these flows are not the only possible ones.  The intent flows
+   shown here are just examples, i.e., typical workflows that illustrate
+   how YANG models at the service, network, and device layers can be
+   engaged in an agent-integrated network automation context.
 
 3.1.  Layered AI Agent Deployment Architecture
 
    This document targets a two-layer agent deployment architecture as
-   specified in Figure 1:
+   specified in Figure 1.  It is a simplied view that hides task agents,
+   function modules or toolsets that are available for agents to invoke.
+   Refer to [I-D.draft-wmz-nmrg-agent-ndt-arch] for the complete
+   architecture design.
 
        +---------------------+
        |    Orchestrator     |
@@ -190,19 +218,18 @@ Table of Contents
 
                Figure 1: A simplified reference architecture
 
-   A complete end-to-end workflow is defined as follows.  Note that the
-   following flow is not the only possible one.  The intent flow shown
-   here is an example — a typical workflow that illustrates how YANG
-   models at the service, network, and device layers can be engaged in
-   an agent-integrated network automation context.
+3.2.  Workflow 1: Service Provisioning/Optimization
+
+   A complete end-to-end workflow focusing on AI agents generating
+   configuration from high-level intents is defined as follows.
 
    Step 1:  A network operator submits an E2E service request expressed
       in natural language.
 
    Step 2:  The orchestrator AI agent parses the natural language
       intent, mapped it into the corresponding service model for user
-      confirmation, and then decomposes it into structured network model
-      layer YANG data.
+      confirmation, and then decomposes it into structured configuration
+      using network model.
 
    Step 3:  YANG-structured data are encapsulated as message payload,
       and transmitted to network AI agents along with other context
@@ -213,12 +240,40 @@ Table of Contents
       tools through MCP, or directly delivers YANG configuration via
       NETCONF or RESTCONF.
 
-   Step 5:  Network devices receive incoming configurations against YANG
-      models, execute changes, and report execution response.
+   Step 5:  Network devices receive incoming configuration, execute
+      changes, and report execution response.
+
+3.3.  Workflow 2: Network Troubleshooting
+
+   Step 1:  A network operator submits a high-level operational intent,
+      requesting the network AI agent to continuously monitor the
+      network, perceive emerging anomalies, perform active diagnosis,
+      and conduct autonomous repair while reporting root causes and
+      handling results.
+
+   Step 2:  Network AI agent receives the comprehensive telemetry data
+      which provides a holistic view of the network operational state
+      across multiple network devices and YANG modules.  By analyzing
+      the real-time data, it could detect network anomalies swiftly,
+      which enables the prompt identification of potential issues before
+      they escalate into major faults.
+
+   Step 3:  Once a issue or fault is identified, network AI agent
+      diagnoses the exact cause and generate targeted repair solutions.
+      These solutions may involve making configuration changes on
+      relevant network devices, such as when a failure is caused by
+      misconfiguration.
+
+   Step 4:  The network AI agent autonomously executes the formulated
+      repair actions by delivering corresponding YANG configuration
+      changes to devices, after invoking the network digital twin to
+      simulate the proposed repair solution successfully.
 
 4.  Gap Analysis
 
 4.1.  Gap 1: Semantic Incompleteness
+
+4.1.1.  Description
 
    Natural language intents from operators inherently carry ambiguity,
    implicit constraints, missing parameters and diverse interpretations.
@@ -235,11 +290,16 @@ Table of Contents
    model scenarios.  Second, implicit operational requirements embedded
    in original intents, such as service continuity, high availability
    and security compliance, are likely lost during the transformation
-   process.
-
-   As a result, the generated configuration data are either
+   process.  As a result, the generated configuration data are either
    syntactically invalid, semantically incomplete, or inconsistent with
    the original operator intent.
+
+   When analyzing massive telemetry data composed of operational state
+   data from multiple devices, agents may fail to fully understand
+   nested model hierarchies and implicit dependencies between YANG
+   nodes.  Incomplete semantic comprehension could lead to misjudgment
+   of network anomalies, inaccurate fault localization, and flawed
+   repair solutions derived from misinterpreted state data.
 
 4.2.  Gap 2: Expressiveness Limits
 
@@ -272,14 +332,16 @@ Table of Contents
 
    A typical conflicting scenario occurs when an orchestrator AI agent
    is executing a service provisioning task, while a network AI agent
-   triggers real-time network incident diagnosis and resolution, based
-   on continuous telemetry streams and analysis.
+   triggers real-time network fault diagnosis and resolution, based on
+   continuous telemetry streams and analysis.
 
    Concurrent write operations on identical YANG nodes may lead to
    configuration overwriting and policy conflicts, which might cause
    critical risks in asynchronous multi-agent operational environments.
 
-4.4.  Gap 4: Explainability
+4.4.  Gap 4:
+
+4.5.  Gap 5: Explainability
 
    YANG is designed for deterministic network automation.  It assumes
    the client knows exactly what to configure and why.  AI agents, on
@@ -297,17 +359,19 @@ Table of Contents
    send an <edit-config> RPC operation that deletes a leaf, without any
    indication of why the deletion was necessary.
 
-5.  Security Considerations
+5.  Possible Way Forward
+
+6.  Security Considerations
 
    TODO Security
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -318,7 +382,15 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-7.2.  Informative References
+8.2.  Informative References
+
+   [I-D.draft-wmz-nmrg-agent-ndt-arch]
+              Wu, Q., Zhou, C., Contreras, L. M., Han, S., and Y. Hong,
+              "Network Digital Twin and Agentic AI based Architecture
+              for AI driven Network Operations", Work in Progress,
+              Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04, 21 May
+              2026, <https://datatracker.ietf.org/doc/html/draft-wmz-
+              nmrg-agent-ndt-arch-04>.
 
    [I-D.wmz-nmrg-agent-ndt-arch]
               Wu, Q., Zhou, C., Contreras, L. M., Han, S., and Y. Hong,

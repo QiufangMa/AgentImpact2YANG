@@ -7,8 +7,8 @@
 <title>Rethinking YANG-based Service and Network Management in the Era of Agentic AI</title>
 <meta content="Qiufang Ma" name="author">
 <meta content="
-       to be completed...
- discussion on the impacts imposed on YANG ecosystems (including device, network and service models) remain insufficient. 
+       The industry today is actively exploring the application of agentic AI to autonomous network operations. However, insufficient attention has been paid to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation. 
+       Based on an end-to-end intent translation workflow that engages YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability. 
     " name="description">
 <meta content="xml2rfc 3.33.0" name="generator">
 <meta content="Agentic AI" name="keyword">
@@ -1050,7 +1050,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma</td>
-<td class="center">Expires 29 November 2026</td>
+<td class="center">Expires 30 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg {
 <dd class="internet-draft">draft-xxx-yang-agent-challenges-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-28" class="published">28 May 2026</time>
+<time datetime="2026-05-29" class="published">29 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-29">29 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-30">30 November 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1082,8 +1082,8 @@ svg {
 <h1 id="title">Rethinking YANG-based Service and Network Management in the Era of Agentic AI</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">to be completed...
- discussion on the impacts imposed on YANG ecosystems (including device, network and service models) remain insufficient.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The industry today is actively exploring the application of agentic AI to autonomous network operations. However, insufficient attention has been paid to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">Based on an end-to-end intent translation workflow that engages YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1115,7 +1115,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1151,10 +1151,16 @@ svg {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-a-reference-intent-workflow" class="internal xref">A Reference Intent Workflow: From Natural Language to YANG Configuration</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-a-reference-architecture-an" class="internal xref">A Reference Architecture and Typical Workflows</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-layered-ai-agent-deployment" class="internal xref">Layered AI Agent Deployment Architecture</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-workflow-1-service-provisio" class="internal xref">Workflow 1: Service Provisioning/Optimization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-workflow-2-network-troubles" class="internal xref">Workflow 2: Network Troubleshooting</a></p>
 </li>
             </ul>
 </li>
@@ -1163,6 +1169,11 @@ svg {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-gap-1-semantic-incompletene" class="internal xref">Gap 1: Semantic Incompleteness</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
+                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-description" class="internal xref">Description</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-gap-2-expressiveness-limits" class="internal xref">Gap 2: Expressiveness Limits</a></p>
@@ -1171,32 +1182,38 @@ svg {
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-transaction-conflicts" class="internal xref">Gap 3: Transaction Conflicts</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4-explainability" class="internal xref">Gap 4: Explainability</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4" class="internal xref">Gap 4:</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-gap-5-explainability" class="internal xref">Gap 5: Explainability</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-possible-way-forward" class="internal xref">Possible Way Forward</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1264,17 +1281,18 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </dl>
 </section>
 </div>
-<div id="a-reference-intent-workflow-from-natural-language-to-yang-configuration">
+<div id="a-reference-architecture-and-typical-workflows">
 <section id="section-3">
-      <h2 id="name-a-reference-intent-workflow">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-a-reference-intent-workflow" class="section-name selfRef">A Reference Intent Workflow: From Natural Language to YANG Configuration</a>
+      <h2 id="name-a-reference-architecture-an">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-a-reference-architecture-an" class="section-name selfRef">A Reference Architecture and Typical Workflows</a>
       </h2>
+<p id="section-3-1">This section uses a simplied layered agentic AI reference architecture compliant with <span>[<a href="#I-D.draft-wmz-nmrg-agent-ndt-arch" class="cite xref">I-D.draft-wmz-nmrg-agent-ndt-arch</a>]</span> and describes two typical workflows: network service provisioning/optimization and fault troubleshooting. The workflows cover scenarios from configuration generation to YANG data consumption, which are essential to expose and derive the gaps in <a href="#gaps" class="auto internal xref">Section 4</a>. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="layered-ai-agent-deployment-architecture">
 <section id="section-3.1">
         <h3 id="name-layered-ai-agent-deployment">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-layered-ai-agent-deployment" class="section-name selfRef">Layered AI Agent Deployment Architecture</a>
         </h3>
-<p id="section-3.1-1">This document targets a two-layer agent deployment architecture as specified in <a href="#arch" class="auto internal xref">Figure 1</a>:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">This document targets a two-layer agent deployment architecture as specified in <a href="#arch" class="auto internal xref">Figure 1</a>. It is a simplied view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to <span>[<a href="#I-D.draft-wmz-nmrg-agent-ndt-arch" class="cite xref">I-D.draft-wmz-nmrg-agent-ndt-arch</a>]</span> for the complete architecture design.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-a-simplified-reference-arch"></span><div id="arch">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-3.1-2.1">
@@ -1307,31 +1325,67 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#name-a-simplified-reference-arch" class="selfRef">A simplified reference architecture</a>
           </figcaption></figure>
 </div>
-<p id="section-3.1-3">A complete end-to-end workflow is defined as follows. Note that the following flow is not the only possible one. The intent flow shown here is an example — a typical workflow that illustrates how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.1-4">
-          <dt id="section-3.1-4.1">Step 1:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.2">
-            <p id="section-3.1-4.2.1">A network operator submits an E2E service request expressed in natural language.<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="workflow-1-service-provisioningoptimization">
+<section id="section-3.2">
+        <h3 id="name-workflow-1-service-provisio">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-workflow-1-service-provisio" class="section-name selfRef">Workflow 1: Service Provisioning/Optimization</a>
+        </h3>
+<p id="section-3.2-1">A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-3.2-2">
+          <dt id="section-3.2-2.1">Step 1:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.2">
+            <p id="section-3.2-2.2.1">A network operator submits an E2E service request expressed in natural language.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-4.3">Step 2:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.4">
-            <p id="section-3.1-4.4.1">The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured network model layer YANG data.<a href="#section-3.1-4.4.1" class="pilcrow">¶</a></p>
+<dt id="section-3.2-2.3">Step 2:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.4">
+            <p id="section-3.2-2.4.1">The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured configuration using network model.<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-4.5">Step 3:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.6">
-            <p id="section-3.1-4.6.1">YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.<a href="#section-3.1-4.6.1" class="pilcrow">¶</a></p>
+<dt id="section-3.2-2.5">Step 3:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.6">
+            <p id="section-3.2-2.6.1">YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.<a href="#section-3.2-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-4.7">Step 4:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.8">
-            <p id="section-3.1-4.8.1">The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF.<a href="#section-3.1-4.8.1" class="pilcrow">¶</a></p>
+<dt id="section-3.2-2.7">Step 4:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.8">
+            <p id="section-3.2-2.8.1">The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF.<a href="#section-3.2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.1-4.9">Step 5:</dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-4.10">
-            <p id="section-3.1-4.10.1">Network devices receive incoming configurations against YANG models, execute changes, and report execution response.<a href="#section-3.1-4.10.1" class="pilcrow">¶</a></p>
+<dt id="section-3.2-2.9">Step 5:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.10">
+            <p id="section-3.2-2.10.1">Network devices receive incoming configuration, execute changes, and report execution response.<a href="#section-3.2-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="workflow-2-network-troubleshooting">
+<section id="section-3.3">
+        <h3 id="name-workflow-2-network-troubles">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-workflow-2-network-troubles" class="section-name selfRef">Workflow 2: Network Troubleshooting</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-3.3-1">
+          <dt id="section-3.3-1.1">Step 1:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-1.2">
+            <p id="section-3.3-1.2.1">A network operator submits a high-level operational intent, requesting the network AI agent to continuously monitor the network, perceive emerging anomalies, perform active diagnosis, and conduct autonomous repair while reporting root causes and handling results.<a href="#section-3.3-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.3-1.3">Step 2:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-1.4">
+            <p id="section-3.3-1.4.1">Network AI agent receives the comprehensive telemetry data which provides a holistic view of the network operational state across multiple network devices and YANG modules. By analyzing the real-time data, it could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.<a href="#section-3.3-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.3-1.5">Step 3:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-1.6">
+            <p id="section-3.3-1.6.1">Once a issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, such as when a failure is caused by misconfiguration.<a href="#section-3.3-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.3-1.7">Step 4:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-1.8">
+            <p id="section-3.3-1.8.1">The network AI agent autonomously executes the formulated repair actions by delivering corresponding YANG configuration changes to devices, after invoking the network digital twin to simulate the proposed repair solution successfully.<a href="#section-3.3-1.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1339,7 +1393,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 </section>
 </div>
-<div id="gap-analysis">
+<div id="gaps">
 <section id="section-4">
       <h2 id="name-gap-analysis">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-gap-analysis" class="section-name selfRef">Gap Analysis</a>
@@ -1349,9 +1403,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-gap-1-semantic-incompletene">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gap-1-semantic-incompletene" class="section-name selfRef">Gap 1: Semantic Incompleteness</a>
         </h3>
-<p id="section-4.1-1">Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as when, must and leafref.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">When the AI agent translates natural language into YANG-structured data, two outstanding issues arise. First, AI hallucinations are commonly observed: it may generate a non-existent YANG node, invalid enumeration values or out-of-range parameters, or overlook a "when"/"must" constraints on configuration data defined by YANG. This problem is even amplified in multi-vendor and cross-version model scenarios. Second, implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<div id="description">
+<section id="section-4.1.1">
+          <h4 id="name-description">
+<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-description" class="section-name selfRef">Description</a>
+          </h4>
+<p id="section-4.1.1-1">Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as when, must and leafref.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">When the AI agent translates natural language into YANG-structured data, two outstanding issues arise. First, AI hallucinations are commonly observed: it may generate a non-existent YANG node, invalid enumeration values or out-of-range parameters, or overlook a "when"/"must" constraints on configuration data defined by YANG. This problem is even amplified in multi-vendor and cross-version model scenarios. Second, implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process. As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-3">When analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="gap-2-expressiveness-limits">
@@ -1370,46 +1431,60 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-transaction-conflicts" class="section-name selfRef">Gap 3: Transaction Conflicts</a>
         </h3>
 <p id="section-4.3-1">In the reference two-layer agentic AI architecture, orchestrator AI agent and network AI agent could operate autonomously and asynchronously with no centralized global scheduling. Different agents may initiate independent tasks simultaneously against the same set of network devices and configuration data.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">A typical conflicting scenario occurs when an orchestrator AI agent is executing a service provisioning task, while a network AI agent triggers real-time network incident diagnosis and resolution, based on continuous telemetry streams and analysis.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">A typical conflicting scenario occurs when an orchestrator AI agent is executing a service provisioning task, while a network AI agent triggers real-time network fault diagnosis and resolution, based on continuous telemetry streams and analysis.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3-3">Concurrent write operations on identical YANG nodes may lead to configuration overwriting and policy conflicts, which might cause critical risks in asynchronous multi-agent operational environments.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="gap-4-explainability">
+<div id="gap-4">
 <section id="section-4.4">
-        <h3 id="name-gap-4-explainability">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-explainability" class="section-name selfRef">Gap 4: Explainability</a>
-        </h3>
-<p id="section-4.4-1">YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Currently, YANG and YANG-driven network management protocols has no standard fields for such explanatory metadata. An agent may silently send an &lt;edit-config&gt; RPC operation that deletes a leaf, without any indication of why the deletion was necessary.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+        <h3 id="name-gap-4">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4" class="section-name selfRef">Gap 4:</a>
+      </h3>
 </section>
 </div>
+<div id="gap-5-explainability">
+<section id="section-4.5">
+        <h3 id="name-gap-5-explainability">
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-gap-5-explainability" class="section-name selfRef">Gap 5: Explainability</a>
+        </h3>
+<p id="section-4.5-1">YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">Currently, YANG and YANG-driven network management protocols has no standard fields for such explanatory metadata. An agent may silently send an &lt;edit-config&gt; RPC operation that deletes a leaf, without any indication of why the deletion was necessary.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="possible-way-forward">
+<section id="section-5">
+      <h2 id="name-possible-way-forward">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-possible-way-forward" class="section-name selfRef">Possible Way Forward</a>
+    </h2>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-5">
+<section id="section-6">
       <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">TODO Security<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">TODO Security<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">This document has no IANA actions.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This document has no IANA actions.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-7.1">
+<section id="section-8.1">
         <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1424,11 +1499,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-7.2">
+<section id="section-8.2">
         <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.draft-wmz-nmrg-agent-ndt-arch">[I-D.draft-wmz-nmrg-agent-ndt-arch]</dt>
+        <dd>
+<span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Zhou, C.</span>, <span class="refAuthor">Contreras, L. M.</span>, <span class="refAuthor">Han, S.</span>, and <span class="refAuthor">Y. Hong</span>, <span class="refTitle">"Network Digital Twin and Agentic AI based Architecture for AI driven Network Operations"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04</span>, <time datetime="2026-05-21" class="refDate">21 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-wmz-nmrg-agent-ndt-arch-04">https://datatracker.ietf.org/doc/html/draft-wmz-nmrg-agent-ndt-arch-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.wmz-nmrg-agent-ndt-arch">[I-D.wmz-nmrg-agent-ndt-arch]</dt>
         <dd>
 <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Zhou, C.</span>, <span class="refAuthor">Contreras, L. M.</span>, <span class="refAuthor">Han, S.</span>, and <span class="refAuthor">Y. Hong</span>, <span class="refTitle">"Network Digital Twin and Agentic AI based Architecture for AI driven Network Operations"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04</span>, <time datetime="2026-05-21" class="refDate">21 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-wmz-nmrg-agent-ndt-arch-04">https://datatracker.ietf.org/doc/html/draft-wmz-nmrg-agent-ndt-arch-04</a>&gt;</span>. </dd>

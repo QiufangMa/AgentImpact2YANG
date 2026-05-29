@@ -82,10 +82,9 @@ Table of Contents
      3.3.  Workflow 2: Network Troubleshooting
    4.  Gap Analysis
      4.1.  Gap 1: Semantic Incompleteness
-       4.1.1.  Description
      4.2.  Gap 2: Expressiveness Limits
      4.3.  Gap 3: Transaction Conflicts
-     4.4.  Gap 4: Explainability
+     4.4.  Gap 4: Lack of Explainability
    5.  Possible Ways Forward
      5.1.  YANG-driven Operations as AI-Invocable Tools
      5.2.  Semantic Enrichment via Knowledge Graphs
@@ -279,8 +278,6 @@ Table of Contents
 
 4.1.  Gap 1: Semantic Incompleteness
 
-4.1.1.  Description
-
    Natural language intents from operators inherently carry ambiguity,
    implicit constraints, missing parameters and diverse interpretations.
    In contrast, YANG models and corresponding instance data require
@@ -345,7 +342,7 @@ Table of Contents
    configuration overwriting and policy conflicts, which might cause
    critical risks in asynchronous multi-agent operational environments.
 
-4.4.  Gap 4: Explainability
+4.4.  Gap 4: Lack of Explainability
 
    YANG is designed for deterministic network automation.  It assumes
    the client knows exactly what to configure and why.  AI agents, on

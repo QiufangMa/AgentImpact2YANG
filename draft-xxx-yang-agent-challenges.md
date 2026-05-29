@@ -170,7 +170,6 @@ Step 4:
 
 ## Gap 1: Semantic Incompleteness
 
-### Description
 
 Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as when, must and leafref.
 
@@ -194,7 +193,7 @@ A typical conflicting scenario occurs when an orchestrator AI agent is executing
 
 Concurrent write operations on identical YANG nodes may lead to configuration overwriting and policy conflicts, which might cause critical risks in asynchronous multi-agent operational environments.
 
-## Gap 4: Explainability
+## Gap 4: Lack of Explainability
 
 YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
 

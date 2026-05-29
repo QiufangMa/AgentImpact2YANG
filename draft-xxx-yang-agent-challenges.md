@@ -38,15 +38,15 @@ normative:
 
 informative:
 
-MCP:
-  title: Model Context Protocol
-  target: https://modelcontextprotocol.io/
-  date: November 2024
+  MCP:
+    title: Model Context Protocol
+    target: https://modelcontextprotocol.io/
+    date: November 2024
 
-gNMIBuddy:
-  title: gNMIBuddy
-  target: https://github.com/jillesca/gNMIBuddy
-  date: February 2026
+  gNMIBuddy:
+    title: gNMIBuddy
+    target: https://github.com/jillesca/gNMIBuddy
+    date: February 2026
 
 --- abstract
 

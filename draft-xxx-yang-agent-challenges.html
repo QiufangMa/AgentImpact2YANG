@@ -1344,12 +1344,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <span class="break"></span><dl class="dlParallel" id="section-3.2-2">
           <dt id="section-3.2-2.1">Step 1:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-2.2">
-            <p id="section-3.2-2.2.1">A network operator submits an E2E service request expressed in natural language.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.2.1">A network operator submits an end-to-end service request expressed in natural language including eplicit service requirements. The intent may imply some constraints such as not affecting existing network services.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-2.3">Step 2:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-2.4">
-            <p id="section-3.2-2.4.1">The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model for user confirmation, and then decomposes it into structured configuration using network model.<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.4.1">The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model and parameters for user confirmation, and then decomposes it into structured configuration using network model.<a href="#section-3.2-2.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-2.5">Step 3:</dt>
@@ -1359,7 +1359,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <dd class="break"></dd>
 <dt id="section-3.2-2.7">Step 4:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-2.8">
-            <p id="section-3.2-2.8.1">The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF.<a href="#section-3.2-2.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.8.1">The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF. Validation checks such as syntax and semantic validation may be performed before the device configuration is delivered.<a href="#section-3.2-2.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-2.9">Step 5:</dt>

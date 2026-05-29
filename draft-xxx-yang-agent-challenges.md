@@ -185,21 +185,42 @@ A typical conflicting scenario occurs when an orchestrator AI agent is executing
 
 Concurrent write operations on identical YANG nodes may lead to configuration overwriting and policy conflicts, which might cause critical risks in asynchronous multi-agent operational environments.
 
-## Gap 4:
-
-## Gap 5: Explainability
+## Gap 4: Explainability
 
 YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
 
 Currently, YANG and YANG-driven network management protocols has no standard fields for such explanatory metadata. An agent may silently send an \<edit-config\> RPC operation that deletes a leaf, without any indication of why the deletion was necessary.
 
-# Possible Way Forward
+# Possible Ways Forward
 
+This section explores several operational directions to try to bridge the gaps identified in {{gaps}} and improve the AI-readiness of existing YANG ecosystem.
+
+## YANG-driven Operations as AI-Invocable Tools
+
+A promising direction for partially addressing Gap 1 (Semantic Incompleteness) is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
+
+The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
+
+## Semantic Enrichment via Knowledge Graphs
+
+Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.
+
+IETF work in this area includes {{I-D.mackey-nmop-kg-for-netops}} and {{I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
+
+When a user expresses an high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.
+
+## Human-in-the-Loop
+
+While full autonomy is a long‑term goal for agentic AI enabled network management, a mechanism that escalates decisions based on assessed risk or confidence level is essential for safe deployment. This approach partially addresses Gap 4 (Explainability), specifically the need for human oversight of agent decisions, and also helps mitigate high‑impact transaction conflicts (Gap 3).
+
+For example, a low-risk operation proceeds automatically without human approval, while a high-risk one renders a visual diff, the network digital twin simulation report, and the agent’s intent explanation (including confidence and evidence), and pushes the report to a human for approval.
 
 
 # Security Considerations
 
-TODO Security
+The integration of agentic AI with YANG-based network automation introduces new attack surfaces and operational risks that differ from traditional deterministic network management.
+
+For example, AI-generated configuration risks are introduced by agent autonomous decision-making. Unlike manually crafted or scripted configurations, LLM-generated configuration edits may contain unintended misconfiguration or semantic deviations. Such errors can lead to service outages, policy violations, or enlarged attack surfaces. The human-in-the-loop mechanism and network digital twin simulation and validation could mitigate this concern by blocking high-risk unvalidated changes before cofiguration is committed. Furthermore, tool invocation and credential exposure risks arise when AI agents are granted access to network devices via MCP servers. Open-source MCP implementations enable LLM clients to execute read/write operations over managed devices. Unauthorized or malicious prompt injection may trigger abusive command execution, configuration tampering, or information leakage. Token-based authentication, transport encryption, and tool-level guardrail mechanisms (blocked command lists and restricted configuration scopes) are required to enforce access control.
 
 
 # IANA Considerations

@@ -71,7 +71,7 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
  * The applicability of A2A to Network Management {{?I-D.yang-nmrg-a2a-nm}}, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.
 
-While the industry is actively exploring the application of agentic AI to autonomous network, litter work considers how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized at the intersection of probabilistic AI agents and deterministic YANG.
+While the industry is actively exploring the application of agentic AI to autonomous network, little work considers how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized at the intersection of probabilistic AI agents and deterministic YANG.
 
 The purpose of this document is not to extend YANG, or define a brand new data model language. Rather, it seeks how to make IETF-developed YANG AI-ready and be better leveraged by agentic AI, by attempting to identify some fundamental gaps in the hope of facilitating community discussion on how to bridge them.
 
@@ -99,11 +99,11 @@ Agentic AI:
 
 # A Reference Architecture and Typical Workflows
 
-This section uses a simplied layered agentic AI reference architecture compliant with {{I-D.draft-wmz-nmrg-agent-ndt-arch}} and describes two typical workflows: network service provisioning/optimization and fault troubleshooting. The workflows cover scenarios from configuration generation to YANG data consumption, which are essential to expose and derive the gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
+This section uses a simplified layered agentic AI reference architecture compliant with {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} and describes two typical workflows: network service provisioning/optimization and fault troubleshooting. The workflows cover scenarios from configuration generation to YANG data consumption, which are essential to expose and derive the gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
 
 ## Layered AI Agent Deployment Architecture
 
-This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplied view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
 
 
 ~~~~
@@ -138,10 +138,10 @@ This document targets a two-layer agent deployment architecture as specified in 
 A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.
 
 Step 1:
-: A network operator submits an end-to-end service request expressed in natural language including eplicit service requirements. The intent may imply some constraints such as not affecting existing network services.
+: A network operator submits an end-to-end service request expressed in natural language including explicit service requirements. The intent may imply some constraints such as not affecting existing network services.
 
 Step 2:
-: The orchestrator AI agent parses the natural language intent, mapped it into the corresponding service model and parameters for user confirmation, and then decomposes it into structured configuration using network model.
+: The orchestrator AI agent parses the natural language intent, maps it into the corresponding service model and parameters for user confirmation, and then decomposes it into structured configuration using network model.
 
 Step 3:
 : YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.
@@ -161,7 +161,7 @@ Step 2:
 : Network AI agent receives the comprehensive telemetry data which provides a holistic view of the network operational state across multiple network devices and YANG modules. By analyzing the real-time data, it could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.
 
 Step 3:
-: Once a issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, such as when a failure is caused by misconfiguration.
+: Once an issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, such as when a failure is caused by misconfiguration.
 
 Step 4:
 : The network AI agent autonomously executes the formulated repair actions by delivering corresponding YANG configuration changes to devices, after invoking the network digital twin to simulate the proposed repair solution successfully.
@@ -171,7 +171,7 @@ Step 4:
 ## Gap 1: Semantic Incompleteness
 
 
-Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as when, must and leafref.
+Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. In contrast, YANG models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as "when", "must", and "leafref" statements.
 
 When the AI agent translates natural language into YANG-structured data, two outstanding issues arise. First, AI hallucinations are commonly observed: it may generate a non-existent YANG node, invalid enumeration values or out-of-range parameters, or overlook a "when"/"must" constraints on configuration data defined by YANG. This problem is even amplified in multi-vendor and cross-version model scenarios. Second, implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process. As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.
 
@@ -197,7 +197,7 @@ Concurrent write operations on identical YANG nodes may lead to configuration ov
 
 YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
 
-Currently, YANG and YANG-driven network management protocols has no standard fields for such explanatory metadata. An agent may silently send an \<edit-config\> RPC operation that deletes a leaf, without any indication of why the deletion was necessary.
+Currently, YANG and YANG-driven network management protocols have no standard fields for such explanatory metadata. An agent may silently send an \<edit-config\> RPC operation that deletes a leaf, without any indication of why the deletion was necessary.
 
 # Possible Ways Forward
 
@@ -215,7 +215,7 @@ Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can be par
 
 IETF work in this area includes {{?I-D.mackey-nmop-kg-for-netops}} and {{?I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
 
-When a user expresses an high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.
+When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.
 
 ## Human-in-the-Loop
 
@@ -228,7 +228,7 @@ For example, a low-risk operation proceeds automatically without human approval,
 
 The integration of agentic AI with YANG-based network automation introduces new attack surfaces and operational risks that differ from traditional deterministic network management.
 
-For example, AI-generated configuration risks are introduced by agent autonomous decision-making. Unlike manually crafted or scripted configurations, LLM-generated configuration edits may contain unintended misconfiguration or semantic deviations. Such errors can lead to service outages, policy violations, or enlarged attack surfaces. The human-in-the-loop mechanism and network digital twin simulation and validation could mitigate this concern by blocking high-risk unvalidated changes before cofiguration is committed. Furthermore, tool invocation and credential exposure risks arise when AI agents are granted access to network devices via MCP servers. Open-source MCP implementations enable LLM clients to execute read/write operations over managed devices. Unauthorized or malicious prompt injection may trigger abusive command execution, configuration tampering, or information leakage. Token-based authentication, transport encryption, and tool-level guardrail mechanisms (blocked command lists and restricted configuration scopes) are required to enforce access control.
+For example, AI-generated configuration risks are introduced by agent autonomous decision-making. Unlike manually crafted or scripted configurations, LLM-generated configuration edits may contain unintended misconfiguration or semantic deviations. Such errors can lead to service outages, policy violations, or enlarged attack surfaces. The human-in-the-loop mechanism and network digital twin simulation and validation could mitigate this concern by blocking high-risk unvalidated changes before configuration is committed. Furthermore, tool invocation and credential exposure risks arise when AI agents are granted access to network devices via MCP servers. Open-source MCP implementations enable LLM clients to execute read/write operations over managed devices. Unauthorized or malicious prompt injection may trigger abusive command execution, configuration tampering, or information leakage. Token-based authentication, transport encryption, and tool-level guardrail mechanisms (blocked command lists and restricted configuration scopes) are required to enforce access control.
 
 
 # IANA Considerations

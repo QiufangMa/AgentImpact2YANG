@@ -52,7 +52,7 @@ informative:
 
 The industry today is actively exploring the application of agentic AI to autonomous network operations. However, insufficient attention has been paid to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation.
 
-Based on an end-to-end intent translation workflow that engages YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
+Based on some end-to-end intent translation workflow analysis that engage YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose major YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
 
 
 --- middle
@@ -63,7 +63,7 @@ RFC 8969 {{?RFC8969}} establishes a framework for automating service and network
 
 Recently, Large Language Models (LLMs) and AI Agents have emerged as new enablers for network automation. Multiple IETF activities are ongoing in this area, proposals include but are not limited to:
 
- * The network digital twin and agentic AI based architecture for AI driven network operations described in {{?I-D.wmz-nmrg-agent-ndt-arch}}, which deploys hybrid agent systems within the network autonomous domain, and allows agents to invoke network operational function modules and collaborate to solve non-trivial tasks.
+ * The network digital twin {{?I-D.irtf-nmrg-network-digital-twin-arch}} and agentic AI based architecture for AI driven network operations described in {{?I-D.wmz-nmrg-agent-ndt-arch}}, which deploys hybrid agent systems within the network autonomous domain, and allows agents to invoke network operational function modules and collaborate to solve non-trivial tasks.
 
  * The Network Management Agent (NMA) concept presented in {{?I-D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.
 
@@ -71,9 +71,9 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
  * The applicability of A2A to Network Management {{?I-D.yang-nmrg-a2a-nm}}, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.
 
-While the industry is actively exploring the application of agentic AI to autonomous network, little work considers how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized at the intersection of probabilistic AI agents and deterministic YANG.
+While the industry is actively exploring the application of agentic AI to autonomous network, little work considers how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized/unsolved at the intersection of probabilistic AI agents and deterministic YANG.
 
-The purpose of this document is not to extend YANG, or define a brand new data model language. Rather, it seeks how to make IETF-developed YANG AI-ready and be better leveraged by agentic AI, by attempting to identify some fundamental gaps in the hope of facilitating community discussion on how to bridge them.
+The purpose of this document is not to substantially modify YANG or define a brand-new data modeling language. Rather, it seeks to adapt YANG for agentic AI. By identifying fundamental gaps, this document aims to facilitate community discussion on how to bridge them.
 
 
 # Conventions and Definitions
@@ -124,7 +124,7 @@ This document targets a two-layer agent deployment architecture as specified in 
 |+--------^----------+|
 +---------+-----------+
           |
-          |NETCONF/RESTCONF/MCP
+          |NETCONF/RESTCONF
           |
 +---------v-----------+
 |   Network Devices   |
@@ -133,7 +133,7 @@ This document targets a two-layer agent deployment architecture as specified in 
 {: #arch title="A simplified reference architecture" artwork-align="center"}
 
 
-## Workflow 1: Service Provisioning/Optimization
+## Workflow Example 1: Service Provisioning/Optimization
 
 A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.
 
@@ -147,12 +147,12 @@ Step 3:
 : YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.
 
 Step 4:
-: The network AI agent converts received tasks into structured device model layer operations. It either invokes standard YANG tools through MCP, or directly delivers YANG configuration via NETCONF or RESTCONF. Validation checks such as syntax and semantic validation may be performed before the device configuration is delivered.
+: The network AI agent converts received tasks into structured device model layer operations. The configuration is delivered via YANG-driven protocols such as NETCONF and RESTCONF. Validation checks such as syntax and semantic validation may be performed before the device configuration is delivered.
 
 Step 5:
 : Network devices receive incoming configuration, execute changes, and report execution response.
 
-## Workflow 2: Network Troubleshooting
+## Workflow Example 2: Network Troubleshooting
 
 Step 1:
 : A network operator submits a high-level operational intent, requesting the network AI agent to continuously monitor the network, perceive emerging anomalies, perform active diagnosis, and conduct autonomous repair while reporting root causes and handling results.
@@ -161,7 +161,7 @@ Step 2:
 : Network AI agent receives the comprehensive telemetry data which provides a holistic view of the network operational state across multiple network devices and YANG modules. By analyzing the real-time data, it could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.
 
 Step 3:
-: Once an issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, such as when a failure is caused by misconfiguration.
+: Once an issue or fault is identified, network AI agent diagnoses the exact cause and generate targeted repair solutions. These solutions may involve making configuration changes on relevant network devices, for example, when a failure is caused by misconfiguration.
 
 Step 4:
 : The network AI agent autonomously executes the formulated repair actions by delivering corresponding YANG configuration changes to devices, after invoking the network digital twin to simulate the proposed repair solution successfully.
@@ -209,13 +209,24 @@ A promising direction for partially addressing Gap 1 (Semantic Incompleteness)
 
 The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy {{gNMIBuddy}} provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
 
-## Semantic Enrichment via Knowledge Graphs
+## Semantic Enrichment via Knowledge Graphs and Semantic Metadata
 
 Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.
 
 IETF work in this area includes {{?I-D.mackey-nmop-kg-for-netops}} and {{?I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
 
 When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.
+
+There is also other work in NMOP focusing on semantic enrichment that could serve as a foundation layer for agentic AI driven network anomaly detection. A set of ongoing drafts include:
+
+ * {{?I-D.ietf-nmop-network-anomaly-architecture}} provides a reference architecture for knowledge based service disruption detection;
+
+ * {{?I-D.ietf-nmop-network-anomaly-lifecycle}} defines an experiment for managing the lifecycle process of a network anomaly detection system, spanning across detection, validation, and refinement.
+
+ * {{?I-D.ietf-nmop-network-anomaly-semantics}} describes common network symptom semantics across different network planes.
+
+An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging Gap 1 and Gap 2. Moreover, the standardized anomaly semantics also help improve explainability (Gap 4), as agents can log which anomaly or symptom has triggered a repair action using well-defined metadata.
+
 
 ## Human-in-the-Loop
 

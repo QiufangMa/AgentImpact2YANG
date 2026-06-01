@@ -4,8 +4,8 @@
 
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                    Huawei
-Intended status: Informational                               29 May 2026
-Expires: 30 November 2026
+Intended status: Informational                               1 June 2026
+Expires: 3 December 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2026.
+   This Internet-Draft will expire on 3 December 2026.
 
 Copyright Notice
 
@@ -136,7 +136,7 @@ Table of Contents
       automation in the multi-vendor heterogeneous network environment.
 
    While the industry is actively exploring the application of agentic
-   AI to autonomous network, litter work considers how YANG modeling, as
+   AI to autonomous network, little work considers how YANG modeling, as
    the very foundation of model-driven network automation, would be
    impacted, and if there is any critical gaps that remain unrecognized
    at the intersection of probabilistic AI agents and deterministic
@@ -175,7 +175,7 @@ Table of Contents
 
 3.  A Reference Architecture and Typical Workflows
 
-   This section uses a simplied layered agentic AI reference
+   This section uses a simplified layered agentic AI reference
    architecture compliant with [I-D.draft-wmz-nmrg-agent-ndt-arch] and
    describes two typical workflows: network service provisioning/
    optimization and fault troubleshooting.  The workflows cover
@@ -189,10 +189,10 @@ Table of Contents
 3.1.  Layered AI Agent Deployment Architecture
 
    This document targets a two-layer agent deployment architecture as
-   specified in Figure 1.  It is a simplied view that hides task agents,
-   function modules or toolsets that are available for agents to invoke.
-   Refer to [I-D.draft-wmz-nmrg-agent-ndt-arch] for the complete
-   architecture design.
+   specified in Figure 1.  It is a simplified view that hides task
+   agents, function modules or toolsets that are available for agents to
+   invoke.  Refer to [I-D.draft-wmz-nmrg-agent-ndt-arch] for the
+   complete architecture design.
 
        +---------------------+
        |    Orchestrator     |
@@ -225,12 +225,12 @@ Table of Contents
    configuration from high-level intents is defined as follows.
 
    Step 1:  A network operator submits an end-to-end service request
-      expressed in natural language including eplicit service
+      expressed in natural language including explicit service
       requirements.  The intent may imply some constraints such as not
       affecting existing network services.
 
    Step 2:  The orchestrator AI agent parses the natural language
-      intent, mapped it into the corresponding service model and
+      intent, maps it into the corresponding service model and
       parameters for user confirmation, and then decomposes it into
       structured configuration using network model.
 
@@ -263,7 +263,7 @@ Table of Contents
       which enables the prompt identification of potential issues before
       they escalate into major faults.
 
-   Step 3:  Once a issue or fault is identified, network AI agent
+   Step 3:  Once an issue or fault is identified, network AI agent
       diagnoses the exact cause and generate targeted repair solutions.
       These solutions may involve making configuration changes on
       relevant network devices, such as when a failure is caused by
@@ -282,7 +282,8 @@ Table of Contents
    implicit constraints, missing parameters and diverse interpretations.
    In contrast, YANG models and corresponding instance data require
    fully qualified XPaths, strictly typed values, and full compliance
-   with model constraints such as when, must and leafref.
+   with model constraints such as "when", "must", and "leafref"
+   statements.
 
    When the AI agent translates natural language into YANG-structured
    data, two outstanding issues arise.  First, AI hallucinations are
@@ -355,7 +356,7 @@ Table of Contents
    why specific configuration nodes are modified, and why particular
    network states are retrieved for incident diagnosis.
 
-   Currently, YANG and YANG-driven network management protocols has no
+   Currently, YANG and YANG-driven network management protocols have no
    standard fields for such explanatory metadata.  An agent may silently
    send an <edit-config> RPC operation that deletes a leaf, without any
    indication of why the deletion was necessary.
@@ -398,7 +399,7 @@ Table of Contents
    from different network planes, e.g., management, control, and data
    planes and present a holistic view of network status.
 
-   When a user expresses an high-level intent such as "check why the VPN
+   When a user expresses a high-level intent such as "check why the VPN
    tunnel is down", a KG-enhanced agent can query the YANG-based
    knowledge graph to understand the relationships between relevant
    services and metrics, addressing Gap 1.  Furthermore, KGs can
@@ -434,7 +435,7 @@ Table of Contents
    lead to service outages, policy violations, or enlarged attack
    surfaces.  The human-in-the-loop mechanism and network digital twin
    simulation and validation could mitigate this concern by blocking
-   high-risk unvalidated changes before cofiguration is committed.
+   high-risk unvalidated changes before configuration is committed.
    Furthermore, tool invocation and credential exposure risks arise when
    AI agents are granted access to network devices via MCP servers.
    Open-source MCP implementations enable LLM clients to execute read/

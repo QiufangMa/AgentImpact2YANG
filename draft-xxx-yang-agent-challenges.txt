@@ -3,9 +3,9 @@
 
 
 Network Working Group                                         Q. Ma, Ed.
-Internet-Draft                                                    Huawei
-Intended status: Informational                               2 June 2026
-Expires: 4 December 2026
+Internet-Draft                                                     Q. Wu
+Intended status: Informational                                    Huawei
+Expires: 4 December 2026                                     2 June 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -81,7 +81,7 @@ Table of Contents
      3.2.  Workflow Example 1: Service Provisioning/Optimization
      3.3.  Workflow Example 2: Network Troubleshooting
    4.  Gap Analysis
-     4.1.  Gap 1: Semantic Incompleteness
+     4.1.  Gap 1: Insufficient Agent Comprehension of YANG Semantics
      4.2.  Gap 2: Expressiveness Limits
      4.3.  Gap 3: Transaction Conflicts
      4.4.  Gap 4: Lack of Explainability
@@ -96,7 +96,7 @@ Table of Contents
      8.1.  Normative References
      8.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -275,25 +275,25 @@ Table of Contents
 
 4.  Gap Analysis
 
-4.1.  Gap 1: Semantic Incompleteness
+4.1.  Gap 1: Insufficient Agent Comprehension of YANG Semantics
 
-   Natural language intents from operators inherently carry ambiguity,
-   implicit constraints, missing parameters and diverse interpretations.
-   In contrast, YANG models and corresponding instance data require
-   fully qualified XPaths, strictly typed values, and full compliance
-   with model constraints such as "when", "must", and "leafref"
-   statements.
+   YANG is a data modeling language rich in semantics.  YANG data models
+   and corresponding instance data require fully qualified XPaths,
+   strictly typed values, and full compliance with model constraints
+   such as "when", "must", and "leafref" statements.
 
    When the AI agent translates natural language into YANG-structured
-   data, two outstanding issues arise.  First, AI hallucinations are
-   commonly observed: it may generate a non-existent YANG node, invalid
-   enumeration values or out-of-range parameters, or overlook a
-   "when"/"must" constraints on configuration data defined by YANG.
-   This problem is even amplified in multi-vendor and cross-version
-   model scenarios.  Second, implicit operational requirements embedded
-   in original intents, such as service continuity, high availability
-   and security compliance, are likely lost during the transformation
-   process.  As a result, the generated configuration data are either
+   data, AI hallucinations are commonly observed due to insufficient
+   comprehension of YANG semantics.  While syntax errors (e.g., non-
+   existent nodes, invalid enumeration values or out-of-range
+   parameters) may be effectively detected and fixed by configuration
+   validation tools, the greater challenge lies in semantic-level
+   misinterpretion.  For instance, the agent may misinterpret a YANG
+   node's "description" statement, resulting in the delivered
+   configuration violating the original operator intent.  This problem
+   is even amplified in multi-vendor and cross-version model scenarios.
+
+   As a result, the generated configuration data are either
    syntactically invalid, semantically incomplete, or inconsistent with
    the original operator intent.
 
@@ -306,20 +306,26 @@ Table of Contents
 
 4.2.  Gap 2: Expressiveness Limits
 
-   YANG is designed to describe static and target state of services,
-   networks and devices.  It focuses on defining data structures and
-   formats, syntax and semantic rules and static constraints, without
+   Natural language intents from operators inherently carry ambiguity,
+   implicit constraints, missing parameters and diverse interpretations.
+   Nevertheless, YANG focuses on defining data structures and formats,
+   syntax and semantic rules and static constraints, without
    capabilities to represent flexible operational logic.
 
    In real-world network operations, operator intents often contain
-   relaxation preferences, degradation policies, retry strategies, or
-   conditional fallback rules.  These dynamic and flexible requirements
-   cannot be natively expressed by standard YANG models.  To adapt to
-   rigid YANG structures, orchestrator AI agents have to trim and
-   simplify the original intent.  This premature semantic trimming
-   deprives downstream network AI agents of the flexibility to make
-   dynamic decisions, perform graceful degradation or apply fault-
-   tolerant adjustments when network runtime status changes.
+   constraints, relaxation preferences, degradation policies, retry
+   strategies, or conditional fallback rules.  These dynamic and
+   flexible requirements cannot be natively expressed by standard YANG
+   models.  To adapt to rigid YANG structures, orchestrator AI agents
+   have to trim and simplify the original intent. implicit operational
+   requirements embedded in original intents, such as service
+   continuity, high availability and security compliance, are likely
+   lost during the transformation process.
+
+   This premature semantic trimming deprives downstream network AI
+   agents of the flexibility to make dynamic decisions, perform graceful
+   degradation or apply fault-tolerant adjustments when network runtime
+   status changes.
 
    In short, the fixed-state design of YANG creates a hard boundary for
    carrying intent relaxation, which limits the autonomous decision
@@ -610,7 +616,7 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Qiufang Ma (editor)
    Huawei
@@ -619,3 +625,12 @@ Author's Address
    210012
    China
    Email: maqiufang1@huawei.com
+
+
+   Qin Wu
+   Huawei
+   101 Software Avenue, Yuhua District
+   Nanjing, Jiangsu
+   210012
+   China
+   Email: bill.wu@huawei.com

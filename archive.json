@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-31T04:06:01.452699+00:00",
+  "timestamp": "2026-06-02T04:13:47.411153+00:00",
   "repo": "QiufangMa/AgentImpact2YANG",
   "labels": [
     {
@@ -50,5 +50,34 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOSpII1M7hk4jP",
+      "title": "Some Editorial changes",
+      "url": "https://github.com/QiufangMa/AgentImpact2YANG/pull/1",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-02T00:16:35Z",
+      "updatedAt": "2026-06-02T02:16:03Z",
+      "baseRepository": "QiufangMa/AgentImpact2YANG",
+      "baseRefName": "main",
+      "baseRefOid": "e2166a6d1873919014588b2592cc496f10019650",
+      "headRepository": "billwuqin/AgentImpact2YANG",
+      "headRefName": "patch-1",
+      "headRefOid": "46402d44fc40d26b367588d788a520c49abb6917",
+      "closedAt": "2026-06-02T02:16:03Z",
+      "mergedAt": "2026-06-02T02:16:03Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "8a3f5a3597783db5a8c0265cdda3764ca3190904"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }

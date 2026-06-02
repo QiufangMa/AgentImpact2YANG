@@ -124,7 +124,7 @@ This document targets a two-layer agent deployment architecture as specified in 
 |+--------^----------+|
 +---------+-----------+
           |
-          |NETCONF/RESTCONF
+          |NETCONF/RESTCONF/Telemetry
           |
 +---------v-----------+
 |   Network Devices   |
@@ -195,7 +195,7 @@ Concurrent write operations on identical YANG nodes may lead to configuration ov
 
 ## Gap 4: Lack of Explainability
 
-YANG is designed for deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
+YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.
 
 Currently, YANG and YANG-driven network management protocols have no standard fields for such explanatory metadata. An agent may silently send an \<edit-config\> RPC operation that deletes a leaf, without any indication of why the deletion was necessary.
 
@@ -205,7 +205,7 @@ This section explores several operational directions to try to bridge the gaps i
 
 ## YANG-driven Operations as AI-Invocable Tools
 
-A promising direction for partially addressing Gap 1 (Semantic Incompleteness) is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
+A promising direction for partially addressing Gap 1 (Semantic Incompleteness) is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
 
 The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy {{gNMIBuddy}} provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
 

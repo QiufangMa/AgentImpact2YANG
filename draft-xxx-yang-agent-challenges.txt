@@ -4,8 +4,8 @@
 
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                    Huawei
-Intended status: Informational                               1 June 2026
-Expires: 3 December 2026
+Intended status: Informational                               2 June 2026
+Expires: 4 December 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 December 2026.
+   This Internet-Draft will expire on 4 December 2026.
 
 Copyright Notice
 
@@ -211,7 +211,7 @@ Table of Contents
        |+--------^----------+|
        +---------+-----------+
                  |
-                 |NETCONF/RESTCONF
+                 |NETCONF/RESTCONF/Telemetry
                  |
        +---------v-----------+
        |   Network Devices   |
@@ -344,16 +344,16 @@ Table of Contents
 
 4.4.  Gap 4: Lack of Explainability
 
-   YANG is designed for deterministic network automation.  It assumes
-   the client knows exactly what to configure and why.  AI agents, on
-   the contrary, needs to explain their decisions to build trust.  AI
-   agents act as autonomous decision-makers that generate YANG
-   configuration data and related operations (e.g., create, replace,
-   delete), and actively retrieve network state data.  For trusted,
-   auditable, and human-collaborative autonomous operations, agents are
-   required to provide explanation for every YANG-level action, e.g.,
-   why specific configuration nodes are modified, and why particular
-   network states are retrieved for incident diagnosis.
+   YANG is designed for the deterministic network automation.  It
+   assumes the client knows exactly what to configure and why.  AI
+   agents, on the contrary, needs to explain their decisions to build
+   trust.  AI agents act as autonomous decision-makers that generate
+   YANG configuration data and invoke related operations (e.g., create,
+   replace, delete), and actively retrieve network state data.  For
+   trusted, auditable, and human-collaborative autonomous operations,
+   agents are required to provide explanation for every YANG-level
+   action, e.g., why specific configuration nodes are modified, and why
+   particular network states are retrieved for incident diagnosis.
 
    Currently, YANG and YANG-driven network management protocols have no
    standard fields for such explanatory metadata.  An agent may silently
@@ -372,11 +372,12 @@ Table of Contents
    Incompleteness) is to refactor YANG-based network operations into
    AI-invocable tools using the Model Context Protocol (MCP).  Instead
    of requiring an AI agent to generate raw YANG instance data directly,
-   which is prone to hallucination, the agent invokes an MCP tool with
-   structured parameters.  By shielding agents from low-level syntax and
-   model complexity, this abstraction layer reduces the agent’s burden
-   of understanding complex YANG schemas and mitigates the risk of
-   generating invalid configuration data.
+   which is prone to hallucination or exhibits non-determined behavior,
+   the agent invokes an MCP tool with structured parameters.  By
+   shielding agents from low-level syntax and model complexity, this
+   abstraction layer reduces the agent’s burden of understanding complex
+   YANG schemas and mitigates the risk of generating invalid
+   configuration data.
 
    The applicability of MCP to network management is discussed in
    [I-D.yang-nmrg-mcp-nm].  Industry open-source exploration is emerging

@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 4 December 2026                                     2 June 2026
+Expires: 5 December 2026                                     3 June 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2026.
+   This Internet-Draft will expire on 5 December 2026.
 
 Copyright Notice
 
@@ -83,8 +83,8 @@ Table of Contents
    4.  Gap Analysis
      4.1.  Gap 1: Insufficient Agent Comprehension of YANG Semantics
      4.2.  Gap 2: Expressiveness Limits
-     4.3.  Gap 3: Transaction Conflicts
-     4.4.  Gap 4: Lack of Explainability
+     4.3.  Gap 3: Lack of Explainability
+     4.4.  Gap 4: Agent Uncertainty in YANG-Level Actions
    5.  Possible Ways Forward
      5.1.  YANG-driven Operations as AI-Invocable Tools
      5.2.  Semantic Enrichment via Knowledge Graphs and Semantic
@@ -282,16 +282,17 @@ Table of Contents
    strictly typed values, and full compliance with model constraints
    such as "when", "must", and "leafref" statements.
 
-   When the AI agent translates natural language into YANG-structured
-   data, AI hallucinations are commonly observed due to insufficient
-   comprehension of YANG semantics.  While syntax errors (e.g., non-
-   existent nodes, invalid enumeration values or out-of-range
-   parameters) may be effectively detected and fixed by configuration
-   validation tools, the greater challenge lies in semantic-level
-   misinterpretion.  For instance, the agent may misinterpret a YANG
-   node's "description" statement, resulting in the delivered
-   configuration violating the original operator intent.  This problem
-   is even amplified in multi-vendor and cross-version model scenarios.
+   When the AI agent translates the operator intent expressed via
+   natural language into YANG-structured data, AI hallucinations are
+   commonly observed due to insufficient comprehension of YANG
+   semantics.  While syntax errors (e.g., non-existent nodes, invalid
+   enumeration values or out-of-range parameters) may be effectively
+   detected and fixed by configuration validation tools, the greater
+   challenge lies in semantic-level misinterpretion.  For instance, the
+   agent may misinterpret a YANG node's "description" statement,
+   resulting in the delivered configuration violating the original
+   operator intent.  This problem is even amplified in multi-vendor and
+   cross-version model scenarios.
 
    As a result, the generated configuration data are either
    syntactically invalid, semantically incomplete, or inconsistent with
@@ -331,24 +332,7 @@ Table of Contents
    carrying intent relaxation, which limits the autonomous decision
    space of multi-agent systems.
 
-4.3.  Gap 3: Transaction Conflicts
-
-   In the reference two-layer agentic AI architecture, orchestrator AI
-   agent and network AI agent could operate autonomously and
-   asynchronously with no centralized global scheduling.  Different
-   agents may initiate independent tasks simultaneously against the same
-   set of network devices and configuration data.
-
-   A typical conflicting scenario occurs when an orchestrator AI agent
-   is executing a service provisioning task, while a network AI agent
-   triggers real-time network fault diagnosis and resolution, based on
-   continuous telemetry streams and analysis.
-
-   Concurrent write operations on identical YANG nodes may lead to
-   configuration overwriting and policy conflicts, which might cause
-   critical risks in asynchronous multi-agent operational environments.
-
-4.4.  Gap 4: Lack of Explainability
+4.3.  Gap 3: Lack of Explainability
 
    YANG is designed for the deterministic network automation.  It
    assumes the client knows exactly what to configure and why.  AI
@@ -358,13 +342,24 @@ Table of Contents
    replace, delete), and actively retrieve network state data.  For
    trusted, auditable, and human-collaborative autonomous operations,
    agents are required to provide explanation for every YANG-level
-   action, e.g., why specific configuration nodes are modified, and why
-   particular network states are retrieved for incident diagnosis.
+   action, e.g., why specific configuration nodes are modified, why
+   particular network states are retrieved for incident diagnosis, and
+   which intent or task triggered it.
 
-   Currently, YANG and YANG-driven network management protocols have no
-   standard fields for such explanatory metadata.  An agent may silently
-   send an <edit-config> RPC operation that deletes a leaf, without any
-   indication of why the deletion was necessary.
+4.4.  Gap 4: Agent Uncertainty in YANG-Level Actions
+
+   AI agents, especially those built on large language models,
+   inherently produce outputs with varying degrees of confidence.  For
+   the same intent, an agent may generate different YANG-level actions
+   due to insufficient context or the probabilistic nature of the
+   underlying large language models.  Likewise, when analyzing network
+   anomaly or incident, different diagnostic explanations may exist for
+   the same obverved state values.
+
+   When an agent generates a configuration change, there is a lack of
+   visibility into how confident the agent was in that specific
+   operation, and whether the agent internally marks a YANG-level action
+   as tentative or likely to be reverted.
 
 5.  Possible Ways Forward
 
@@ -374,16 +369,15 @@ Table of Contents
 
 5.1.  YANG-driven Operations as AI-Invocable Tools
 
-   A promising direction for partially addressing Gap 1 (Semantic
-   Incompleteness) is to refactor YANG-based network operations into
-   AI-invocable tools using the Model Context Protocol (MCP).  Instead
-   of requiring an AI agent to generate raw YANG instance data directly,
-   which is prone to hallucination or exhibits non-determined behavior,
-   the agent invokes an MCP tool with structured parameters.  By
-   shielding agents from low-level syntax and model complexity, this
-   abstraction layer reduces the agent’s burden of understanding complex
-   YANG schemas and mitigates the risk of generating invalid
-   configuration data.
+   A promising direction for partially addressing Section 4.1 is to
+   refactor YANG-based network operations into AI-invocable tools using
+   the Model Context Protocol (MCP).  Instead of requiring an AI agent
+   to generate raw YANG instance data directly, which is prone to
+   hallucination or exhibits non-determined behavior, the agent invokes
+   an MCP tool with structured parameters.  By shielding agents from
+   low-level syntax and model complexity, this abstraction layer reduces
+   the agent’s burden of understanding complex YANG schemas and
+   mitigates the risk of generating invalid configuration data.
 
    The applicability of MCP to network management is discussed in
    [I-D.yang-nmrg-mcp-nm].  Industry open-source exploration is emerging
@@ -393,12 +387,11 @@ Table of Contents
 
 5.2.  Semantic Enrichment via Knowledge Graphs and Semantic Metadata
 
-   Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can
-   be partially addressed by adding a semantic layer on top of YANG data
-   models.  Knowledge graphs (KGs) provide a machine-readable
-   representation of network knowledge, enabling AI agents to better
-   understand the semantics, relationships, and constraints embedded in
-   the network.
+   Section 4.1 and Section 4.2 can be partially addressed by adding a
+   semantic layer on top of YANG data models.  Knowledge graphs (KGs)
+   provide a machine-readable representation of network knowledge,
+   enabling AI agents to better understand the semantics, relationships,
+   and constraints embedded in the network.
 
    IETF work in this area includes [I-D.mackey-nmop-kg-for-netops] and
    [I-D.tailhardat-nmop-incident-management-noria], which correlate data
@@ -411,7 +404,8 @@ Table of Contents
    services and metrics, addressing Gap 1.  Furthermore, KGs can
    explicitly model concepts such as "preferred vs. optional", temporal
    KGs can model concepts such as "transient vs. persistent failure",
-   which are currently absent from YANG, partially addressing Gap 2.
+   which are currently absent from YANG, partially addressing
+   Section 4.2.
 
    There is also other work in NMOP focusing on semantic enrichment that
    could serve as a foundation layer for agentic AI driven network
@@ -430,10 +424,10 @@ Table of Contents
    An AI agent gains a structured and machine-understandable vocabulary
    for describing, querying, and reasoning about network anomaly.  The
    standardized anomaly semantic metadata provides the missing semantic
-   hooks, and contributes to bridging Gap 1 and Gap 2.  Moreover, the
-   standardized anomaly semantics also help improve explainability
-   (Gap 4), as agents can log which anomaly or symptom has triggered a
-   repair action using well-defined metadata.
+   hooks, and contributes to bridging Section 4.1 and Section 4.2.
+   Moreover, the standardized anomaly semantics also help improve
+   explainability (Gap 4), as agents can log which anomaly or symptom
+   has triggered a repair action using well-defined metadata.
 
 5.3.  Human-in-the-Loop
 

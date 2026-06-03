@@ -1051,7 +1051,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma &amp; Wu</td>
-<td class="center">Expires 4 December 2026</td>
+<td class="center">Expires 5 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg {
 <dd class="internet-draft">draft-xxx-yang-agent-challenges-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-02" class="published">2 June 2026</time>
+<time datetime="2026-06-03" class="published">3 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-04">4 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1179,10 +1179,10 @@ svg {
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-gap-2-expressiveness-limits" class="internal xref">Gap 2: Expressiveness Limits</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-transaction-conflicts" class="internal xref">Gap 3: Transaction Conflicts</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-lack-of-explainabilit" class="internal xref">Gap 3: Lack of Explainability</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4-lack-of-explainabilit" class="internal xref">Gap 4: Lack of Explainability</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4-agent-uncertainty-in-" class="internal xref">Gap 4: Agent Uncertainty in YANG-Level Actions</a></p>
 </li>
             </ul>
 </li>
@@ -1406,18 +1406,18 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-gap-analysis">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-gap-analysis" class="section-name selfRef">Gap Analysis</a>
       </h2>
-<div id="gap-1-insufficient-agent-comprehension-of-yang-semantics">
+<div id="comprehension">
 <section id="section-4.1">
         <h3 id="name-gap-1-insufficient-agent-co">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gap-1-insufficient-agent-co" class="section-name selfRef">Gap 1: Insufficient Agent Comprehension of YANG Semantics</a>
         </h3>
 <p id="section-4.1-1">YANG is a data modeling language rich in semantics. YANG data models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as "when", "must", and "leafref" statements.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">When the AI agent translates natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the greater challenge lies in semantic-level misinterpretion. For instance, the agent may misinterpret a YANG node's "description" statement, resulting in the delivered configuration violating the original operator intent. This problem is even amplified in multi-vendor and cross-version model scenarios.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the greater challenge lies in semantic-level misinterpretion. For instance, the agent may misinterpret a YANG node's "description" statement, resulting in the delivered configuration violating the original operator intent. This problem is even amplified in multi-vendor and cross-version model scenarios.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">As a result, the generated configuration data are either syntactically invalid, semantically incomplete, or inconsistent with the original operator intent.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">When analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="gap-2-expressiveness-limits">
+<div id="Expressiveness">
 <section id="section-4.2">
         <h3 id="name-gap-2-expressiveness-limits">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-gap-2-expressiveness-limits" class="section-name selfRef">Gap 2: Expressiveness Limits</a>
@@ -1429,23 +1429,21 @@ implicit operational requirements embedded in original intents, such as service 
 <p id="section-4.2-4">In short, the fixed-state design of YANG creates a hard boundary for carrying intent relaxation, which limits the autonomous decision space of multi-agent systems.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="gap-3-transaction-conflicts">
+<div id="gap-3-lack-of-explainability">
 <section id="section-4.3">
-        <h3 id="name-gap-3-transaction-conflicts">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-transaction-conflicts" class="section-name selfRef">Gap 3: Transaction Conflicts</a>
+        <h3 id="name-gap-3-lack-of-explainabilit">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-lack-of-explainabilit" class="section-name selfRef">Gap 3: Lack of Explainability</a>
         </h3>
-<p id="section-4.3-1">In the reference two-layer agentic AI architecture, orchestrator AI agent and network AI agent could operate autonomously and asynchronously with no centralized global scheduling. Different agents may initiate independent tasks simultaneously against the same set of network devices and configuration data.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">A typical conflicting scenario occurs when an orchestrator AI agent is executing a service provisioning task, while a network AI agent triggers real-time network fault diagnosis and resolution, based on continuous telemetry streams and analysis.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Concurrent write operations on identical YANG nodes may lead to configuration overwriting and policy conflicts, which might cause critical risks in asynchronous multi-agent operational environments.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, why particular network states are retrieved for incident diagnosis, and which intent or task triggered it.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="gap-4-lack-of-explainability">
+<div id="gap-4-agent-uncertainty-in-yang-level-actions">
 <section id="section-4.4">
-        <h3 id="name-gap-4-lack-of-explainabilit">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-lack-of-explainabilit" class="section-name selfRef">Gap 4: Lack of Explainability</a>
+        <h3 id="name-gap-4-agent-uncertainty-in-">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-agent-uncertainty-in-" class="section-name selfRef">Gap 4: Agent Uncertainty in YANG-Level Actions</a>
         </h3>
-<p id="section-4.4-1">YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data. For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide explanation for every YANG-level action, e.g., why specific configuration nodes are modified, and why particular network states are retrieved for incident diagnosis.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Currently, YANG and YANG-driven network management protocols have no standard fields for such explanatory metadata. An agent may silently send an &lt;edit-config&gt; RPC operation that deletes a leaf, without any indication of why the deletion was necessary.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">AI agents, especially those built on large language models, inherently produce outputs with varying degrees of confidence. For the same intent, an agent may generate different YANG-level actions due to insufficient context or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomaly or incident, different diagnostic explanations may exist for the same obverved state values.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">When an agent generates a configuration change, there is a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative or likely to be reverted.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1461,7 +1459,7 @@ implicit operational requirements embedded in original intents, such as service 
         <h3 id="name-yang-driven-operations-as-a">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-yang-driven-operations-as-a" class="section-name selfRef">YANG-driven Operations as AI-Invocable Tools</a>
         </h3>
-<p id="section-5.1-1">A promising direction for partially addressing Gap 1 (Semantic Incompleteness) is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">A promising direction for partially addressing <a href="#comprehension" class="auto internal xref">Section 4.1</a> is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">The applicability of MCP to network management is discussed in <span>[<a href="#I-D.yang-nmrg-mcp-nm" class="cite xref">I-D.yang-nmrg-mcp-nm</a>]</span>. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy <span>[<a href="#gNMIBuddy" class="cite xref">gNMIBuddy</a>]</span> provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1470,9 +1468,9 @@ implicit operational requirements embedded in original intents, such as service 
         <h3 id="name-semantic-enrichment-via-kno">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-semantic-enrichment-via-kno" class="section-name selfRef">Semantic Enrichment via Knowledge Graphs and Semantic Metadata</a>
         </h3>
-<p id="section-5.2-1">Gap 1 (Semantic Incompleteness) and Gap 2 (Expressiveness Limits) can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1"><a href="#comprehension" class="auto internal xref">Section 4.1</a> and <a href="#Expressiveness" class="auto internal xref">Section 4.2</a> can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">IETF work in this area includes <span>[<a href="#I-D.mackey-nmop-kg-for-netops" class="cite xref">I-D.mackey-nmop-kg-for-netops</a>]</span> and <span>[<a href="#I-D.tailhardat-nmop-incident-management-noria" class="cite xref">I-D.tailhardat-nmop-incident-management-noria</a>]</span>, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing Gap 2.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing Gap 1. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing <a href="#Expressiveness" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">There is also other work in NMOP focusing on semantic enrichment that could serve as a foundation layer for agentic AI driven network anomaly detection. A set of ongoing drafts include:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-5.1">
@@ -1485,7 +1483,7 @@ implicit operational requirements embedded in original intents, such as service 
             <p id="section-5.2-5.3.1"><span>[<a href="#I-D.ietf-nmop-network-anomaly-semantics" class="cite xref">I-D.ietf-nmop-network-anomaly-semantics</a>]</span> describes common network symptom semantics across different network planes.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.2-6">An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging Gap 1 and Gap 2. Moreover, the standardized anomaly semantics also help improve explainability (Gap 4), as agents can log which anomaly or symptom has triggered a repair action using well-defined metadata.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
+<p id="section-5.2-6">An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging <a href="#comprehension" class="auto internal xref">Section 4.1</a> and <a href="#Expressiveness" class="auto internal xref">Section 4.2</a>. Moreover, the standardized anomaly semantics also help improve explainability (Gap 4), as agents can log which anomaly or symptom has triggered a repair action using well-defined metadata.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="human-in-the-loop">

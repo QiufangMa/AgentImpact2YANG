@@ -189,8 +189,7 @@ Furthermore, real-world network deployments introduce more challenges through ve
 
 Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. Nevertheless, YANG focuses on defining data structures and formats, syntax and semantic rules and static constraints, without capabilities to represent flexible operational logic.
 
-In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models. To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent.
-implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
+In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models. To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
 
 This premature semantic trimming deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.
 
@@ -206,13 +205,15 @@ For trusted, auditable, and human-collaborative autonomous operations, agents ar
 
  * Task-level explanation: A high-level intent may involve dozens of YANG operations action multiple devices. There is a need to explain why a series of actions were taken, or how a task was fulfilled.
 
- * Causal explanation: when a specific action leads to an unexpected network behavior, an agent needs to explain the causal chain from the change to the observed state.
+ * Causal explanation: when a specific YANG action leads to an unexpected network behavior, an agent needs to explain the causal chain from the change to the observed state.
 
-## Gap 4: Agent Uncertainty in YANG-Level Actions {#Uncertainty}
+## Gap 4: Agent Non-determinism and Uncertainty in YANG-Level Actions {#Uncertainty}
 
-AI agents, especially those built on large language models, inherently produce outputs with varying degrees of confidence. For the same intent, an agent may generate different YANG-level actions due to insufficient context or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomaly or incident, different diagnostic explanations may exist for the same obverved state values.
+The operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach absolute determinism.
+However, when tasked with deep reasoning, processing complex contexts, or executing multi-step decisions, the agent's behavior inevitably introduces randomness and unpredictability. For the same high-level intent, an agent may generate different YANG-level actions due to historical context drift or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge for the exact same observed network operational state.
 
-When an agent generates a configuration change, there is a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative or likely to be reverted.
+Besides, AI agents also inherently produce outputs with varying degrees of confidence.
+When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.
 
 # Possible Ways Forward
 

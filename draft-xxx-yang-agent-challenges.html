@@ -1051,7 +1051,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma &amp; Wu</td>
-<td class="center">Expires 5 December 2026</td>
+<td class="center">Expires 6 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg {
 <dd class="internet-draft">draft-xxx-yang-agent-challenges-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-03" class="published">3 June 2026</time>
+<time datetime="2026-06-04" class="published">4 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-06">6 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1182,7 +1182,7 @@ svg {
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-lack-of-explainabilit" class="internal xref">Gap 3: Lack of Explainability</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4-agent-uncertainty-in-" class="internal xref">Gap 4: Agent Uncertainty in YANG-Level Actions</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-gap-4-agent-non-determinism" class="internal xref">Gap 4: Agent Non-determinism and Uncertainty in YANG-Level Actions</a></p>
 </li>
             </ul>
 </li>
@@ -1423,8 +1423,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-gap-2-expressiveness-limits" class="section-name selfRef">Gap 2: Expressiveness Limits</a>
         </h3>
 <p id="section-4.2-1">Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. Nevertheless, YANG focuses on defining data structures and formats, syntax and semantic rules and static constraints, without capabilities to represent flexible operational logic.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models. To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent.
-implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models. To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.2-3">This premature semantic trimming deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4">In short, the fixed-state design of YANG creates a hard boundary for carrying intent relaxation, which limits the autonomous decision space of multi-agent systems.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
 </section>
@@ -1444,18 +1443,20 @@ implicit operational requirements embedded in original intents, such as service 
             <p id="section-4.3-3.2.1">Task-level explanation: A high-level intent may involve dozens of YANG operations action multiple devices. There is a need to explain why a series of actions were taken, or how a task was fulfilled.<a href="#section-4.3-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.3-3.3">
-            <p id="section-4.3-3.3.1">Causal explanation: when a specific action leads to an unexpected network behavior, an agent needs to explain the causal chain from the change to the observed state.<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-3.3.1">Causal explanation: when a specific YANG action leads to an unexpected network behavior, an agent needs to explain the causal chain from the change to the observed state.<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="Uncertainty">
 <section id="section-4.4">
-        <h3 id="name-gap-4-agent-uncertainty-in-">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-agent-uncertainty-in-" class="section-name selfRef">Gap 4: Agent Uncertainty in YANG-Level Actions</a>
+        <h3 id="name-gap-4-agent-non-determinism">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-agent-non-determinism" class="section-name selfRef">Gap 4: Agent Non-determinism and Uncertainty in YANG-Level Actions</a>
         </h3>
-<p id="section-4.4-1">AI agents, especially those built on large language models, inherently produce outputs with varying degrees of confidence. For the same intent, an agent may generate different YANG-level actions due to insufficient context or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomaly or incident, different diagnostic explanations may exist for the same obverved state values.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">When an agent generates a configuration change, there is a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative or likely to be reverted.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">The operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach absolute determinism.
+However, when tasked with deep reasoning, processing complex contexts, or executing multi-step decisions, the agent's behavior inevitably introduces randomness and unpredictability. For the same high-level intent, an agent may generate different YANG-level actions due to historical context drift or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge for the exact same observed network operational state.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">Besides, AI agents also inherently produce outputs with varying degrees of confidence.
+When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

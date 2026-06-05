@@ -1051,7 +1051,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma &amp; Wu</td>
-<td class="center">Expires 6 December 2026</td>
+<td class="center">Expires 7 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg {
 <dd class="internet-draft">draft-xxx-yang-agent-challenges-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-04" class="published">4 June 2026</time>
+<time datetime="2026-06-05" class="published">5 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-06">6 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-07">7 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1232,7 +1232,7 @@ svg {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">RFC 8969 <span>[<a href="#RFC8969" class="cite xref">RFC8969</a>]</span> establishes a framework for automating service and network management with YANG <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. Combined with network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>, YANG delivers deterministic and interoperable capabilities for configuration manipulation and state retrieval across service, network, and device layers.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">RFC 8969 <span>[<a href="#RFC8969" class="cite xref">RFC8969</a>]</span> establishes a framework for automating service and network management using YANG <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. Combined with network management protocols such as NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>, YANG delivers deterministic and interoperable capabilities for configuration manipulation and state retrieval across service, network, and device layers.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Recently, Large Language Models (LLMs) and AI Agents have emerged as new enablers for network automation. Multiple IETF activities are ongoing in this area, proposals include but are not limited to:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-3.1">
@@ -1301,41 +1301,41 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-layered-ai-agent-deployment" class="section-name selfRef">Layered AI Agent Deployment Architecture</a>
         </h3>
 <p id="section-3.1-1">This document targets a two-layer agent deployment architecture as specified in <a href="#arch" class="auto internal xref">Figure 1</a>. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to <span>[<a href="#I-D.draft-wmz-nmrg-agent-ndt-arch" class="cite xref">I-D.draft-wmz-nmrg-agent-ndt-arch</a>]</span> for the complete architecture design.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<span id="name-a-simplified-reference-arch"></span><div id="arch">
+<span id="name-a-simplified-hierarchical-a"></span><div id="arch">
 <figure id="figure-1">
           <div class="alignCenter art-text artwork" id="section-3.1-2.1">
 <pre>
-+---------------------+
-|    Orchestrator     |
-|  +----------------+ |
-|  |  AI Agent(s)   | |
-|  +------^---------+ |
-+---------+-----------+
-          |
-          |A2A Protocol
-          |//YANG-structured payload; or domain-level intent
-          |
-+---------+-----------+
-|     Controller      |
-|+--------v----------+|
-||Network AI Agent(s)||
-|+--------^----------+|
-+---------+-----------+
-          |
-          |NETCONF/RESTCONF/Telemetry
-          |
-+---------v-----------+
-|   Network Devices   |
-+---------------------+
++--------------------------+
+|Orchestrator              |
+|+------------------------+|
+||Orchestrator AI Agent(s)||
+|+-----------^------------+|
++------------+-------------+
+             |
+             |A2A Protocol
+             |//YANG-structured payload; or domain-level intent
+             |
+  +----------+----------+
+  |Controller|          |
+  |+---------v---------+|
+  ||Network AI Agent(s)||
+  |+-------------------+|
+  +----------^----------+
+             |
+             |NETCONF/RESTCONF/Telemetry
+             |
+  +----------v----------+
+  |   Network Devices   |
+  +---------------------+
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-a-simplified-reference-arch" class="selfRef">A simplified reference architecture</a>
+<a href="#name-a-simplified-hierarchical-a" class="selfRef">A simplified Hierarchical AI Agent Architecture</a>
           </figcaption></figure>
 </div>
 </section>
 </div>
-<div id="workflow-example-1-service-provisioningoptimization">
+<div id="provision">
 <section id="section-3.2">
         <h3 id="name-workflow-example-1-service-">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-workflow-example-1-service-" class="section-name selfRef">Workflow Example 1: Service Provisioning/Optimization</a>
@@ -1370,7 +1370,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </dl>
 </section>
 </div>
-<div id="workflow-example-2-network-troubleshooting">
+<div id="troubleshoot">
 <section id="section-3.3">
         <h3 id="name-workflow-example-2-network-">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-workflow-example-2-network-" class="section-name selfRef">Workflow Example 2: Network Troubleshooting</a>
@@ -1383,7 +1383,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <dd class="break"></dd>
 <dt id="section-3.3-1.3">Step 2:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.4">
-            <p id="section-3.3-1.4.1">Network AI agent receives the comprehensive telemetry data which provides a holistic view of the network operational state across multiple network devices and YANG modules. By analyzing the real-time data, it could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.<a href="#section-3.3-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-1.4.1">Network AI agent grasps a holistic view of the network operational state across multiple network devices and YANG modules. Instead of flooding the Network AI agent with massive, raw streaming telemetry data which would instantly overwhelm the LLM's context window and incur prohibitive token costs, agent may leverage existing network data analytics components or tools. Network AI agent could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.<a href="#section-3.3-1.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.5">Step 3:</dt>
@@ -1412,8 +1412,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gap-1-insufficient-agent-co" class="section-name selfRef">Gap 1: Insufficient Agent Comprehension of YANG Semantics</a>
         </h3>
 <p id="section-4.1-1">YANG is a data modeling language rich in semantics. YANG data models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as "when", "must", and "leafref" statements.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the greater challenge lies in intent-level mismatch. For instance, the agent may misinterpret a YANG node's "description" statement, resulting in the delivered configuration inconsistent with the original operator intent.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">When analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">This gap hinders Step 2 of the Service Provisioning/Optimization Workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>), where the Orchestrator Agent ingests a high-level customer intent and attempts to map it into service-level YANG models (e.g., ietf-l3vpn-svc).
+When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the greater challenge lies in intent-level mismatch. For instance, the agent may misinterpret a YANG node's "description" statement, resulting in the delivered configuration inconsistent with the original operator intent.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">And in the step 2 of the network troubleshooting workflow (<a href="#troubleshoot" class="auto internal xref">Section 3.3</a>), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes and modules. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.1-4">Furthermore, real-world network deployments introduce more challenges through vendor-specific YANG extensions, augmentations, and deviations, as well as multiple versions of YANG modules, all of which contribute to exponential difficulties in completely comprehending YANG semantics.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1423,9 +1424,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-gap-2-expressiveness-limits" class="section-name selfRef">Gap 2: Expressiveness Limits</a>
         </h3>
 <p id="section-4.2-1">Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. Nevertheless, YANG focuses on defining data structures and formats, syntax and semantic rules and static constraints, without capabilities to represent flexible operational logic.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models. To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">This premature semantic trimming deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">In short, the fixed-state design of YANG creates a hard boundary for carrying intent relaxation, which limits the autonomous decision space of multi-agent systems.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">This Gap hinders step 3 of the service provisioning/optimization workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>). To adapt to rigid YANG structures, orchestrator AI agents have to trim and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">This premature semantic trimming deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">In short, the fixed-state design of YANG creates a hard boundary for carrying intent relaxation, which limits the autonomous decision space of multi-agent systems.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Explainability">
@@ -1433,7 +1435,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-gap-3-lack-of-explainabilit">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-lack-of-explainabilit" class="section-name selfRef">Gap 3: Lack of Explainability</a>
         </h3>
-<p id="section-4.3-1">YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, on the contrary, needs to explain their decisions to build trust. AI agents act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, which act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data, needs to explain their decisions to build trust. This gap exists in the steps 2 and 4 of the service provisioning/optimization workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>), and steps 3 and 4 of the network troubleshooting workflow (<a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide:<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3-3.1">
@@ -1454,7 +1456,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-gap-4-agent-non-determinism" class="section-name selfRef">Gap 4: Agent Non-determinism and Uncertainty in YANG-Level Actions</a>
         </h3>
 <p id="section-4.4-1">The operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach absolute determinism.
-However, when tasked with deep reasoning, processing complex contexts, or executing multi-step decisions, the agent's behavior inevitably introduces randomness and unpredictability. For the same high-level intent, an agent may generate different YANG-level actions due to historical context drift or the probabilistic nature of the underlying large language models. Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge for the exact same observed network operational state.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+However, when tasked with deep reasoning, processing complex contexts, or executing multi-step decisions, the agent's behavior inevitably introduces randomness and unpredictability. For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in <a href="#provision" class="auto internal xref">Section 3.2</a>). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">Besides, AI agents also inherently produce outputs with varying degrees of confidence.
 When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>

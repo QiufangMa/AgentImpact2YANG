@@ -110,7 +110,8 @@ This section uses a simplified layered agentic AI reference architecture complia
 
 ## Layered AI Agent Deployment Architecture
 
-This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+This document targets a two-layer agent deployment architecture as specified in {{arch}}. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. The architecture may also use memory management (e.g., short-term and long-term memory) to maintain conversational continuity and enable contextual search.
+Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
 
 
 ~~~~
@@ -140,7 +141,7 @@ This document targets a two-layer agent deployment architecture as specified in 
 {: #arch title="A simplified Hierarchical AI Agent Architecture" artwork-align="center"}
 
 
-## Workflow Example 1: Service Provisioning/Optimization {#provision}
+## Workflow Example 1: Intent-Driven Service Provisioning/Optimization {#provision}
 
 A complete end-to-end workflow focusing on AI agents generating configuration from high-level intents is defined as follows.
 
@@ -154,7 +155,7 @@ Step 3:
 : YANG-structured data are encapsulated as message payload, and transmitted to network AI agents along with other context metadata via A2A protocol.
 
 Step 4:
-: The network AI agent converts received tasks into structured device model layer operations. The configuration is delivered via YANG-driven protocols such as NETCONF and RESTCONF. Validation checks such as syntax and semantic validation may be performed before the device configuration is delivered.
+: The network AI agent converts received tasks into structured device model layer operations. The configuration is handed off to the network controller's Southbound Interface (SBI) and delivered via YANG-driven protocols such as NETCONF and RESTCONF. Validation checks may be performed before the configuration is delivered to network devices.
 
 Step 5:
 : Network devices receive incoming configuration, execute changes, and report execution response.
@@ -165,7 +166,7 @@ Step 1:
 : A network operator submits a high-level operational intent, requesting the network AI agent to continuously monitor the network, perceive emerging anomalies, perform active diagnosis, and conduct autonomous repair while reporting root causes and handling results.
 
 Step 2:
-: Network AI agent grasps a holistic view of the network operational state across multiple network devices and YANG modules. Instead of flooding the Network AI agent with massive, raw streaming telemetry data which would instantly overwhelm the LLM's context window and incur prohibitive token costs, agent may leverage existing network data analytics components or tools. Network AI agent could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.
+: Network AI agent grasps a holistic view of the network operational state across multiple network devices and YANG modules. Instead of flooding the Network AI agent with massive, raw streaming telemetry data which would instantly overwhelm the LLM's context window and incur prohibitive token costs, agent may leverage existing network data analytics components or tools to be aware of real-time network state. Network AI agent could detect network anomalies swiftly, which enables the prompt identification of potential issues before they escalate into major faults.
 
 
 Step 3:
@@ -181,7 +182,7 @@ Step 4:
 YANG is a data modeling language rich in semantics. YANG data models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as "when", "must", and "leafref" statements.
 
 This gap hinders Step 2 of the Service Provisioning/Optimization Workflow ({{provision}}), where the Orchestrator Agent ingests a high-level customer intent and attempts to map it into service-level YANG models (e.g., ietf-l3vpn-svc).
-When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the greater challenge lies in intent-level mismatch. For instance, the agent may misinterpret a YANG node's "description" statement, resulting in the delivered configuration inconsistent with the original operator intent.
+When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the more significant challenge lies in intent-level mismatch. For instance, the agent may misinterpret some YANG data nodes, resulting in the delivered configuration inconsistent with the original operator intent.
 
 And in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes and modules. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
@@ -252,7 +253,7 @@ An AI agent gains a structured and machine-understandable vocabulary for describ
 
 While full autonomy is a long‑term goal for agentic AI enabled network management, a mechanism that escalates decisions based on assessed risk or confidence level is essential for safe deployment. This approach partially addresses Gap 3 (Lack of Explainability), specifically the need for human oversight of agent decisions, and also helps mitigate Agent Uncertainty in YANG-Level Actions (Gap 4).
 
-For example, a low-risk operation proceeds automatically without human approval, while a high-risk one renders a visual diff, the network digital twin simulation report, and the agent’s intent explanation (including confidence and evidence), and pushes the report to a human for approval.
+For example, a low-risk operation proceeds automatically without human approval, while a high-risk one renders a visual diff, the network digital twin simulation report, and the agent’s intent explanation (including confidence and evidence), and pushes the report to a human for approval. It could be possible for users to verify agent decisions and further clarify their intentions.
 
 
 # Security Considerations

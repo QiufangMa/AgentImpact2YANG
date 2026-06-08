@@ -87,6 +87,7 @@ Table of Contents
      4.3.  Gap 3: Lack of Explainability
      4.4.  Gap 4: Agent Non-determinism and Uncertainty in YANG-Level
            Actions
+     4.5.  Gap 5: Context Explosion in YANG-Based Environments
    5.  Possible Ways Forward
      5.1.  YANG-driven Operations as AI-Invocable Tools
      5.2.  Semantic Enrichment via Knowledge Graphs and Semantic
@@ -407,6 +408,29 @@ Table of Contents
    the agent was in that specific operation, and whether the agent
    internally marks a YANG-level action as tentative, low-confidence, or
    likely to be reverted.
+
+4.5.  Gap 5: Context Explosion in YANG-Based Environments
+
+   LLM-based agents operate within finite context windows.  In step 2 of
+   the service provisioning/optimization workflow (Section 3.2), where
+   the orchestrator agent maps a high-level customer intent into
+   service-level YANG data (e.g., ietf-l3vpn-svc), the LLM needs to
+   understand the schema of relevant YANG modules, including node
+   hierarchies, type definition, constraints, and relationship and
+   dependencies across YANG modules.  Furthermore, vendors may introduce
+   customized YANG extension, augmentations and deviations.  Loading the
+   entire collection of relevant YANG schemas leads to a "context
+   explosion" problem, which introduces unacceptable inference latency
+   and unpredictable operational costs during real-time network
+   operations.
+
+   While the token context windows of modern LLMs continue to expand,
+   high-density schemas cause LLMs to suffer from severe focus
+   degradation.  Critical configuration nodes, path reference (leafref),
+   or specific "when" conditional statement located in the middle of a
+   massive context window are easily overlooked (i.e., the "lost-in-the-
+   middle" phenomenon), which causes a decline in LLM reasoning
+   performance.
 
 5.  Possible Ways Forward
 

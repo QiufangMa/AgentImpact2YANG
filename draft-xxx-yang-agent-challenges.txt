@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 7 December 2026                                     5 June 2026
+Expires: 10 December 2026                                    8 June 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2026.
+   This Internet-Draft will expire on 10 December 2026.
 
 Copyright Notice
 
@@ -78,7 +78,8 @@ Table of Contents
    2.  Conventions and Definitions
    3.  A Reference Architecture and Typical Workflows
      3.1.  Layered AI Agent Deployment Architecture
-     3.2.  Workflow Example 1: Service Provisioning/Optimization
+     3.2.  Workflow Example 1: Intent-Driven Service Provisioning/
+           Optimization
      3.3.  Workflow Example 2: Network Troubleshooting
    4.  Gap Analysis
      4.1.  Gap 1: Insufficient Agent Comprehension of YANG Semantics
@@ -192,8 +193,11 @@ Table of Contents
    This document targets a two-layer agent deployment architecture as
    specified in Figure 1.  It is a simplified view that hides task
    agents, function modules or toolsets that are available for agents to
-   invoke.  Refer to [I-D.draft-wmz-nmrg-agent-ndt-arch] for the
-   complete architecture design.
+   invoke.  The architecture may also use memory management (e.g.,
+   short-term and long-term memory) to maintain conversational
+   continuity and enable contextual search.  Refer to
+   [I-D.draft-wmz-nmrg-agent-ndt-arch] for the complete architecture
+   design.
 
       +--------------------------+
       |Orchestrator              |
@@ -220,7 +224,8 @@ Table of Contents
 
          Figure 1: A simplified Hierarchical AI Agent Architecture
 
-3.2.  Workflow Example 1: Service Provisioning/Optimization
+3.2.  Workflow Example 1: Intent-Driven Service Provisioning/
+      Optimization
 
    A complete end-to-end workflow focusing on AI agents generating
    configuration from high-level intents is defined as follows.
@@ -240,10 +245,11 @@ Table of Contents
       metadata via A2A protocol.
 
    Step 4:  The network AI agent converts received tasks into structured
-      device model layer operations.  The configuration is delivered via
-      YANG-driven protocols such as NETCONF and RESTCONF.  Validation
-      checks such as syntax and semantic validation may be performed
-      before the device configuration is delivered.
+      device model layer operations.  The configuration is handed off to
+      the network controller's Southbound Interface (SBI) and delivered
+      via YANG-driven protocols such as NETCONF and RESTCONF.
+      Validation checks may be performed before the configuration is
+      delivered to network devices.
 
    Step 5:  Network devices receive incoming configuration, execute
       changes, and report execution response.
@@ -261,10 +267,10 @@ Table of Contents
       modules.  Instead of flooding the Network AI agent with massive,
       raw streaming telemetry data which would instantly overwhelm the
       LLM's context window and incur prohibitive token costs, agent may
-      leverage existing network data analytics components or tools.
-      Network AI agent could detect network anomalies swiftly, which
-      enables the prompt identification of potential issues before they
-      escalate into major faults.
+      leverage existing network data analytics components or tools to be
+      aware of real-time network state.  Network AI agent could detect
+      network anomalies swiftly, which enables the prompt identification
+      of potential issues before they escalate into major faults.
 
    Step 3:  Once an issue or fault is identified, network AI agent
       diagnoses the exact cause and generate targeted repair solutions.
@@ -295,10 +301,10 @@ Table of Contents
    comprehension of YANG semantics.  While syntax errors (e.g., non-
    existent nodes, invalid enumeration values or out-of-range
    parameters) may be effectively detected and fixed by configuration
-   validation tools, the greater challenge lies in intent-level
-   mismatch.  For instance, the agent may misinterpret a YANG node's
-   "description" statement, resulting in the delivered configuration
-   inconsistent with the original operator intent.
+   validation tools, the more significant challenge lies in intent-level
+   mismatch.  For instance, the agent may misinterpret some YANG data
+   nodes, resulting in the delivered configuration inconsistent with the
+   original operator intent.
 
    And in the step 2 of the network troubleshooting workflow
    (Section 3.3), when analyzing massive telemetry data composed of
@@ -485,7 +491,8 @@ Table of Contents
    human approval, while a high-risk one renders a visual diff, the
    network digital twin simulation report, and the agent’s intent
    explanation (including confidence and evidence), and pushes the
-   report to a human for approval.
+   report to a human for approval.  It could be possible for users to
+   verify agent decisions and further clarify their intentions.
 
 6.  Security Considerations
 

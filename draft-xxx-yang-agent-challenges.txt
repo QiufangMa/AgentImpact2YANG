@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 10 December 2026                                    8 June 2026
+Expires: 12 December 2026                                   10 June 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -15,9 +15,9 @@ Expires: 10 December 2026                                    8 June 2026
 Abstract
 
    The industry today is actively exploring the application of agentic
-   AI to autonomous network operations.  However, insufficient attention
-   has been paid to the impacts that the introduction of agentic AI may
-   impose on YANG modeling, which serves as the foundation of model-
+   AI to autonomous network operations.  However, there is little
+   attention given to the impacts that the introduction of agentic AI
+   may impose on YANG modeling, which serves as the foundation of model-
    driven network automation.
 
    Based on some end-to-end intent translation workflow analysis that
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 December 2026.
+   This Internet-Draft will expire on 12 December 2026.
 
 Copyright Notice
 
@@ -84,7 +84,7 @@ Table of Contents
    4.  Gap Analysis
      4.1.  Gap 1: Insufficient Agent Comprehension of YANG Semantics
      4.2.  Gap 2: Expressiveness Limits
-     4.3.  Gap 3: Lack of Explainability
+     4.3.  Gap 3: Lack of Trust or Explainability
      4.4.  Gap 4: Agent Non-determinism and Uncertainty in YANG-Level
            Actions
      4.5.  Gap 5: Context Explosion in YANG-Based Environments
@@ -140,16 +140,17 @@ Table of Contents
       automation in the multi-vendor heterogeneous network environment.
 
    While the industry is actively exploring the application of agentic
-   AI to autonomous network, little work considers how YANG modeling, as
-   the very foundation of model-driven network automation, would be
-   impacted, and if there is any critical gaps that remain unrecognized/
-   unsolved at the intersection of probabilistic AI agents and
-   deterministic YANG.
+   AI to autonomous network, little attention has been paid to how YANG
+   modeling, as the very foundation of model-driven network automation,
+   would be impacted, and if there is any critical gaps that remain
+   unrecognized/unsolved at the intersection of probabilistic AI agents
+   and deterministic structured YANG.
 
-   The purpose of this document is not to substantially modify YANG or
+   The purpose of this document is not to substantially redesign YANG or
    define a brand-new data modeling language.  Rather, it seeks to adapt
    YANG for agentic AI.  By identifying fundamental gaps, this document
-   aims to facilitate community discussion on how to bridge them.
+   aims to facilitate community discussion on how to bridge the gap
+   between them.
 
 2.  Conventions and Definitions
 
@@ -180,14 +181,15 @@ Table of Contents
 
    This section uses a simplified layered agentic AI reference
    architecture compliant with [I-D.draft-wmz-nmrg-agent-ndt-arch] and
-   describes two typical workflows: network service provisioning/
-   optimization and fault troubleshooting.  The workflows cover
-   scenarios from configuration generation to YANG data consumption,
-   which are essential to expose and derive the gaps in Section 4.  Note
-   that these flows are not the only possible ones.  The intent flows
-   shown here are just examples, i.e., typical workflows that illustrate
-   how YANG models at the service, network, and device layers can be
-   engaged in an agent-integrated network automation context.
+   describes two typical workflows: the network service provisioning/
+   optimization and the fault troubleshooting.  The workflows cover
+   scenarios from configuration generation to YANG modelled data
+   consumption, which are essential to expose and derive the gaps in
+   Section 4.  Note that these flows are not the only possible ones.
+   The intent flows shown here are just examples, i.e., typical
+   workflows that illustrate how YANG models at the service, network,
+   and device layers can be engaged in an agent-integrated network
+   automation context.
 
 3.1.  Layered AI Agent Deployment Architecture
 
@@ -299,13 +301,13 @@ Table of Contents
    models (e.g., ietf-l3vpn-svc).  When the AI agent translates the
    operator intent expressed via natural language into YANG-structured
    data, AI hallucinations are commonly observed due to insufficient
-   comprehension of YANG semantics.  While syntax errors (e.g., non-
-   existent nodes, invalid enumeration values or out-of-range
-   parameters) may be effectively detected and fixed by configuration
-   validation tools, the more significant challenge lies in intent-level
-   mismatch.  For instance, the agent may misinterpret some YANG data
-   nodes, resulting in the delivered configuration inconsistent with the
-   original operator intent.
+   comprehension of YANG semantics or incomplete YANG semantics.  While
+   syntax errors (e.g., non-existent nodes, invalid enumeration values
+   or out-of-range parameters) may be effectively detected and fixed by
+   configuration validation tools, the more significant challenge lies
+   in intent-level mismatch.  For instance, the agent may misinterpret
+   some YANG data nodes, resulting in the delivered configuration
+   inconsistent with the original operator intent.
 
    And in the step 2 of the network troubleshooting workflow
    (Section 3.3), when analyzing massive telemetry data composed of
@@ -337,14 +339,14 @@ Table of Contents
    models.
 
    This Gap hinders step 3 of the service provisioning/optimization
-   workflow (Section 3.2).  To adapt to rigid YANG structures,
-   orchestrator AI agents have to trim and simplify the original intent.
-   Implicit operational requirements embedded in original intents, such
-   as service continuity, high availability and security compliance, are
-   likely lost during the transformation process.
+   workflow (Section 3.2).  To adapt to static YANG structures,
+   orchestrator AI agents have to prune and simplify the original
+   intent.  Implicit operational requirements embedded in original
+   intents, such as service continuity, high availability and security
+   compliance, are likely lost during the transformation process.
 
-   This premature semantic trimming deprives downstream network AI
-   agents of the flexibility to make dynamic decisions, perform graceful
+   This premature semantic pruning deprives downstream network AI agents
+   of the flexibility to make dynamic decisions, perform graceful
    degradation or apply fault-tolerant adjustments when network runtime
    status changes.
 
@@ -352,7 +354,7 @@ Table of Contents
    carrying intent relaxation, which limits the autonomous decision
    space of multi-agent systems.
 
-4.3.  Gap 3: Lack of Explainability
+4.3.  Gap 3: Lack of Trust or Explainability
 
    YANG is designed for the deterministic network automation.  It
    assumes the client knows exactly what to configure and why.  AI

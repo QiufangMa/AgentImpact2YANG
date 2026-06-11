@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-09T03:46:05.493137+00:00",
+  "timestamp": "2026-06-11T04:12:31.217047+00:00",
   "repo": "QiufangMa/AgentImpact2YANG",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOSpII1M8AAAABE94GJw",
+      "title": "YANG Limitation for AI",
+      "url": "https://github.com/QiufangMa/AgentImpact2YANG/issues/3",
+      "state": "OPEN",
+      "author": "billwuqin",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/bradspau/Network-Ontology-Knowledge-Graphs#owl--semantics-vs-yang-for-ai-and-grounding\n\"\nYANG Limitations for AI\nYANG is an excellent configuration and operational data schema language, but it presents significant difficulties for AI consumption:\n\nStructural opacity. A YANG model is a schema, not data. The actual network state lives in NETCONF get responses or YANG instance data files \u2014 a separate format that requires understanding the schema to interpret. An AI system must hold both the schema and the data in context simultaneously to answer questions about the network.\n\nProcedural traversal requirement. As shown in the traversal problem section, navigating relationships in YANG data requires procedural loops that resolve leafref pointers one step at a time. There is no mechanism for expressing \"find all ONTs that cannot reach an ODF\" as a single declarative statement. AI systems are poor at executing procedural database traversal logic reliably.\n\nNo native semantics. YANG defines structure and constraints, but not meaning. It has no concept of owl:inverseOf, transitivity, disjointness, or class hierarchy inference. A device-type leaf with value ODF is just a string to a YANG parser; there is no mechanism to assert that ODF is a subtype of passive-device without augmenting the model.\n\nOpaque identity system. YANG identity and identityref provide a lightweight taxonomy, but the hierarchy is not traversable as a graph. An AI cannot naturally ask \"which device types are passive equipment?\" without understanding the module's identity tree and writing code to walk it.\n\nSchema volatility. YANG models evolve with IETF drafts. Each new version may restructure paths, rename leaves, or change leafref targets. Any AI system that has learned the schema structure must be retrained or re-prompted when the schema changes.\n\"",
+      "createdAt": "2026-06-10T05:22:57Z",
+      "updatedAt": "2026-06-10T05:22:57Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -75,6 +92,34 @@
       "mergedBy": "QiufangMa",
       "mergeCommit": {
         "oid": "8a3f5a3597783db5a8c0265cdda3764ca3190904"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOSpII1M7kYvkx",
+      "title": "Walk through the document with some proposed edits",
+      "url": "https://github.com/QiufangMa/AgentImpact2YANG/pull/2",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-09T13:07:14Z",
+      "updatedAt": "2026-06-10T06:55:32Z",
+      "baseRepository": "QiufangMa/AgentImpact2YANG",
+      "baseRefName": "main",
+      "baseRefOid": "3355c492f721ba944ee2c883e2560168f7956032",
+      "headRepository": "billwuqin/AgentImpact2YANG",
+      "headRefName": "patch-2",
+      "headRefOid": "eb8f868a4b09eb49235340a8bc6374f75d3a34d0",
+      "closedAt": "2026-06-10T06:55:32Z",
+      "mergedAt": "2026-06-10T06:55:32Z",
+      "mergedBy": "QiufangMa",
+      "mergeCommit": {
+        "oid": "62e25c2c356ff9c2e37f1231877b378a8f5a6c01"
       },
       "comments": [],
       "reviews": []

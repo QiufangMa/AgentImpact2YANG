@@ -35,7 +35,7 @@ author:
     email: maqiufang1@huawei.com
  -
     fullname: Qin Wu
-    organization: Huawei    
+    organization: Huawei
     street: 101 Software Avenue, Yuhua District
     city: Nanjing, Jiangsu
     code: 210012

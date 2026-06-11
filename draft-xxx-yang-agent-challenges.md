@@ -35,7 +35,7 @@ author:
     email: maqiufang1@huawei.com
  -
     fullname: Qin Wu
-    organization: Huawei
+    organization: Huawei    
     street: 101 Software Avenue, Yuhua District
     city: Nanjing, Jiangsu
     code: 210012
@@ -59,7 +59,7 @@ informative:
 
 The industry today is actively exploring the application of agentic AI to autonomous network operations. However, there is little attention given to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation.
 
-Based on some end-to-end intent translation workflow analysis that engage YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to propose major YANG extensions or new modeling languages. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
+Based on some end-to-end intent translation workflow analysis that engage YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to substantially redesign YANG or define a new data model language. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged in the context of agentic AI, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
 
 
 --- middle
@@ -80,6 +80,7 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
 While the industry is actively exploring the application of agentic AI to autonomous network, little attention has been paid to how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized/unsolved at the intersection of probabilistic AI agents and deterministic structured YANG.
 
+This document analyzes two typical network operation workflows driven by hierarchical AI Agents: service provisioning/optimization and network troubleshooting. It identifies key gaps arising from the adoption of YANG data models in these scenarios.
 The purpose of this document is not to substantially redesign YANG or define a brand-new data modeling language. Rather, it seeks to adapt YANG for agentic AI. By identifying fundamental gaps, this document aims to facilitate community discussion on how to bridge the gap between them.
 
 
@@ -102,6 +103,9 @@ The document uses the following terms defined in {{?RFC8309}} and {{?RFC8969}}:
 The following definitions are used throughout this document:
 
 Agentic AI:
+: to be completed...
+
+AI Agent:
 : to be completed...
 
 # A Reference Architecture and Typical Workflows
@@ -182,39 +186,33 @@ Step 4:
 YANG is a data modeling language rich in semantics. YANG data models and corresponding instance data require fully qualified XPaths, strictly typed values, and full compliance with model constraints such as "when", "must", and "leafref" statements.
 
 This gap hinders Step 2 of the Service Provisioning/Optimization Workflow ({{provision}}), where the Orchestrator Agent ingests a high-level customer intent and attempts to map it into service-level YANG models (e.g., ietf-l3vpn-svc).
-When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics or incomplete YANG semantics. While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the more significant challenge lies in intent-level mismatch. For instance, the agent may misinterpret some YANG data nodes, resulting in the delivered configuration inconsistent with the original operator intent.
+When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics. For example, a lot of YANG semantics rely on informal natural language expressed via "description" statement, which is designed for human-readability. Cross-node associations implemented via "leafref", "when", or "must" statements need to be traversed step by step, in which process Large Language Models may suffer from drift. This easily introduces ambiguity and potential misinterpretation, making it hard for LLMs to generate correct YANG configuration. Furthermore, real-world network deployments introduce more challenges through vendor-specific YANG extensions, augmentations, and deviations, as well as multiple versions of YANG modules, all of which contribute to exponential difficulties in completely comprehending YANG semantics.
 
-And in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes and modules. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
+While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) may be effectively detected and fixed by configuration validation tools, the more significant challenge lies in intent-level mismatch. For instance, the agent may misinterpret certain YANG data nodes, producing configuration that is syntactically valid yet fails to align with the operator's original intent.
 
-Furthermore, real-world network deployments introduce more challenges through vendor-specific YANG extensions, augmentations, and deviations, as well as multiple versions of YANG modules, all of which contribute to exponential difficulties in completely comprehending YANG semantics.
+Similarly in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may fail to fully understand nested model hierarchies and implicit dependencies between YANG nodes and modules. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
+
 
 ## Gap 2: Expressiveness Limits {#Expressiveness}
 
-Natural language intents from operators inherently carry ambiguity, implicit constraints, missing parameters and diverse interpretations. Nevertheless, YANG focuses on defining data structures and formats, syntax and semantic rules and static constraints, without capabilities to represent flexible operational logic.
-
-In real-world network operations, operator intents often contain constraints, relaxation preferences, degradation policies, retry strategies, or conditional fallback rules. These dynamic and flexible requirements cannot be natively expressed by standard YANG models.
+In real-world network operations, operator intents often contain expectations and constraints, relaxation preferences, retry strategies, or fallback rules. Nevertheless, YANG is designed solely focuses on defining data structures and formats, syntax and semantic rules and static data dependencies. It lacks the ability to express dynamic and flexible operational logic, which creates a hard boundary for carrying intent and limits the decision space of multi-agent system.
 
 This Gap hinders step 3 of the service provisioning/optimization workflow ({{provision}}). To adapt to static YANG structures, orchestrator AI agents have to prune and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
 
 This premature semantic pruning deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.
 
-In short, the fixed-state design of YANG creates a hard boundary for carrying intent relaxation, which limits the autonomous decision space of multi-agent systems.
+## Gap 3: Lack of Explainability {#Explainability}
 
-## Gap 3: Lack of Trust or Explainability {#Explainability}
+YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, which act as autonomous decision-makers that generate YANG configuration data and perform specific network operations, needs to explain their decisions for human oversight, operational auditing, and compliance governance. This gap manifests in steps 2 and 4 of the service provisioning/optimization workflow ({{provision}}), as well as steps 3 and 4 of the network troubleshooting workflow ({{troubleshoot}}).
 
-YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, which act as autonomous decision-makers that generate YANG configuration data and invoke related operations (e.g., create, replace, delete), and actively retrieve network state data, needs to explain their decisions to build trust. This gap exists in the steps 2 and 4 of the service provisioning/optimization workflow ({{provision}}), and steps 3 and 4 of the network troubleshooting workflow ({{troubleshoot}}).
+In the service provisioning/optimization workflow ({{provision}}), AI agents decompose abstract intents into granular configuration across multiple modules and devices. There is no mechanism to log how the agent fulfill operator's expectations, prioritizes constraints, and trades off competing operational requirements throughout Step 2 and Step 4.
 
-For trusted, auditable, and human-collaborative autonomous operations, agents are required to provide:
+Correlations and dependencies embedded within hierarchical YANG data hinder causal explainability for fault analysis. Even if it could capture which tools it calls and what data it retrieves, it remains invisible how it internally determine the root cause among different anomaly heterogeneous data. Consequently, it becomes untrust to generate unambiguous causal explanations for operators in Step 3 and Step 4 during network troubleshooting ({{troubleshoot}}).
 
- * Action-level explanation: For instance, why did the agent perform this specific YANG operation, why specific configuration nodes are modified, why particular network states are retrieved for incident diagnosis, and which intent or task triggered it.
-
- * Task-level explanation: A high-level intent may involve dozens of YANG operations action multiple devices. There is a need to explain why a series of actions were taken, or how a task was fulfilled.
-
- * Causal explanation: when a specific YANG action leads to an unexpected network behavior, an agent needs to explain the causal chain from the change to the observed state.
 
 ## Gap 4: Agent Non-determinism and Uncertainty in YANG-Level Actions {#Uncertainty}
 
-The operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach absolute determinism.
+The operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. YANG is a fully deterministic modeling language with no built-in support for uncertain or probabilistic reasoning. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach determinism.
 However, when tasked with deep reasoning, processing complex contexts, or executing multi-step decisions, the agent's behavior inevitably introduces randomness and unpredictability. For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in {{provision}}). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in {{troubleshoot}}).
 
 Besides, AI agents also inherently produce outputs with varying degrees of confidence.
@@ -223,6 +221,8 @@ When an agent generates a configuration change, there is currently a lack of vis
 ## Gap 5: Context Explosion in YANG-Based Environments {#context}
 
 LLM-based agents operate within finite context windows. In step 2 of the service provisioning/optimization workflow ({{provision}}), where the orchestrator agent maps a high-level customer intent into service-level YANG data (e.g., ietf-l3vpn-svc), the LLM needs to understand the schema of relevant YANG modules, including node hierarchies, type definition, constraints, and relationship and dependencies across YANG modules. Furthermore, vendors may introduce customized YANG extension, augmentations and deviations. Loading the entire collection of relevant YANG schemas leads to a "context explosion" problem, which introduces unacceptable inference latency and unpredictable operational costs during real-time network operations.
+
+During the network troubleshooting workflow ({{troubleshoot}}) at Step 2, where network AI agents need to perceive network anomalies, the inherent separation between YANG schemas and runtime instance data forces agents to load correlated schema definitions alongside operational data to correctly interpret telemetry streams. This significantly enlarges the overall context size that agents must process.
 
 While the token context windows of modern LLMs continue to expand, high-density schemas cause LLMs to suffer from severe focus degradation. Critical configuration nodes, path reference (leafref), or specific "when" conditional statement located in the middle of a massive context window are easily overlooked (i.e., the "lost-in-the-middle" phenomenon), which causes a decline in LLM reasoning performance.
 

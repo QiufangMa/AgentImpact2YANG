@@ -100,13 +100,24 @@ The document uses the following terms defined in {{?RFC8309}} and {{?RFC8969}}:
 
  * network domain
 
+ The document uses the following terms defined in {{?I-D.hong-nmrg-agenticai-ps}}:
+
+ * Agentic AI
+
 The following definitions are used throughout this document:
 
-Agentic AI:
-: to be completed...
-
 AI Agent:
-: to be completed...
+: An autonomous software system driven by an artificial
+   intelligence reasoning engine (typically a large
+   language model) that integrates a set of resources such as data and tools to perceive its operational environment, dynamically plan and
+   execute decisions, and invoke actions to achieve specific goals.
+
+   Unlike traditional deterministic or rule-based autonomous systems,
+   an AI Agent exhibits non-deterministic reasoning, maintains runtime
+   and historical state, and possesses the capability to dynamically
+   decompose abstract high-level intents into a sequence of
+   operational actions.
+
 
 # A Reference Architecture and Typical Workflows
 

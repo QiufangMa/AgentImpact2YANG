@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 13 December 2026                                   11 June 2026
+Expires: 14 December 2026                                   12 June 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 December 2026.
+   This Internet-Draft will expire on 14 December 2026.
 
 Copyright Notice
 
@@ -178,11 +178,24 @@ Table of Contents
 
    *  network domain
 
+   The document uses the following terms defined in
+   [I-D.hong-nmrg-agenticai-ps]:
+
+   *  Agentic AI
+
    The following definitions are used throughout this document:
 
-   Agentic AI:  to be completed...
+   AI Agent:  An autonomous software system driven by an artificial
+      intelligence reasoning engine (typically a large language model)
+      that integrates a set of resources such as data and tools to
+      perceive its operational environment, dynamically plan and execute
+      decisions, and invoke actions to achieve specific goals.
 
-   AI Agent:  to be completed...
+      Unlike traditional deterministic or rule-based autonomous systems,
+      an AI Agent exhibits non-deterministic reasoning, maintains
+      runtime and historical state, and possesses the capability to
+      dynamically decompose abstract high-level intents into a sequence
+      of operational actions.
 
 3.  A Reference Architecture and Typical Workflows
 
@@ -588,6 +601,14 @@ Table of Contents
               Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04, 21 May
               2026, <https://datatracker.ietf.org/doc/html/draft-wmz-
               nmrg-agent-ndt-arch-04>.
+
+   [I-D.hong-nmrg-agenticai-ps]
+              Hong, Y., Youn, J., Wu, Q., and B. Claise, "Motivations
+              and Problem Statement of Agentic AI for network
+              management", Work in Progress, Internet-Draft, draft-hong-
+              nmrg-agenticai-ps-01, 1 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-hong-nmrg-
+              agenticai-ps-01>.
 
    [I-D.ietf-nmop-network-anomaly-architecture]
               Graf, T., Du, W., Francois, P., and A. H. Feng, "A

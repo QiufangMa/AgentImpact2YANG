@@ -197,7 +197,7 @@ Step 4:
 
 # Gap Analysis {#gaps}
 
-## Gap 1: Lack rich semantics on Declarative YANG {{#semantic}}
+## Gap 1: Lack rich semantics on Declarative YANG {#semantic}
 
  YANG was originally created to model configuration and state data for deterministic networking hardware. Because it is strictly declarative
  it is fantastic at defining static "what" boundaries is (e.g., "in-errors counter is great than 1000") , but it completely lacks the rich
@@ -218,7 +218,7 @@ Step 4:
  semantics for various different type of data such as log, metrics, Anomaly, time series data for various different high value scenarios
  such as fault management, quality optimization, network change, etc.
 
-## Gap 2: Handling uncertain or ambiguous tasks {{#uncertain}}
+## Gap 2: Handling uncertain or ambiguous tasks {#uncertain}
 
 when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior
 could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact

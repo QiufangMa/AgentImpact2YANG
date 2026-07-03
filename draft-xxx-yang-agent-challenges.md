@@ -121,7 +121,7 @@ AI Agent:
 
 # A Reference Architecture and Typical Workflows
 
-This section uses a simplified layered agentic AI reference architecture compliant with {{?I-D.draft-wmz-nmrg-agent-ndt-arch}}
+This section uses a simplified layered agentic AI reference architecture compliant with {{?I-D.wmz-nmrg-agent-ndt-arch}}
 and describes two typical workflows: the network service provisioning/optimization and the fault troubleshooting. The workflows
 cover scenarios from configuration generation to YANG modelled data consumption, which are essential to expose and derive the
 gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e.,
@@ -202,7 +202,7 @@ Step 4:
  YANG was originally created to model configuration and state data for deterministic networking hardware. Because it is strictly declarative
  it is fantastic at defining static "what" boundaries is (e.g., "in-errors counter is great than 1000") , but it completely lacks the rich
  semantic structures needed to describe imperative policy, e.g., take simple and instant action when a trigger condition on the managed objects
- is met {{I-D.ietf-netmod-eca-policy}}, less than represent dynamic, probabilistic, and intent-driven AI policies, in other words, YANG excels
+ is met {{?I-D.ietf-netmod-eca-policy}}, less than represent dynamic, probabilistic, and intent-driven AI policies, in other words, YANG excels
  at strict data trees, types, and constraints, but it cannot express cognitive conditions, reasoning flows, or behaviour constraints.
 
  The Cognitive Condition Constraint:

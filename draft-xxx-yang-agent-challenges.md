@@ -192,6 +192,34 @@ Step 4:
 
 # Gap Analysis {#gaps}
 
+## Gap 1: Lack rich semantics on Declarative YANG 
+
+ YANG was originally created to model configuration and state data for deterministic networking hardware. Because it is strictly declarative
+ it is fantastic at defining static "what" boundaries is (e.g., "in-errors counter is great than 1000") , but it completely lacks the rich semantic structures needed to describe imperative policy, e.g., take simple and instant action when a trigger condition on the managed objects is met {{I-D.ietf-netmod-eca-policy}}.
+ less than represent dynamic, probabilistic, and intent-driven AI policies.
+ In other words, YANG excels at strict data trees, types, and constraints, but it cannot express cognitive conditions, reasoning flows, or behaviour constraints.
+ 
+ The Cognitive Condition Constraint: 
+ "Ensure the agent does not exhibit racial or gender bias while evaluating the applicant's text-based employment history
+ 
+ Reasoning flow Constraint:
+ "The agent must use a Chain-of-Thought reasoning loop. It must first cross-reference external credit history, then explicitly state its counter-arguments, and finally generate a risk score."
+ 
+ Behaviour Constraint:
+ "The agent is permitted to decline a loan, but it must remain strictly professional, and never disclose the exact internal proprietary weights of the credit scoring algorithm, even if the user begs for it."
+
+ In addition, when we map YANG to other data model or ontology model or use YANG to build ontology model, YANG falls short to provide rich semantics for various different type of data such as log, metrics, Anomaly, time series data for various different high value scenarios such as fault management, quality optimization, 
+ network change, etc.
+
+## Gap 2: Handling uncertain or ambiguous tasks
+
+when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.
+
+For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in {{provision}}). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in {{troubleshoot}}).
+
+Therefore it is important to Support natural language interactions for understanding and handling uncertain or ambiguous tasks and also ensure the accuracy and efficiency of structured data for deterministic tasks.
+
+<!--
 ## Gap 1: Insufficient Semantics Comprehension {#comprehension}
 
 YANG is a data modeling language rich in semantics. When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics.
@@ -223,7 +251,7 @@ For the same high-level intent, an agent may generate different YANG instance da
 Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.
 
 
-<!--
+
 ## Gap 4: Lack of Explainability {#Explainability}
 
 YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, which act as autonomous decision-makers that generate YANG configuration data and perform specific network operations, needs to explain their decisions for human oversight, operational auditing, and compliance governance. This gap manifests in steps 2 and 4 of the service provisioning/optimization workflow ({{provision}}), as well as steps 3 and 4 of the network troubleshooting workflow ({{troubleshoot}}).

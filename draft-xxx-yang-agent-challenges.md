@@ -270,13 +270,6 @@ There is also other work in NMOP focusing on semantic enrichment that could serv
 An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging gaps in {{comprehension}} and {{Expressiveness}}.
 
 
-## Human-in-the-Loop
-
-While full autonomy is a long‑term goal for agentic AI enabled network management, a mechanism that escalates decisions based on assessed risk or confidence level is essential for safe deployment. This approach helps avoid the negative effect caused due to agent uncertainty in YANG-Level Actions ({{Uncertainty}}).
-
-For example, a low-risk operation proceeds automatically without human approval, while a high-risk one renders a visual diff, the network digital twin simulation report, and the agent’s intent explanation (including confidence and evidence), and pushes the report to a human for approval. It could be possible for users to verify agent decisions and further clarify their intentions.
-
-
 # Security Considerations
 
 The integration of agentic AI with YANG-based network automation introduces new attack surfaces and operational risks that differ from traditional deterministic network management.

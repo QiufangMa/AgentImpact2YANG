@@ -204,13 +204,13 @@ Step 4:
  semantic structures needed to describe imperative policy, e.g., take simple and instant action when a trigger condition on the managed objects
  is met {{I-D.ietf-netmod-eca-policy}}, less than represent dynamic, probabilistic, and intent-driven AI policies, in other words, YANG excels
  at strict data trees, types, and constraints, but it cannot express cognitive conditions, reasoning flows, or behaviour constraints.
- 
+
  The Cognitive Condition Constraint:
  "Ensure the agent does not exhibit racial or gender bias while evaluating the applicant's text-based employment history
- 
+
  Reasoning flow Constraint:
  "The agent must use a Chain-of-Thought reasoning loop. It must first cross-reference external credit history, then explicitly state its counter-arguments, and finally generate a risk score."
- 
+
  Behaviour Constraint:
  "The agent is permitted to decline a loan, but it must remain strictly professional, and never disclose the exact internal proprietary weights of the credit scoring algorithm, even if the user begs for it."
 

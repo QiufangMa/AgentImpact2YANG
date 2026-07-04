@@ -121,12 +121,12 @@ AI Agent:
 
 # A Reference Architecture and Typical Workflows
 
-This section uses a simplified layered agentic AI reference architecture compliant with {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} and describes two typical workflows: the network service provisioning/optimization and the fault troubleshooting. The workflows cover scenarios from configuration generation to YANG modelled data consumption, which are essential to expose and derive the gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
+This section uses a simplified layered agentic AI reference architecture compliant with {{?I-D.wmz-nmrg-agent-ndt-arch}} and describes two typical workflows: the network service provisioning/optimization and the fault troubleshooting. The workflows cover scenarios from configuration generation to YANG modelled data consumption, which are essential to expose and derive the gaps in {{gaps}}. Note that these flows are not the only possible ones. The intent flows shown here are just examples, i.e., typical workflows that illustrate how YANG models at the service, network, and device layers can be engaged in an agent-integrated network automation context.
 
 ## Layered AI Agent Deployment Architecture
 
 This document targets a hierarchical agent deployment architecture as specified in {{arch}}. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. The architecture may also use memory management (e.g., short-term and long-term memory) to maintain conversational continuity and enable contextual search.
-Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+Refer to {{?I-D.wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
 
 
 ~~~~

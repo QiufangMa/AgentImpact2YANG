@@ -205,6 +205,7 @@ While syntax errors (e.g., non-existent nodes, invalid enumeration values or out
 
 Similarly in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may struggle to fully understand nested model hierarchies and implicit dependencies between YANG nodes, and thus fail to infer the correlations embedded within operational data. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
+Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation symptoms described above.
 
 ## Gap 2: Expressiveness Limits {#Expressiveness}
 

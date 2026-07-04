@@ -354,6 +354,17 @@ Table of Contents
    localization, and flawed repair solutions derived from misinterpreted
    state data.
 
+   Furthermore, a production network may expose hundreds of YANG modules
+   with vendor augmentations and deviations, far exceeding what can be
+   feasibly included in an AI agent's context window.  An Agent must
+   first correctly identify which subset of the YANG schema is relevant
+   to a given intent or telemetry observation.  Existing mechanisms such
+   as YANG library [RFC8525] are not optimized for agent-driven
+   retrieval.  This retrieval issue is distinct from semantic
+   comprehension itself, but a failure to retrieve the correct schema
+   will manifest as the same hallucination or misinterpretation symptoms
+   described above.
+
 4.2.  Gap 2: Expressiveness Limits
 
    In real-world network operations, operator intents often contain
@@ -653,6 +664,11 @@ Table of Contents
    [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
               Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
               <https://www.rfc-editor.org/rfc/rfc8309>.
+
+   [RFC8525]  Bierman, A., Bjorklund, M., Schoenwaelder, J., Watsen, K.,
+              and R. Wilton, "YANG Library", RFC 8525,
+              DOI 10.17487/RFC8525, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8525>.
 
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network

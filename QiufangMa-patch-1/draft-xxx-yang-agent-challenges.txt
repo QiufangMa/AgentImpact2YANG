@@ -195,6 +195,13 @@ Table of Contents
       dynamically decompose abstract high-level intents into a sequence
       of operational actions.
 
+   non-determinism:  The property whereby an AI Agent may produce
+      different outputs (e.g., generate different configuration or give
+      different network diagnostic conclusions) across multiple
+      invocations given the identical input, due to the probabilistic
+      nature of the underlying model, historical context drift, or non-
+      producible reasoning paths.
+
 3.  A Reference Architecture and Typical Workflows
 
    This section uses a simplified layered agentic AI reference
@@ -386,6 +393,12 @@ Table of Contents
    and unpredictability.  These unpredictable variations in Agent and
    LLM outputs can significantly impact the reliability and consistency
    of network operations.
+
+   This gap manifests in two related but distinct forms: (1) behavioral
+   non-determinism, where repeated invocations for the same intent yield
+   different YANG-level outputs; and (2) confidence opacity, where the
+   agent's output carries no indication of how reliable it should be
+   considered.  Both are elaborated below.
 
    For the same high-level intent, an agent may generate different YANG
    instance data due to historical context drift or the probabilistic

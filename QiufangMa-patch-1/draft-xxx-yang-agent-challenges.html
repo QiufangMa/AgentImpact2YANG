@@ -1298,6 +1298,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
  decompose abstract high-level intents into a sequence of
  operational actions.<a href="#section-2-7.2.2" class="pilcrow">¶</a></p>
 </dd>
+        <dd class="break"></dd>
+<dt id="section-2-7.3">non-determinism:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-7.4">
+          <p id="section-2-7.4.1">The property whereby an AI Agent may produce different outputs (e.g., generate different configuration or give different network diagnostic conclusions) across multiple invocations given the identical input, due to the probabilistic nature of the underlying model, historical context drift, or non-producible reasoning paths.<a href="#section-2-7.4.1" class="pilcrow">¶</a></p>
+</dd>
       <dd class="break"></dd>
 </dl>
 </section>
@@ -1449,8 +1454,9 @@ While syntax errors (e.g., non-existent nodes, invalid enumeration values or out
         </h3>
 <p id="section-4.3-1">YANG is a fully deterministic modeling language with no built-in support for uncertain or probabilistic reasoning, while the operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach determinism.
 However, when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in <a href="#provision" class="auto internal xref">Section 3.2</a>). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">This gap manifests in two related but distinct forms: (1) behavioral non-determinism, where repeated invocations for the same intent yield different YANG-level outputs; and (2) confidence opacity, where the agent's output carries no indication of how reliable it should be considered. Both are elaborated below.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in <a href="#provision" class="auto internal xref">Section 3.2</a>). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-4">Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

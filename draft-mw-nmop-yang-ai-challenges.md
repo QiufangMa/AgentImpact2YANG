@@ -57,7 +57,7 @@ informative:
 
 --- abstract
 
-The industry today is actively exploring the application of agentic AI to autonomous network operations. However, there is little attention given to the impacts that the introduction of agentic AI may impose on YANG modeling, which serves as the foundation of model-driven network automation.
+The industry today is actively exploring the application of agentic AI to autonomous network operations. However, there is little attention given to the impacts that the introduction of agentic AI may impose on YANG modeling, and how YANG can be better leveraged to support AI-driven autonomous operations.
 
 Based on some end-to-end intent translation workflow analysis that engage YANG models across service, network, and device layers, this document identifies some critical gaps when AI agents generate and operate on YANG data. The purpose of this document is not to substantially redesign YANG or define a new data model language. Instead, it aims to facilitate discussion on how existing YANG ecosystems can be better leveraged in the context of agentic AI, and how complementary mechanisms can bridge these gaps while preserving YANG’s interoperability.
 

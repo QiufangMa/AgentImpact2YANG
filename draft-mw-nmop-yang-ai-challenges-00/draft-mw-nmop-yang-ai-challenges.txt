@@ -1,0 +1,681 @@
+
+
+
+
+Network Working Group                                         Q. Ma, Ed.
+Internet-Draft                                                     Q. Wu
+Intended status: Informational                                    Huawei
+Expires: 7 January 2027                                      6 July 2026
+
+
+   Rethinking YANG-based Service and Network Management in the Era of
+                               Agentic AI
+                draft-mw-nmop-yang-ai-challenges-latest
+
+Abstract
+
+   The industry today is actively exploring the application of agentic
+   AI to autonomous network operations.  However, there is little
+   attention given to the impacts that the introduction of agentic AI
+   may impose on YANG modeling, and how YANG can be better leveraged to
+   support AI-driven autonomous operations.
+
+   Based on some end-to-end intent translation workflow analysis that
+   engage YANG models across service, network, and device layers, this
+   document identifies some critical gaps when AI agents generate and
+   operate on YANG data.  The purpose of this document is not to
+   substantially redesign YANG or define a new data model language.
+   Instead, it aims to facilitate discussion on how existing YANG
+   ecosystems can be better leveraged in the context of agentic AI, and
+   how complementary mechanisms can bridge these gaps while preserving
+   YANG’s interoperability.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://QiufangMa.github.io/AgentImpact2YANG/draft-mw-nmop-yang-ai-
+   challenges.html.  Status information for this document may be found
+   at https://datatracker.ietf.org/doc/draft-mw-nmop-yang-ai-
+   challenges/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/QiufangMa/AgentImpact2YANG.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 7 January 2027.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  A Reference Architecture and Typical Workflows
+     3.1.  Layered AI Agent Deployment Architecture
+     3.2.  Workflow Example 1: Intent-Driven Service Provisioning/
+           Optimization
+     3.3.  Workflow Example 2: Network Troubleshooting
+   4.  Gap Analysis
+     4.1.  Gap 1: Expressiveness Limits
+     4.2.  Gap 2: Token Efficiency and Structural Encoding Overhead
+     4.3.  Gap 3: Non-determinism Task Handling
+   5.  Possible Ways Forward
+     5.1.  YANG-driven Operations as AI-Invocable Tools
+     5.2.  Semantic Enrichment via Knowledge Graphs and Semantic
+           Metadata
+     5.3.  Declarative Intent/Policy Overlay
+     5.4.  Token-Efficient YANG Serialization for Agent Contexts
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   RFC 8969 [RFC8969] establishes a framework for automating service and
+   network management using YANG [RFC7950].  Combined with network
+   management protocols such as NETCONF [RFC6241] and RESTCONF
+   [RFC8040], YANG delivers deterministic and interoperable capabilities
+   for configuration manipulation and state retrieval across service,
+   network, and device layers.
+
+   Recently, Large Language Models (LLMs) and AI Agents have emerged as
+   new enablers for network automation.  Multiple IETF activities are
+   ongoing in this area, proposals include but are not limited to:
+
+   *  The network digital twin [I-D.irtf-nmrg-network-digital-twin-arch]
+      and agentic AI based architecture for AI driven network operations
+      described in [I-D.wmz-nmrg-agent-ndt-arch], which deploys hybrid
+      agent systems within the network autonomous domain, and allows
+      agents to invoke network operational function modules and
+      collaborate to solve non-trivial tasks.
+
+   *  The Network Management Agent (NMA) concept presented in
+      [I-D.zhao-nmop-network-management-agent], which proposes that
+      network management agents can be deployed at both orchestrator and
+      controller layers, with A2A, A2C, and A2N interfaces enabling
+      communication among agents to agents, controllers, and network
+      elements.
+
+   *  The applicability of MCP [MCP] for Network Management
+      [I-D.yang-nmrg-mcp-nm], which explores how the Model Context
+      Protocol can refactor network management operations and network
+      capabilities as LLM-callable tools.
+
+   *  The applicability of A2A to Network Management
+      [I-D.yang-nmrg-a2a-nm], which outlines how the Agent to Agent
+      protocol can be leveraged to develop various rich AI driven
+      network applications, realize intent-based network management
+      automation in the multi-vendor heterogeneous network environment.
+
+   While the industry is actively exploring the application of agentic
+   AI to autonomous network, little attention has been paid to how YANG
+   modeling, as the very foundation of model-driven network automation,
+   would be impacted, and if there is any critical gaps that remain
+   unrecognized/unsolved at the intersection of probabilistic AI agents
+   and deterministic structured YANG.
+
+   This document analyzes two typical network operation workflows driven
+   by hierarchical AI Agents: service provisioning/optimization and
+   network troubleshooting.  It identifies key gaps arising from the
+   adoption of YANG data models in these scenarios.  The purpose of this
+   document is not to substantially redesign YANG or define a brand-new
+   data modeling language.  Rather, it seeks to adapt YANG for agentic
+   AI.  By identifying fundamental gaps, this document aims to
+   facilitate community discussion on how to bridge the gap between
+   them.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   The document uses the following terms defined in [RFC8309] and
+   [RFC8969]:
+
+   *  data model
+
+   *  service model
+
+   *  network model
+
+   *  device model
+
+   *  network domain
+
+   The document uses the following terms defined in
+   [I-D.hong-nmrg-agenticai-ps]:
+
+   *  Agentic AI
+
+   The following definitions are used throughout this document:
+
+   AI Agent:  An autonomous software system driven by an artificial
+      intelligence reasoning engine (typically a large language model)
+      that integrates a set of resources such as data and tools to
+      perceive its operational environment, dynamically plan and execute
+      decisions, and invoke actions to achieve specific goals.
+
+      Unlike traditional deterministic or rule-based autonomous systems,
+      an AI Agent exhibits non-deterministic reasoning, maintains
+      runtime and historical state, and possesses the capability to
+      dynamically decompose abstract high-level intents into a sequence
+      of operational actions.
+
+   non-determinism:  The property whereby an AI Agent may produce
+      different outputs (e.g., generate different configuration or give
+      different network diagnostic conclusions) across multiple
+      invocations given the identical input, due to the probabilistic
+      nature of the underlying model, historical context drift, or non-
+      producible reasoning paths.
+
+3.  A Reference Architecture and Typical Workflows
+
+   This section uses a simplified layered agentic AI reference
+   architecture compliant with [I-D.wmz-nmrg-agent-ndt-arch] and
+   describes two typical workflows: the network service provisioning/
+   optimization and the fault troubleshooting.  The workflows cover
+   scenarios from configuration generation to YANG modelled data
+   consumption, which are essential to expose and derive the gaps in
+   Section 4.  Note that these flows are not the only possible ones.
+   The intent flows shown here are just examples, i.e., typical
+   workflows that illustrate how YANG models at the service, network,
+   and device layers can be engaged in an agent-integrated network
+   automation context.
+
+3.1.  Layered AI Agent Deployment Architecture
+
+   This document targets a hierarchical agent deployment architecture as
+   specified in Figure 1.  It is a simplified view that hides task
+   agents, function modules or toolsets that are available for agents to
+   invoke.  The architecture may also use memory management (e.g.,
+   short-term and long-term memory) to maintain conversational
+   continuity and enable contextual search.  Refer to
+   [I-D.wmz-nmrg-agent-ndt-arch] for the complete architecture design.
+
+      +--------------------------+
+      |Orchestrator              |
+      |+------------------------+|
+      ||Orchestrator AI Agent(s)||
+      |+-----------^------------+|
+      +------------+-------------+
+                   |
+                   |A2A Protocol
+                   |//YANG-structured payload; or domain-level intent
+                   |
+        +----------+----------+
+        |Controller|          |
+        |+---------v---------+|
+        ||Network AI Agent(s)||
+        |+-------------------+|
+        +----------^----------+
+                   |
+                   |NETCONF/RESTCONF/Telemetry
+                   |
+        +----------v----------+
+        |   Network Devices   |
+        +---------------------+
+
+         Figure 1: A simplified Hierarchical AI Agent Architecture
+
+3.2.  Workflow Example 1: Intent-Driven Service Provisioning/
+      Optimization
+
+   A complete end-to-end workflow focusing on AI agents generating
+   configuration from high-level intents is defined as follows.
+
+   Step 1:  A network operator submits an end-to-end service request
+      expressed in natural language including explicit service
+      requirements.  The intent may imply some constraints such as not
+      affecting existing network services.
+
+   Step 2:  The orchestrator AI agent parses the natural language
+      intent, maps it into the corresponding service model and
+      parameters for user confirmation, and then decomposes it into
+      structured configuration using network model.
+
+   Step 3:  YANG-structured data are encapsulated as message payload,
+      and transmitted to network AI agents along with other context
+      metadata via agent communication protocol like Agent-to-Agent
+      (A2A).
+
+   Step 4:  The network AI agent converts received tasks into structured
+      device model layer operations.  The configuration is handed off to
+      the network controller's Southbound Interface (SBI) and delivered
+      via YANG-driven protocols such as NETCONF and RESTCONF.
+      Validation checks may be performed before the configuration is
+      delivered to network devices.
+
+   Step 5:  Network devices receive incoming configuration, execute
+      changes, and report execution response.
+
+3.3.  Workflow Example 2: Network Troubleshooting
+
+   Step 1:  A network operator submits a high-level operational intent,
+      requesting the network AI agent to continuously monitor the
+      network, perceive emerging anomalies, perform active diagnosis,
+      and conduct autonomous repair while reporting root causes and
+      handling results.
+
+   Step 2:  Network AI agent grasps a holistic view of the network
+      operational state across multiple network devices and YANG
+      modules.  Instead of flooding the Network AI agent with massive,
+      raw streaming telemetry data which would instantly overwhelm the
+      LLM's context window and incur prohibitive token costs, agent may
+      leverage existing network data analytics components or tools to be
+      aware of real-time network state.  Network AI agent could detect
+      network anomalies swiftly, which enables the prompt identification
+      of potential issues before they escalate into major faults.
+
+   Step 3:  Once an issue or fault is identified, network AI agent
+      diagnoses the exact cause and generate targeted repair solutions.
+      These solutions may involve making configuration changes on
+      relevant network devices, for example, when a failure is caused by
+      misconfiguration.
+
+   Step 4:  The network AI agent autonomously executes the formulated
+      repair actions by delivering corresponding YANG configuration
+      changes to devices, after invoking the network digital twin to
+      simulate the proposed repair solution successfully.
+
+4.  Gap Analysis
+
+4.1.  Gap 1: Expressiveness Limits
+
+   In real-world network operations, operator intents often contain
+   expectations and constraints, relaxation preferences, retry
+   strategies, or fallback rules.  Nevertheless, YANG is designed solely
+   focuses on defining data structures and formats, syntax and semantic
+   rules and static data dependencies.  It lacks the ability to express
+   dynamic and flexible operational logic, which creates a hard boundary
+   for carrying intent and limits the decision space of multi-agent
+   system.
+
+   This Gap hinders step 3 of the service provisioning/optimization
+   workflow (Section 3.2).  To adapt to static YANG structures,
+   orchestrator AI agents have to prune and simplify the original
+   intent.  Implicit operational requirements embedded in original
+   intents, such as service continuity, high availability and security
+   compliance, are likely lost during the transformation process.
+
+   This premature semantic pruning deprives downstream network AI agents
+   of the flexibility to make dynamic decisions, perform graceful
+   degradation or apply fault-tolerant adjustments when network runtime
+   status changes.
+
+4.2.  Gap 2: Token Efficiency and Structural Encoding Overhead
+
+   Existing YANG serialization formats (e.g., XML and JSON [RFC7951])
+   are heavily optimized for either human readability or strict software
+   parsing.  When adapted to agentic AI environments, these formats
+   introduce significant redundancy, and thus consumes substantial LLM
+   context window capacity and incurring significant token costs.  This
+   gap is explicitly exposed during step 3 of the workflow in
+   Section 3.2 and step 2 of the workflow in Section 3.3, where verbose
+   encoding adds latency and cost without contributing semantic value.
+
+   Highly compressed binary alternatives like CBOR mitigate bandwidth
+   issues but introduce a fundamental incompatibility with LLM
+   processing pipelines: LLMs operate exclusively on text token streams
+   and cannot consume raw binary payloads directly.  Currently, there is
+   a clear gap for a token-efficient, semantic-preserving encoding
+   format specifically designed for AI-agent consumption.
+
+4.3.  Gap 3: Non-determinism Task Handling
+
+   when tasked with ambiguous instructions, missing/unreliable data,
+   deep reasoning, or executing multi-step decisions, the agent's
+   behavior could inevitably introduce randomness and unpredictability.
+   These unpredictable variations in Agent and LLM outputs can
+   significantly impact the reliability and consistency of network
+   operations.
+
+   For the same high-level intent, an agent may generate different YANG
+   instance data due to historical context drift or the probabilistic
+   nature of the underlying large language models (steps 2 and 4 of the
+   service provisioning/optimization workflow in Section 3.2).
+   Likewise, when analyzing network anomalies or incidents, multiple
+   distinct diagnostic trajectories and explanations may emerge even for
+   the exact same observed network operational state (steps 3 and 4 of
+   the network troubleshooting workflow in Section 3.3).
+
+5.  Possible Ways Forward
+
+   This section explores several operational directions to try to bridge
+   the gaps identified in Section 4 and improve the AI-readiness of
+   existing YANG ecosystem.
+
+5.1.  YANG-driven Operations as AI-Invocable Tools
+
+   A promising direction for partially addressing gap in Section 4.3 is
+   to refactor YANG-based network operations into AI-invocable tools
+   using the Model Context Protocol (MCP).  Instead of requiring an AI
+   agent to generate raw YANG instance data directly, which is prone to
+   hallucination or exhibits non-determined behavior, the agent invokes
+   an MCP tool with structured parameters.  By shielding agents from
+   low-level syntax and model complexity, this abstraction layer reduces
+   the agent’s burden of understanding complex YANG schemas and
+   mitigates the risk of generating invalid configuration data.
+
+   The applicability of MCP to network management is discussed in
+   [I-D.yang-nmrg-mcp-nm].  Industry open-source exploration is emerging
+   towards this direction, e.g., gNMIBuddy [gNMIBuddy] provides a
+   toolkit to wrap gNMI and OpenConfig YANG data models based network
+   operations, designed primarily for LLMs with MCP integration.
+
+5.2.  Semantic Enrichment via Knowledge Graphs and Semantic Metadata
+
+   Gaps identified in Section 4.1 can be partially addressed by adding a
+   semantic layer on top of YANG data models.  Knowledge graphs (KGs)
+   provide a machine-readable representation of network knowledge,
+   enabling AI agents to better understand the semantics, relationships,
+   and constraints embedded in the network.
+
+   IETF work in this area includes [I-D.mackey-nmop-kg-for-netops] and
+   [I-D.tailhardat-nmop-incident-management-noria], which correlate data
+   from different network planes, e.g., management, control, and data
+   planes and present a holistic view of network status.
+
+   When a user expresses a high-level intent such as "check why the VPN
+   tunnel is down", a KG-enhanced agent can query the YANG-based
+   knowledge graph to understand the relationships between relevant
+   services and metrics.  Furthermore, KGs can explicitly model concepts
+   such as "preferred vs. optional", temporal KGs can model concepts
+   such as "transient vs. persistent failure", which are currently
+   absent from YANG, partially addressing Section 4.1.
+
+   There is also other work in NMOP focusing on semantic enrichment that
+   could serve as a foundation layer for agentic AI driven network
+   anomaly detection.  A set of ongoing drafts include:
+
+   *  [I-D.ietf-nmop-network-anomaly-architecture] provides a reference
+      architecture for knowledge based service disruption detection;
+
+   *  [I-D.ietf-nmop-network-anomaly-lifecycle] defines an experiment
+      for managing the lifecycle process of a network anomaly detection
+      system, spanning across detection, validation, and refinement.
+
+   *  [I-D.ietf-nmop-network-anomaly-semantics] describes common network
+      symptom semantics across different network planes.
+
+   An AI agent gains a structured and machine-understandable vocabulary
+   for describing, querying, and reasoning about network anomaly.  The
+   standardized anomaly semantic metadata provides the missing semantic
+   hooks, and contributes to bridging the gap in Section 4.1.
+
+5.3.  Declarative Intent/Policy Overlay
+
+   To bridge the semantic loss challenge specified in Section 4.1
+   without breaking the backward compatibility with existing network
+   infrastructure, this section outlines a complementary approach that
+   has emerged from operational deployments, that is the use of a
+   declarative intent and policy overlay.
+
+   This approach does not modify YANG or propose new YANG statements.
+   Instead, it introduces a logical layer above YANG that serves as the
+   bridge between human-readable intent and machine-executable
+   configuration.
+
+   Take a natural language based service provisioning intent for
+   example, Instead of forcing AI agents to directly translate loose,
+   high-level operator intent into rigid, low-level structural service
+   YANG leaf nodes, the agent could first compile the intent into a
+   declarative intent/policy overlay.  This overlay explicitly
+   encapsulates invariants, business constraints, and dynamic behavioral
+   policies that existing service models cannot naturally represent.
+   The overlay is co-delivered alongside the generated concrete YANG
+   instances to the lower-layer agents.
+
+5.4.  Token-Efficient YANG Serialization for Agent Contexts
+
+   As noted in Section 4.2, the verbosity of YANG instance data,
+   particularly in JSON/XML encodings, poses a practical barrier to
+   cost-effective agent operations.  One possible way forward is the
+   development of a token-efficient YANG serialization mechanism
+   tailored to agentic consumption.
+
+6.  Security Considerations
+
+   The integration of agentic AI with YANG-based network automation
+   introduces new attack surfaces and operational risks that differ from
+   traditional deterministic network management.
+
+   For example, AI-generated configuration risks are introduced by agent
+   autonomous decision-making.  Unlike manually crafted or scripted
+   configurations, LLM-generated configuration edits may contain
+   unintended misconfiguration or semantic deviations.  Such errors can
+   lead to service outages, policy violations, or enlarged attack
+   surfaces.  The human-in-the-loop mechanism and network digital twin
+   simulation and validation could mitigate this concern by blocking
+   high-risk unvalidated changes before configuration is committed.
+   Furthermore, tool invocation and credential exposure risks arise when
+   AI agents are granted access to network devices via MCP servers.
+   Open-source MCP implementations enable LLM clients to execute read/
+   write operations over managed devices.  Unauthorized or malicious
+   prompt injection may trigger abusive command execution, configuration
+   tampering, or information leakage.  Token-based authentication,
+   transport encryption, and tool-level guardrail mechanisms (blocked
+   command lists and restricted configuration scopes) are required to
+   enforce access control.
+
+7.  IANA Considerations
+
+   This document has no IANA actions.
+
+8.  References
+
+8.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+8.2.  Informative References
+
+   [gNMIBuddy]
+              "gNMIBuddy", February 2026,
+              <https://github.com/jillesca/gNMIBuddy>.
+
+   [I-D.hong-nmrg-agenticai-ps]
+              Hong, Y., Youn, J., Wu, Q., and B. Claise, "Motivations
+              and Problem Statement of Agentic AI for network
+              management", Work in Progress, Internet-Draft, draft-hong-
+              nmrg-agenticai-ps-02, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-hong-nmrg-
+              agenticai-ps-02>.
+
+   [I-D.ietf-nmop-network-anomaly-architecture]
+              Graf, T., Du, W., Francois, P., and A. H. Feng, "A
+              Framework for a Network Anomaly Detection Architecture",
+              Work in Progress, Internet-Draft, draft-ietf-nmop-network-
+              anomaly-architecture-07, 18 January 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-anomaly-architecture-07>.
+
+   [I-D.ietf-nmop-network-anomaly-lifecycle]
+              Riccobene, V., Graf, T., Du, W., and A. H. Feng, "An
+              Experiment: Network Anomaly Detection Lifecycle", Work in
+              Progress, Internet-Draft, draft-ietf-nmop-network-anomaly-
+              lifecycle-05, 12 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-anomaly-lifecycle-05>.
+
+   [I-D.ietf-nmop-network-anomaly-semantics]
+              Graf, T., Du, W., Feng, A. H., and V. Riccobene, "Semantic
+              Metadata Annotation for Network Anomaly Detection", Work
+              in Progress, Internet-Draft, draft-ietf-nmop-network-
+              anomaly-semantics-05, 19 January 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
+              network-anomaly-semantics-05>.
+
+   [I-D.irtf-nmrg-network-digital-twin-arch]
+              Zhou, C., Yang, H., Duan, X., Lopez, D., Pastor, A., Wu,
+              Q., Boucadair, M., and C. Jacquenet, "Network Digital Twin
+              (NDT): Concepts and Reference Architecture", Work in
+              Progress, Internet-Draft, draft-irtf-nmrg-network-digital-
+              twin-arch-13, 1 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-nmrg-
+              network-digital-twin-arch-13>.
+
+   [I-D.mackey-nmop-kg-for-netops]
+              Mackey, M., Claise, B., Graf, T., Keller, H., Voyer, D.,
+              Lucente, P., and I. D. Martinez-Casanueva, "Knowledge
+              Graph Framework for Network Operations", Work in Progress,
+              Internet-Draft, draft-mackey-nmop-kg-for-netops-04, 7
+              April 2026, <https://datatracker.ietf.org/doc/html/draft-
+              mackey-nmop-kg-for-netops-04>.
+
+   [I-D.tailhardat-nmop-incident-management-noria]
+              Tailhardat, L., Troncy, R., Chabot, Y., Ramparany, F.,
+              Folz, P., and B. Kavanagh, "Knowledge Graphs for Enhanced
+              Cross-Operator Incident Management and Network Design",
+              Work in Progress, Internet-Draft, draft-tailhardat-nmop-
+              incident-management-noria-04, 9 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-tailhardat-
+              nmop-incident-management-noria-04>.
+
+   [I-D.wmz-nmrg-agent-ndt-arch]
+              Wu, Q., Zhou, C., Contreras, L. M., Han, S., and Y. Hong,
+              "Network Digital Twin and Agentic AI based Architecture
+              for AI driven Network Operations", Work in Progress,
+              Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04, 21 May
+              2026, <https://datatracker.ietf.org/doc/html/draft-wmz-
+              nmrg-agent-ndt-arch-04>.
+
+   [I-D.yang-nmrg-a2a-nm]
+              Lopez, D., Moreno, N. R., Tailhardat, L., Ma, Q., Wu, Q.,
+              YUANYUANYANG, and S. Prabhu, "Applicability of A2A to the
+              Network Management", Work in Progress, Internet-Draft,
+              draft-yang-nmrg-a2a-nm-03, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
+              a2a-nm-03>.
+
+   [I-D.yang-nmrg-mcp-nm]
+              YUANYUANYANG, Wu, Q., Lopez, D., Moreno, N. R.,
+              Tailhardat, L., and S. Prabhu, "Applicability of MCP for
+              the Network Management", Work in Progress, Internet-Draft,
+              draft-yang-nmrg-mcp-nm-03, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
+              mcp-nm-03>.
+
+   [I-D.zhao-nmop-network-management-agent]
+              XingZhao, Wang, M., Wu, B., Ceccarelli, D., Zheng, H., and
+              J. Zhou, "AI based Network Management Agent(NMA): Concepts
+              and Architecture", Work in Progress, Internet-Draft,
+              draft-zhao-nmop-network-management-agent-05, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-zhao-nmop-
+              network-management-agent-05>.
+
+   [MCP]      "Model Context Protocol", November 2024,
+              <https://modelcontextprotocol.io/>.
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
+   [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
+              RFC 7950, DOI 10.17487/RFC7950, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7950>.
+
+   [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
+              RFC 7951, DOI 10.17487/RFC7951, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7951>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
+
+   [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
+              Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
+              <https://www.rfc-editor.org/rfc/rfc8309>.
+
+   [RFC8525]  Bierman, A., Bjorklund, M., Schoenwaelder, J., Watsen, K.,
+              and R. Wilton, "YANG Library", RFC 8525,
+              DOI 10.17487/RFC8525, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8525>.
+
+   [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
+              L. Geng, "A Framework for Automating Service and Network
+              Management with YANG", RFC 8969, DOI 10.17487/RFC8969,
+              January 2021, <https://www.rfc-editor.org/rfc/rfc8969>.
+
+Acknowledgments
+
+   The authors would like to thank the following individuals for
+   reviewing and providing valuable inputs to this document (listed in
+   no particular order):
+
+   *  Joe Clarke
+
+   *  Mohamed Boucadair
+
+   *  Roland Schott
+
+   *  Luis M.  Contreras
+
+   *  Oscar Gonzalez de Dios
+
+   *  Benoît Claise
+
+   *  Kent Watsen
+
+   *  Thomas Graf
+
+Authors' Addresses
+
+   Qiufang Ma (editor)
+   Huawei
+   101 Software Avenue, Yuhua District
+   Jiangsu
+   210012
+   China
+   Email: maqiufang1@huawei.com
+
+
+   Qin Wu
+   Huawei
+   101 Software Avenue, Yuhua District
+   Nanjing, Jiangsu
+   210012
+   China
+   Email: bill.wu@huawei.com

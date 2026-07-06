@@ -205,7 +205,7 @@ While syntax errors (e.g., non-existent nodes, invalid enumeration values or out
 
 Similarly in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may struggle to fully understand nested model hierarchies and implicit dependencies between YANG nodes, and thus fail to infer the correlations embedded within operational data. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
-Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation symptoms described above.
+Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation issue described above.
 
 ## Gap 2: Expressiveness Limits {#Expressiveness}
 
@@ -227,6 +227,14 @@ For the same high-level intent, an agent may generate different YANG instance da
 
 Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.
 
+## Gap 4: Token Efficiency and Structural Encoding Overhead
+
+Existing YANG serialization formats (e.g., XML and JSON {{?RFC7951}}) are heavily optimized for either human readability or strict software parsing. When adapted to agentic AI environments, these formats introduce significant redundancy (e.g., deeply nested structures, repetitive keys, and explicit namespace declarations), consuming substantial LLM context window capacity and incurring significant token costs. This gap is explicitly exposed during
+step 3 of the workflow in {{provision}} and step 2 of the workflow in {{troubleshoot}}, where verbose encoding adds latency and cost without contributing semantic value.
+
+Highly compressed binary alternatives like CBOR {{?RFC9254}} mitigate bandwidth issues but strip away the text-based semantics required for LLM reasoning. Currently, there is a clear gap for a token-efficient, semantic-preserving encoding format specifically designed for AI-agent consumption.
+
+The gap is distinct from semantic YANG comprehension: even with perfect YANG understanding, the volume of transmitted YANG data remains a barrier to cost-effective agent operations.
 
 <!--
 ## Gap 4: Lack of Explainability {#Explainability}
@@ -273,6 +281,16 @@ There is also other work in NMOP focusing on semantic enrichment that could serv
  * {{?I-D.ietf-nmop-network-anomaly-semantics}} describes common network symptom semantics across different network planes.
 
 An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging gaps in {{comprehension}} and {{Expressiveness}}.
+
+## Declarative Intent/Policy Overlay
+
+To bridge the semantic loss challenge specified in {{expressiveness}} without breaking the backward compatibility with existing network infrastructure, this section outlines a complementary approach that has emerged from operational deployments, that is the use of a declarative intent and policy overlay.
+
+This approach does not modify YANG or propose new YANG statements. Instead, it introduces a logical layer above YANG that serves as the bridge between human-readable intent and machine-executable configuration.
+
+Take a natural language based service provisioning intent for example, Instead of forcing AI agents to directly translate loose, high-level operator intent into rigid, low-level structural service YANG leaf nodes, the agent could first compile the intent into a declarative intent/policy overlay.
+This overlay explicitly encapsulates invariants, business constraints, and dynamic behavioral policies that existing service models cannot naturally represent. The overlay is co-delivered alongside the generated concrete YANG instances to the lower-layer agents.
+
 
 
 ## Human-in-the-Loop

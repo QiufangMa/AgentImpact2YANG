@@ -3,7 +3,7 @@ title: "Rethinking YANG-based Service and Network Management in the Era of Agent
 abbrev: "Agent implications for YANG"
 category: info
 
-docname: draft-nmop-yang-ai-challenges-latest
+docname: draft-mw-nmop-yang-ai-challenges-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -21,7 +21,7 @@ venue:
 #  mail: WG@example.com
 #  arch: https://example.com/WG
   github: "QiufangMa/AgentImpact2YANG"
-  latest: "https://QiufangMa.github.io/AgentImpact2YANG/draft-nmop-yang-ai-challenges.html"
+  latest: "https://QiufangMa.github.io/AgentImpact2YANG/draft-mw-nmop-yang-ai-challenges.html"
 
 author:
  -

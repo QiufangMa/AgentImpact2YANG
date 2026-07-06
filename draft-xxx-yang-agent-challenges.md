@@ -209,8 +209,6 @@ step 3 of the workflow in {{provision}} and step 2 of the workflow in {{troubles
 
 Highly compressed binary alternatives like CBOR mitigate bandwidth issues but introduce a fundamental incompatibility with LLM processing pipelines: LLMs operate exclusively on text token streams and cannot consume raw binary payloads directly. Currently, there is a clear gap for a token-efficient, semantic-preserving encoding format specifically designed for AI-agent consumption.
 
-The gap is distinct from semantic YANG comprehension: even with perfect YANG understanding, the volume of transmitted YANG data remains a barrier to cost-effective agent operations.
-
 
 ## Gap 3: Non-determinism Task Handling {#Uncertainty}
 
@@ -277,7 +275,7 @@ There is also other work in NMOP focusing on semantic enrichment that could serv
 
  * {{?I-D.ietf-nmop-network-anomaly-semantics}} describes common network symptom semantics across different network planes.
 
-An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging gaps in {{comprehension}} and {{Expressiveness}}.
+An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging the gap in {{Expressiveness}}.
 
 ## Declarative Intent/Policy Overlay
 

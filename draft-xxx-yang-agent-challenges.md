@@ -118,6 +118,8 @@ AI Agent:
    decompose abstract high-level intents into a sequence of
    operational actions.
 
+non-determinism:
+: The property whereby an AI Agent may produce different outputs (e.g., generate different configuration or give different network diagnostic conclusions) across multiple invocations given the identical input, due to the probabilistic nature of the underlying model, historical context drift, or non-producible reasoning paths.
 
 # A Reference Architecture and Typical Workflows
 
@@ -131,7 +133,7 @@ network automation context.
 ## Layered AI Agent Deployment Architecture
 
 This document targets a hierarchical agent deployment architecture as specified in {{arch}}. It is a simplified view that hides task agents, function modules or toolsets that are available for agents to invoke. The architecture may also use memory management (e.g., short-term and long-term memory) to maintain conversational continuity and enable contextual search.
-Refer to {{?I-D.draft-wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
+Refer to {{?I-D.wmz-nmrg-agent-ndt-arch}} for the complete architecture design.
 
 
 ~~~~
@@ -244,6 +246,7 @@ While syntax errors (e.g., non-existent nodes, invalid enumeration values or out
 
 Similarly in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may struggle to fully understand nested model hierarchies and implicit dependencies between YANG nodes, and thus fail to infer the correlations embedded within operational data. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
+Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation symptoms described above.
 
 ## Gap 2: Expressiveness Limits
 
@@ -258,6 +261,8 @@ This premature semantic pruning deprives downstream network AI agents of the fle
 
 YANG is a fully deterministic modeling language with no built-in support for uncertain or probabilistic reasoning, while the operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach determinism.
 However, when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.
+
+This gap manifests in two related but distinct forms: (1) behavioral non-determinism, where repeated invocations for the same intent yield different YANG-level outputs; and (2) confidence opacity, where the agent's output carries no indication of how reliable it should be considered. Both are elaborated below.
 
 For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in {{provision}}). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in {{troubleshoot}}).
 

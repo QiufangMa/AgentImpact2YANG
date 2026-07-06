@@ -72,7 +72,9 @@ Recently, Large Language Models (LLMs) and AI Agents have emerged as new enabler
 
  * The network digital twin {{?I-D.irtf-nmrg-network-digital-twin-arch}} and agentic AI based architecture for AI driven network operations described in {{?I-D.wmz-nmrg-agent-ndt-arch}}, which deploys hybrid agent systems within the network autonomous domain, and allows agents to invoke network operational function modules and collaborate to solve non-trivial tasks.
 
- * The Network Management Agent (NMA) concept presented in {{?I-D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A interfaces enabling communication among agents to agents, controllers.
+ * The Network Management Agent (NMA) concept presented in {{?I-D.zhao-nmop-network-management-agent}}, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.
+
+* The applicability of MCP {{MCP}} for Network Management {{?I-D.yang-nmrg-mcp-nm}}, which explores how the Model Context Protocol can refactor network management operations and network capabilities as LLM-callable tools.
 
  * The applicability of A2A to Network Management {{?I-D.yang-nmrg-a2a-nm}}, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.
 
@@ -192,6 +194,31 @@ Step 4:
 
 # Gap Analysis {#gaps}
 
+## Gap 1: Expressiveness Limits {#Expressiveness}
+
+In real-world network operations, operator intents often contain expectations and constraints, relaxation preferences, retry strategies, or fallback rules. Nevertheless, YANG is designed solely focuses on defining data structures and formats, syntax and semantic rules and static data dependencies. It lacks the ability to express dynamic and flexible operational logic, which creates a hard boundary for carrying intent and limits the decision space of multi-agent system.
+
+This Gap hinders step 3 of the service provisioning/optimization workflow ({{provision}}). To adapt to static YANG structures, orchestrator AI agents have to prune and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
+
+This premature semantic pruning deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.
+
+## Gap 2: Token Efficiency and Structural Encoding Overhead {#encoding}
+
+Existing YANG serialization formats (e.g., XML and JSON {{?RFC7951}}) are heavily optimized for either human readability or strict software parsing. When adapted to agentic AI environments, these formats introduce significant redundancy, and thus consumes substantial LLM context window capacity and incurring significant token costs. This gap is explicitly exposed during
+step 3 of the workflow in {{provision}} and step 2 of the workflow in {{troubleshoot}}, where verbose encoding adds latency and cost without contributing semantic value.
+
+Highly compressed binary alternatives like CBOR mitigate bandwidth issues but introduce a fundamental incompatibility with LLM processing pipelines: LLMs operate exclusively on text token streams and cannot consume raw binary payloads directly. Currently, there is a clear gap for a token-efficient, semantic-preserving encoding format specifically designed for AI-agent consumption.
+
+
+## Gap 3: Non-determinism Task Handling {#Uncertainty}
+
+when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.
+
+For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in {{provision}}). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in {{troubleshoot}}).
+
+
+<!--
+
 ## Gap 1: Insufficient Semantics Comprehension {#comprehension}
 
 YANG is a data modeling language rich in semantics. When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics.
@@ -203,30 +230,8 @@ While syntax errors (e.g., non-existent nodes, invalid enumeration values or out
 
 Similarly in the step 2 of the network troubleshooting workflow ({{troubleshoot}}), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may struggle to fully understand nested model hierarchies and implicit dependencies between YANG nodes, and thus fail to infer the correlations embedded within operational data. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.
 
-Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation symptoms described above.
+Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library {{?RFC8525}} are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation issue described above.
 
-## Gap 2: Expressiveness Limits {#Expressiveness}
-
-In real-world network operations, operator intents often contain expectations and constraints, relaxation preferences, retry strategies, or fallback rules. Nevertheless, YANG is designed solely focuses on defining data structures and formats, syntax and semantic rules and static data dependencies. It lacks the ability to express dynamic and flexible operational logic, which creates a hard boundary for carrying intent and limits the decision space of multi-agent system.
-
-This Gap hinders step 3 of the service provisioning/optimization workflow ({{provision}}). To adapt to static YANG structures, orchestrator AI agents have to prune and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.
-
-This premature semantic pruning deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.
-
-
-## Gap 3: Non-determinism and Uncertainty in YANG-Level Actions {#Uncertainty}
-
-YANG is a fully deterministic modeling language with no built-in support for uncertain or probabilistic reasoning, while the operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach determinism.
-However, when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.
-
-This gap manifests in two related but distinct forms: (1) behavioral non-determinism, where repeated invocations for the same intent yield different YANG-level outputs; and (2) confidence opacity, where the agent's output carries no indication of how reliable it should be considered. Both are elaborated below.
-
-For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in {{provision}}). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in {{troubleshoot}}).
-
-Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.
-
-
-<!--
 ## Gap 4: Lack of Explainability {#Explainability}
 
 YANG is designed for the deterministic network automation. It assumes the client knows exactly what to configure and why. AI agents, which act as autonomous decision-makers that generate YANG configuration data and perform specific network operations, needs to explain their decisions for human oversight, operational auditing, and compliance governance. This gap manifests in steps 2 and 4 of the service provisioning/optimization workflow ({{provision}}), as well as steps 3 and 4 of the network troubleshooting workflow ({{troubleshoot}}).
@@ -250,17 +255,17 @@ This section explores several operational directions to try to bridge the gaps i
 
 ## YANG-driven Operations as AI-Invocable Tools
 
-A promising direction for partially addressing gap in {{comprehension}} is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
+A promising direction for partially addressing gap in {{Uncertainty}} is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.
 
-Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy {{gNMIBuddy}} provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
+The applicability of MCP to network management is discussed in {{I-D.yang-nmrg-mcp-nm}}. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy {{gNMIBuddy}} provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.
 
 ## Semantic Enrichment via Knowledge Graphs and Semantic Metadata
 
-Gaps identified in {{comprehension}} and {{Expressiveness}} can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.
+Gaps identified in {{Expressiveness}} can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.
 
 IETF work in this area includes {{?I-D.mackey-nmop-kg-for-netops}} and {{?I-D.tailhardat-nmop-incident-management-noria}}, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.
 
-When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing gap in {{comprehension}}. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing {{Expressiveness}}.
+When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing {{Expressiveness}}.
 
 There is also other work in NMOP focusing on semantic enrichment that could serve as a foundation layer for agentic AI driven network anomaly detection. A set of ongoing drafts include:
 
@@ -270,8 +275,28 @@ There is also other work in NMOP focusing on semantic enrichment that could serv
 
  * {{?I-D.ietf-nmop-network-anomaly-semantics}} describes common network symptom semantics across different network planes.
 
-An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging gaps in {{comprehension}} and {{Expressiveness}}.
+An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging the gap in {{Expressiveness}}.
 
+## Declarative Intent/Policy Overlay
+
+To bridge the semantic loss challenge specified in {{Expressiveness}} without breaking the backward compatibility with existing network infrastructure, this section outlines a complementary approach that has emerged from operational deployments, that is the use of a declarative intent and policy overlay.
+
+This approach does not modify YANG or propose new YANG statements. Instead, it introduces a logical layer above YANG that serves as the bridge between human-readable intent and machine-executable configuration.
+
+Take a natural language based service provisioning intent for example, Instead of forcing AI agents to directly translate loose, high-level operator intent into rigid, low-level structural service YANG leaf nodes, the agent could first compile the intent into a declarative intent/policy overlay.
+This overlay explicitly encapsulates invariants, business constraints, and dynamic behavioral policies that existing service models cannot naturally represent. The overlay is co-delivered alongside the generated concrete YANG instances to the lower-layer agents.
+
+## Token-Efficient YANG Serialization for Agent Contexts
+
+As noted in {{encoding}}, the verbosity of YANG instance data, particularly in JSON/XML encodings, poses a practical barrier to cost-effective agent operations. One possible way forward is the development of a token-efficient YANG serialization mechanism tailored to agentic consumption.
+
+<!--
+## Human-in-the-Loop
+
+While full autonomy is a long‑term goal for agentic AI enabled network management, a mechanism that escalates decisions based on assessed risk or confidence level is essential for safe deployment. This approach helps avoid the negative effect caused due to agent uncertainty in YANG-Level Actions ({{Uncertainty}}).
+
+For example, a low-risk operation proceeds automatically without human approval, while a high-risk one renders a visual diff, the network digital twin simulation report, and the agent’s intent explanation (including confidence and evidence), and pushes the report to a human for approval. It could be possible for users to verify agent decisions and further clarify their intentions.
+-->
 
 # Security Considerations
 

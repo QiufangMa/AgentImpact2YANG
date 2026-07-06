@@ -122,14 +122,8 @@ Table of Contents
    *  The Network Management Agent (NMA) concept presented in
       [I-D.zhao-nmop-network-management-agent], which proposes that
       network management agents can be deployed at both orchestrator and
-      controller layers, with A2A, A2C, and A2N interfaces enabling
-      communication among agents to agents, controllers, and network
-      elements.
-
-   *  The applicability of MCP [MCP] for Network Management
-      [I-D.yang-nmrg-mcp-nm], which explores how the Model Context
-      Protocol can refactor network management operations and network
-      capabilities as LLM-callable tools.
+      controller layers, with A2A interfaces enabling communication
+      among agents to agents, controllers.
 
    *  The applicability of A2A to Network Management
       [I-D.yang-nmrg-a2a-nm], which outlines how the Agent to Agent
@@ -444,11 +438,10 @@ Table of Contents
    the agent’s burden of understanding complex YANG schemas and
    mitigates the risk of generating invalid configuration data.
 
-   The applicability of MCP to network management is discussed in
-   [I-D.yang-nmrg-mcp-nm].  Industry open-source exploration is emerging
-   towards this direction, e.g., gNMIBuddy [gNMIBuddy] provides a
-   toolkit to wrap gNMI and OpenConfig YANG data models based network
-   operations, designed primarily for LLMs with MCP integration.
+   Industry open-source exploration is emerging towards this direction,
+   e.g., gNMIBuddy [gNMIBuddy] provides a toolkit to wrap gNMI and
+   OpenConfig YANG data models based network operations, designed
+   primarily for LLMs with MCP integration.
 
 5.2.  Semantic Enrichment via Knowledge Graphs and Semantic Metadata
 
@@ -612,14 +605,6 @@ Table of Contents
               draft-yang-nmrg-a2a-nm-03, 5 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
               a2a-nm-03>.
-
-   [I-D.yang-nmrg-mcp-nm]
-              YUANYUANYANG, Wu, Q., Lopez, D., Moreno, N. R.,
-              Tailhardat, L., and S. Prabhu, "Applicability of MCP for
-              the Network Management", Work in Progress, Internet-Draft,
-              draft-yang-nmrg-mcp-nm-03, 5 July 2026,
-              <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
-              mcp-nm-03>.
 
    [I-D.zhao-nmop-network-management-agent]
               XingZhao, Wang, M., Wu, B., Ceccarelli, D., Zheng, H., and

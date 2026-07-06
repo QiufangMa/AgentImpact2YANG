@@ -284,7 +284,7 @@ An AI agent gains a structured and machine-understandable vocabulary for describ
 
 ## Declarative Intent/Policy Overlay
 
-To bridge the semantic loss challenge specified in {{expressiveness}} without breaking the backward compatibility with existing network infrastructure, this section outlines a complementary approach that has emerged from operational deployments, that is the use of a declarative intent and policy overlay.
+To bridge the semantic loss challenge specified in {{Expressiveness}} without breaking the backward compatibility with existing network infrastructure, this section outlines a complementary approach that has emerged from operational deployments, that is the use of a declarative intent and policy overlay.
 
 This approach does not modify YANG or propose new YANG statements. Instead, it introduces a logical layer above YANG that serves as the bridge between human-readable intent and machine-executable configuration.
 

@@ -91,7 +91,6 @@ Table of Contents
      5.1.  YANG-driven Operations as AI-Invocable Tools
      5.2.  Semantic Enrichment via Knowledge Graphs and Semantic
            Metadata
-     5.3.  Human-in-the-Loop
    6.  Security Considerations
    7.  IANA Considerations
    8.  References
@@ -493,21 +492,6 @@ Table of Contents
    hooks, and contributes to bridging gaps in Section 4.1 and
    Section 4.2.
 
-5.3.  Human-in-the-Loop
-
-   While full autonomy is a long-term goal for agentic AI enabled
-   network management, a mechanism that escalates decisions based on
-   assessed risk or confidence level is essential for safe deployment.
-   This approach helps avoid the negative effect caused due to agent
-   uncertainty in YANG-Level Actions (Section 4.3).
-
-   For example, a low-risk operation proceeds automatically without
-   human approval, while a high-risk one renders a visual diff, the
-   network digital twin simulation report, and the agent’s intent
-   explanation (including confidence and evidence), and pushes the
-   report to a human for approval.  It could be possible for users to
-   verify agent decisions and further clarify their intentions.
-
 6.  Security Considerations
 
    The integration of agentic AI with YANG-based network automation
@@ -559,9 +543,9 @@ Table of Contents
               Hong, Y., Youn, J., Wu, Q., and B. Claise, "Motivations
               and Problem Statement of Agentic AI for network
               management", Work in Progress, Internet-Draft, draft-hong-
-              nmrg-agenticai-ps-01, 1 March 2026,
+              nmrg-agenticai-ps-02, 5 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-hong-nmrg-
-              agenticai-ps-01>.
+              agenticai-ps-02>.
 
    [I-D.ietf-nmop-network-anomaly-architecture]
               Graf, T., Du, W., Francois, P., and A. H. Feng, "A
@@ -625,25 +609,25 @@ Table of Contents
               Lopez, D., Moreno, N. R., Tailhardat, L., Ma, Q., Wu, Q.,
               YUANYUANYANG, and S. Prabhu, "Applicability of A2A to the
               Network Management", Work in Progress, Internet-Draft,
-              draft-yang-nmrg-a2a-nm-02, 26 February 2026,
+              draft-yang-nmrg-a2a-nm-03, 5 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
-              a2a-nm-02>.
+              a2a-nm-03>.
 
    [I-D.yang-nmrg-mcp-nm]
-              YUANYUANYANG, Wu, Q., Lopez, D., Moreno, N. R., and L.
-              Tailhardat, "Applicability of MCP for the Network
-              Management", Work in Progress, Internet-Draft, draft-yang-
-              nmrg-mcp-nm-02, 24 February 2026,
+              YUANYUANYANG, Wu, Q., Lopez, D., Moreno, N. R.,
+              Tailhardat, L., and S. Prabhu, "Applicability of MCP for
+              the Network Management", Work in Progress, Internet-Draft,
+              draft-yang-nmrg-mcp-nm-03, 5 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-yang-nmrg-
-              mcp-nm-02>.
+              mcp-nm-03>.
 
    [I-D.zhao-nmop-network-management-agent]
               XingZhao, Wang, M., Wu, B., Ceccarelli, D., Zheng, H., and
               J. Zhou, "AI based Network Management Agent(NMA): Concepts
               and Architecture", Work in Progress, Internet-Draft,
-              draft-zhao-nmop-network-management-agent-04, 26 February
-              2026, <https://datatracker.ietf.org/doc/html/draft-zhao-
-              nmop-network-management-agent-04>.
+              draft-zhao-nmop-network-management-agent-05, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-zhao-nmop-
+              network-management-agent-05>.
 
    [MCP]      "Model Context Protocol", November 2024,
               <https://modelcontextprotocol.io/>.

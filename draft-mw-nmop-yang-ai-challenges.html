@@ -1174,13 +1174,13 @@ svg {
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-gap-analysis" class="internal xref">Gap Analysis</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-gap-1-insufficient-semantic" class="internal xref">Gap 1: Insufficient Semantics Comprehension</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-gap-1-expressiveness-limits" class="internal xref">Gap 1: Expressiveness Limits</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-gap-2-expressiveness-limits" class="internal xref">Gap 2: Expressiveness Limits</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-gap-2-token-efficiency-and-" class="internal xref">Gap 2: Token Efficiency and Structural Encoding Overhead</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-non-determinism-and-u" class="internal xref">Gap 3: Non-determinism and Uncertainty in YANG-Level Actions</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-gap-3-non-determinism-task-" class="internal xref">Gap 3: Non-determinism Task Handling</a></p>
 </li>
             </ul>
 </li>
@@ -1192,6 +1192,12 @@ svg {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-semantic-enrichment-via-kno" class="internal xref">Semantic Enrichment via Knowledge Graphs and Semantic Metadata</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-declarative-intent-policy-o" class="internal xref">Declarative Intent/Policy Overlay</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-token-efficient-yang-serial" class="internal xref">Token-Efficient YANG Serialization for Agent Contexts</a></p>
 </li>
             </ul>
 </li>
@@ -1234,10 +1240,13 @@ svg {
           <p id="section-1-3.1.1">The network digital twin <span>[<a href="#I-D.irtf-nmrg-network-digital-twin-arch" class="cite xref">I-D.irtf-nmrg-network-digital-twin-arch</a>]</span> and agentic AI based architecture for AI driven network operations described in <span>[<a href="#I-D.wmz-nmrg-agent-ndt-arch" class="cite xref">I-D.wmz-nmrg-agent-ndt-arch</a>]</span>, which deploys hybrid agent systems within the network autonomous domain, and allows agents to invoke network operational function modules and collaborate to solve non-trivial tasks.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-3.2">
-          <p id="section-1-3.2.1">The Network Management Agent (NMA) concept presented in <span>[<a href="#I-D.zhao-nmop-network-management-agent" class="cite xref">I-D.zhao-nmop-network-management-agent</a>]</span>, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A interfaces enabling communication among agents to agents, controllers.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.2.1">The Network Management Agent (NMA) concept presented in <span>[<a href="#I-D.zhao-nmop-network-management-agent" class="cite xref">I-D.zhao-nmop-network-management-agent</a>]</span>, which proposes that network management agents can be deployed at both orchestrator and controller layers, with A2A, A2C, and A2N interfaces enabling communication among agents to agents, controllers, and network elements.<a href="#section-1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-3.3">
-          <p id="section-1-3.3.1">The applicability of A2A to Network Management <span>[<a href="#I-D.yang-nmrg-a2a-nm" class="cite xref">I-D.yang-nmrg-a2a-nm</a>]</span>, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-3.3.1">The applicability of MCP <span>[<a href="#MCP" class="cite xref">MCP</a>]</span> for Network Management <span>[<a href="#I-D.yang-nmrg-mcp-nm" class="cite xref">I-D.yang-nmrg-mcp-nm</a>]</span>, which explores how the Model Context Protocol can refactor network management operations and network capabilities as LLM-callable tools.<a href="#section-1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-3.4">
+          <p id="section-1-3.4.1">The applicability of A2A to Network Management <span>[<a href="#I-D.yang-nmrg-a2a-nm" class="cite xref">I-D.yang-nmrg-a2a-nm</a>]</span>, which outlines how the Agent to Agent protocol can be leveraged to develop various rich AI driven network applications, realize intent-based network management automation in the multi-vendor heterogeneous network environment.<a href="#section-1-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-4">While the industry is actively exploring the application of agentic AI to autonomous network, little attention has been paid to how YANG modeling, as the very foundation of model-driven network automation, would be impacted, and if there is any critical gaps that remain unrecognized/unsolved at the intersection of probabilistic AI agents and deterministic structured YANG.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1419,39 +1428,33 @@ Refer to <span>[<a href="#I-D.wmz-nmrg-agent-ndt-arch" class="cite xref">I-D.wmz
       <h2 id="name-gap-analysis">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-gap-analysis" class="section-name selfRef">Gap Analysis</a>
       </h2>
-<div id="comprehension">
+<div id="Expressiveness">
 <section id="section-4.1">
-        <h3 id="name-gap-1-insufficient-semantic">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gap-1-insufficient-semantic" class="section-name selfRef">Gap 1: Insufficient Semantics Comprehension</a>
+        <h3 id="name-gap-1-expressiveness-limits">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gap-1-expressiveness-limits" class="section-name selfRef">Gap 1: Expressiveness Limits</a>
         </h3>
-<p id="section-4.1-1">YANG is a data modeling language rich in semantics. When the AI agent translates the operator intent expressed via natural language into YANG-structured data, AI hallucinations are commonly observed due to insufficient comprehension of YANG semantics.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">This issue arises for several reasons. First, a lot of YANG semantics rely on informal natural language expressed via "description" statement, which is designed for human-readability. Second, cross-node associations implemented via "leafref", "when", or "must" statements need to be traversed step by step, in which process Large Language Models may suffer from drift. Both easily introduce ambiguity and potential misinterpretation, making it hard for LLMs to generate correct YANG configuration. Furthermore, real-world network deployments introduce more challenges through vendor-specific YANG extensions, augmentations, and deviations, as well as multiple versions of YANG modules, all of which contribute to exponential difficulties in completely comprehending YANG semantics.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">This gap hinders Step 2 of the Service Provisioning/Optimization Workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>), where the Orchestrator Agent ingests a high-level customer intent and attempts to map it into service-level YANG models (e.g., ietf-l3vpn-svc).
-While syntax errors (e.g., non-existent nodes, invalid enumeration values or out-of-range parameters) can be effectively detected and fixed by configuration validation tools, the more significant challenge lies in intent-level mismatch. For instance, the agent may misinterpret certain YANG data nodes, producing configuration that is syntactically valid yet fails to align with the operator's original intent.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">Similarly in the step 2 of the network troubleshooting workflow (<a href="#troubleshoot" class="auto internal xref">Section 3.3</a>), when analyzing massive telemetry data composed of operational state data from multiple devices, agents may struggle to fully understand nested model hierarchies and implicit dependencies between YANG nodes, and thus fail to infer the correlations embedded within operational data. Incomplete semantic comprehension could lead to misjudgment of network anomalies, inaccurate fault localization, and flawed repair solutions derived from misinterpreted state data.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">Furthermore, a production network may expose hundreds of YANG modules with vendor augmentations and deviations, far exceeding what can be feasibly included in an AI agent's context window. An Agent must first correctly identify which subset of the YANG schema is relevant to a given intent or telemetry observation. Existing mechanisms such as YANG library <span>[<a href="#RFC8525" class="cite xref">RFC8525</a>]</span> are not optimized for agent-driven retrieval. This retrieval issue is distinct from semantic comprehension itself, but a failure to retrieve the correct schema will manifest as the same hallucination or misinterpretation symptoms described above.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">In real-world network operations, operator intents often contain expectations and constraints, relaxation preferences, retry strategies, or fallback rules. Nevertheless, YANG is designed solely focuses on defining data structures and formats, syntax and semantic rules and static data dependencies. It lacks the ability to express dynamic and flexible operational logic, which creates a hard boundary for carrying intent and limits the decision space of multi-agent system.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">This Gap hinders step 3 of the service provisioning/optimization workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>). To adapt to static YANG structures, orchestrator AI agents have to prune and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">This premature semantic pruning deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="Expressiveness">
+<div id="encoding">
 <section id="section-4.2">
-        <h3 id="name-gap-2-expressiveness-limits">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-gap-2-expressiveness-limits" class="section-name selfRef">Gap 2: Expressiveness Limits</a>
+        <h3 id="name-gap-2-token-efficiency-and-">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-gap-2-token-efficiency-and-" class="section-name selfRef">Gap 2: Token Efficiency and Structural Encoding Overhead</a>
         </h3>
-<p id="section-4.2-1">In real-world network operations, operator intents often contain expectations and constraints, relaxation preferences, retry strategies, or fallback rules. Nevertheless, YANG is designed solely focuses on defining data structures and formats, syntax and semantic rules and static data dependencies. It lacks the ability to express dynamic and flexible operational logic, which creates a hard boundary for carrying intent and limits the decision space of multi-agent system.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">This Gap hinders step 3 of the service provisioning/optimization workflow (<a href="#provision" class="auto internal xref">Section 3.2</a>). To adapt to static YANG structures, orchestrator AI agents have to prune and simplify the original intent. Implicit operational requirements embedded in original intents, such as service continuity, high availability and security compliance, are likely lost during the transformation process.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">This premature semantic pruning deprives downstream network AI agents of the flexibility to make dynamic decisions, perform graceful degradation or apply fault-tolerant adjustments when network runtime status changes.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">Existing YANG serialization formats (e.g., XML and JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>) are heavily optimized for either human readability or strict software parsing. When adapted to agentic AI environments, these formats introduce significant redundancy, and thus consumes substantial LLM context window capacity and incurring significant token costs. This gap is explicitly exposed during
+step 3 of the workflow in <a href="#provision" class="auto internal xref">Section 3.2</a> and step 2 of the workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>, where verbose encoding adds latency and cost without contributing semantic value.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Highly compressed binary alternatives like CBOR mitigate bandwidth issues but introduce a fundamental incompatibility with LLM processing pipelines: LLMs operate exclusively on text token streams and cannot consume raw binary payloads directly. Currently, there is a clear gap for a token-efficient, semantic-preserving encoding format specifically designed for AI-agent consumption.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Uncertainty">
 <section id="section-4.3">
-        <h3 id="name-gap-3-non-determinism-and-u">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-non-determinism-and-u" class="section-name selfRef">Gap 3: Non-determinism and Uncertainty in YANG-Level Actions</a>
+        <h3 id="name-gap-3-non-determinism-task-">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-gap-3-non-determinism-task-" class="section-name selfRef">Gap 3: Non-determinism Task Handling</a>
         </h3>
-<p id="section-4.3-1">YANG is a fully deterministic modeling language with no built-in support for uncertain or probabilistic reasoning, while the operational determinism of an AI agent behavior may vary across different levels of task complexity and abstraction. Under scenarios where the prompt provides precise, explicit operational instructions (e.g., "modify the MTU value of interface Eth1/1 on Device A to 1500"), or where strict guardrails and constraint checks are enforced, the agent's behavior could achieve or closely approach determinism.
-However, when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">This gap manifests in two related but distinct forms: (1) behavioral non-determinism, where repeated invocations for the same intent yield different YANG-level outputs; and (2) confidence opacity, where the agent's output carries no indication of how reliable it should be considered. Both are elaborated below.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in <a href="#provision" class="auto internal xref">Section 3.2</a>). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.3-3" class="pilcrow">¶</a></p>
-<p id="section-4.3-4">Besides, AI agents also inherently produce outputs with varying degrees of confidence. When an agent generates a configuration change, there is currently a lack of visibility into how confident the agent was in that specific operation, and whether the agent internally marks a YANG-level action as tentative, low-confidence, or likely to be reverted.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">when tasked with ambiguous instructions, missing/unreliable data, deep reasoning, or executing multi-step decisions, the agent's behavior could inevitably introduce randomness and unpredictability. These unpredictable variations in Agent and LLM outputs can significantly impact the reliability and consistency of network operations.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">For the same high-level intent, an agent may generate different YANG instance data due to historical context drift or the probabilistic nature of the underlying large language models (steps 2 and 4 of the service provisioning/optimization workflow in <a href="#provision" class="auto internal xref">Section 3.2</a>). Likewise, when analyzing network anomalies or incidents, multiple distinct diagnostic trajectories and explanations may emerge even for the exact same observed network operational state (steps 3 and 4 of the network troubleshooting workflow in <a href="#troubleshoot" class="auto internal xref">Section 3.3</a>).<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1467,8 +1470,8 @@ However, when tasked with ambiguous instructions, missing/unreliable data, deep 
         <h3 id="name-yang-driven-operations-as-a">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-yang-driven-operations-as-a" class="section-name selfRef">YANG-driven Operations as AI-Invocable Tools</a>
         </h3>
-<p id="section-5.1-1">A promising direction for partially addressing gap in <a href="#comprehension" class="auto internal xref">Section 4.1</a> is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy <span>[<a href="#gNMIBuddy" class="cite xref">gNMIBuddy</a>]</span> provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">A promising direction for partially addressing gap in <a href="#Uncertainty" class="auto internal xref">Section 4.3</a> is to refactor YANG‑based network operations into AI‑invocable tools using the Model Context Protocol (MCP). Instead of requiring an AI agent to generate raw YANG instance data directly, which is prone to hallucination or exhibits non-determined behavior, the agent invokes an MCP tool with structured parameters. By shielding agents from low-level syntax and model complexity, this abstraction layer reduces the agent’s burden of understanding complex YANG schemas and mitigates the risk of generating invalid configuration data.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">The applicability of MCP to network management is discussed in <span>[<a href="#I-D.yang-nmrg-mcp-nm" class="cite xref">I-D.yang-nmrg-mcp-nm</a>]</span>. Industry open-source exploration is emerging towards this direction, e.g., gNMIBuddy <span>[<a href="#gNMIBuddy" class="cite xref">gNMIBuddy</a>]</span> provides a toolkit to wrap gNMI and OpenConfig YANG data models based network operations, designed primarily for LLMs with MCP integration.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="semantic-enrichment-via-knowledge-graphs-and-semantic-metadata">
@@ -1476,9 +1479,9 @@ However, when tasked with ambiguous instructions, missing/unreliable data, deep 
         <h3 id="name-semantic-enrichment-via-kno">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-semantic-enrichment-via-kno" class="section-name selfRef">Semantic Enrichment via Knowledge Graphs and Semantic Metadata</a>
         </h3>
-<p id="section-5.2-1">Gaps identified in <a href="#comprehension" class="auto internal xref">Section 4.1</a> and <a href="#Expressiveness" class="auto internal xref">Section 4.2</a> can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">Gaps identified in <a href="#Expressiveness" class="auto internal xref">Section 4.1</a> can be partially addressed by adding a semantic layer on top of YANG data models. Knowledge graphs (KGs) provide a machine‑readable representation of network knowledge, enabling AI agents to better understand the semantics, relationships, and constraints embedded in the network.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">IETF work in this area includes <span>[<a href="#I-D.mackey-nmop-kg-for-netops" class="cite xref">I-D.mackey-nmop-kg-for-netops</a>]</span> and <span>[<a href="#I-D.tailhardat-nmop-incident-management-noria" class="cite xref">I-D.tailhardat-nmop-incident-management-noria</a>]</span>, which correlate data from different network planes, e.g., management, control, and data planes and present a holistic view of network status.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics, addressing gap in <a href="#comprehension" class="auto internal xref">Section 4.1</a>. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing <a href="#Expressiveness" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">When a user expresses a high-level intent such as "check why the VPN tunnel is down", a KG‑enhanced agent can query the YANG-based knowledge graph to understand the relationships between relevant services and metrics. Furthermore, KGs can explicitly model concepts such as "preferred vs. optional", temporal KGs can model concepts such as "transient vs. persistent failure", which are currently absent from YANG, partially addressing <a href="#Expressiveness" class="auto internal xref">Section 4.1</a>.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <p id="section-5.2-4">There is also other work in NMOP focusing on semantic enrichment that could serve as a foundation layer for agentic AI driven network anomaly detection. A set of ongoing drafts include:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-5.1">
@@ -1491,7 +1494,26 @@ However, when tasked with ambiguous instructions, missing/unreliable data, deep 
             <p id="section-5.2-5.3.1"><span>[<a href="#I-D.ietf-nmop-network-anomaly-semantics" class="cite xref">I-D.ietf-nmop-network-anomaly-semantics</a>]</span> describes common network symptom semantics across different network planes.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.2-6">An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging gaps in <a href="#comprehension" class="auto internal xref">Section 4.1</a> and <a href="#Expressiveness" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
+<p id="section-5.2-6">An AI agent gains a structured and machine-understandable vocabulary for describing, querying, and reasoning about network anomaly. The standardized anomaly semantic metadata provides the missing semantic hooks, and contributes to bridging the gap in <a href="#Expressiveness" class="auto internal xref">Section 4.1</a>.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="declarative-intentpolicy-overlay">
+<section id="section-5.3">
+        <h3 id="name-declarative-intent-policy-o">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-declarative-intent-policy-o" class="section-name selfRef">Declarative Intent/Policy Overlay</a>
+        </h3>
+<p id="section-5.3-1">To bridge the semantic loss challenge specified in <a href="#Expressiveness" class="auto internal xref">Section 4.1</a> without breaking the backward compatibility with existing network infrastructure, this section outlines a complementary approach that has emerged from operational deployments, that is the use of a declarative intent and policy overlay.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">This approach does not modify YANG or propose new YANG statements. Instead, it introduces a logical layer above YANG that serves as the bridge between human-readable intent and machine-executable configuration.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Take a natural language based service provisioning intent for example, Instead of forcing AI agents to directly translate loose, high-level operator intent into rigid, low-level structural service YANG leaf nodes, the agent could first compile the intent into a declarative intent/policy overlay.
+This overlay explicitly encapsulates invariants, business constraints, and dynamic behavioral policies that existing service models cannot naturally represent. The overlay is co-delivered alongside the generated concrete YANG instances to the lower-layer agents.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="token-efficient-yang-serialization-for-agent-contexts">
+<section id="section-5.4">
+        <h3 id="name-token-efficient-yang-serial">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-token-efficient-yang-serial" class="section-name selfRef">Token-Efficient YANG Serialization for Agent Contexts</a>
+        </h3>
+<p id="section-5.4-1">As noted in <a href="#encoding" class="auto internal xref">Section 4.2</a>, the verbosity of YANG instance data, particularly in JSON/XML encodings, poses a practical barrier to cost-effective agent operations. One possible way forward is the development of a token-efficient YANG serialization mechanism tailored to agentic consumption.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1581,6 +1603,10 @@ However, when tasked with ambiguous instructions, missing/unreliable data, deep 
         <dd>
 <span class="refAuthor">Lopez, D.</span>, <span class="refAuthor">Moreno, N. R.</span>, <span class="refAuthor">Tailhardat, L.</span>, <span class="refAuthor">Ma, Q.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">YUANYUANYANG</span>, and <span class="refAuthor">S. Prabhu</span>, <span class="refTitle">"Applicability of A2A to the Network Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yang-nmrg-a2a-nm-03</span>, <time datetime="2026-07-05" class="refDate">5 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yang-nmrg-a2a-nm-03">https://datatracker.ietf.org/doc/html/draft-yang-nmrg-a2a-nm-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.yang-nmrg-mcp-nm">[I-D.yang-nmrg-mcp-nm]</dt>
+        <dd>
+<span class="refAuthor">YUANYUANYANG</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Lopez, D.</span>, <span class="refAuthor">Moreno, N. R.</span>, <span class="refAuthor">Tailhardat, L.</span>, and <span class="refAuthor">S. Prabhu</span>, <span class="refTitle">"Applicability of MCP for the Network Management"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yang-nmrg-mcp-nm-03</span>, <time datetime="2026-07-05" class="refDate">5 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yang-nmrg-mcp-nm-03">https://datatracker.ietf.org/doc/html/draft-yang-nmrg-mcp-nm-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.zhao-nmop-network-management-agent">[I-D.zhao-nmop-network-management-agent]</dt>
         <dd>
 <span class="refAuthor">XingZhao</span>, <span class="refAuthor">Wang, M.</span>, <span class="refAuthor">Wu, B.</span>, <span class="refAuthor">Ceccarelli, D.</span>, <span class="refAuthor">Zheng, H.</span>, and <span class="refAuthor">J. Zhou</span>, <span class="refTitle">"AI based Network Management Agent(NMA): Concepts and Architecture"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-zhao-nmop-network-management-agent-05</span>, <time datetime="2026-07-05" class="refDate">5 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-zhao-nmop-network-management-agent-05">https://datatracker.ietf.org/doc/html/draft-zhao-nmop-network-management-agent-05</a>&gt;</span>. </dd>
@@ -1596,6 +1622,10 @@ However, when tasked with ambiguous instructions, missing/unreliable data, deep 
 <dt id="RFC7950">[RFC7950]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7951">[RFC7951]</dt>
+        <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8040">[RFC8040]</dt>
         <dd>

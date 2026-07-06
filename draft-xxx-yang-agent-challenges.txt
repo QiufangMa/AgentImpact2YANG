@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 18 December 2026                                   16 June 2026
+Expires: 7 January 2027                                      6 July 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2026.
+   This Internet-Draft will expire on 7 January 2027.
 
 Copyright Notice
 
@@ -195,10 +195,17 @@ Table of Contents
       dynamically decompose abstract high-level intents into a sequence
       of operational actions.
 
+   non-determinism:  The property whereby an AI Agent may produce
+      different outputs (e.g., generate different configuration or give
+      different network diagnostic conclusions) across multiple
+      invocations given the identical input, due to the probabilistic
+      nature of the underlying model, historical context drift, or non-
+      producible reasoning paths.
+
 3.  A Reference Architecture and Typical Workflows
 
    This section uses a simplified layered agentic AI reference
-   architecture compliant with [I-D.draft-wmz-nmrg-agent-ndt-arch] and
+   architecture compliant with [I-D.wmz-nmrg-agent-ndt-arch] and
    describes two typical workflows: the network service provisioning/
    optimization and the fault troubleshooting.  The workflows cover
    scenarios from configuration generation to YANG modelled data
@@ -217,8 +224,7 @@ Table of Contents
    invoke.  The architecture may also use memory management (e.g.,
    short-term and long-term memory) to maintain conversational
    continuity and enable contextual search.  Refer to
-   [I-D.draft-wmz-nmrg-agent-ndt-arch] for the complete architecture
-   design.
+   [I-D.wmz-nmrg-agent-ndt-arch] for the complete architecture design.
 
       +--------------------------+
       |Orchestrator              |
@@ -348,6 +354,17 @@ Table of Contents
    localization, and flawed repair solutions derived from misinterpreted
    state data.
 
+   Furthermore, a production network may expose hundreds of YANG modules
+   with vendor augmentations and deviations, far exceeding what can be
+   feasibly included in an AI agent's context window.  An Agent must
+   first correctly identify which subset of the YANG schema is relevant
+   to a given intent or telemetry observation.  Existing mechanisms such
+   as YANG library [RFC8525] are not optimized for agent-driven
+   retrieval.  This retrieval issue is distinct from semantic
+   comprehension itself, but a failure to retrieve the correct schema
+   will manifest as the same hallucination or misinterpretation symptoms
+   described above.
+
 4.2.  Gap 2: Expressiveness Limits
 
    In real-world network operations, operator intents often contain
@@ -387,6 +404,12 @@ Table of Contents
    and unpredictability.  These unpredictable variations in Agent and
    LLM outputs can significantly impact the reliability and consistency
    of network operations.
+
+   This gap manifests in two related but distinct forms: (1) behavioral
+   non-determinism, where repeated invocations for the same intent yield
+   different YANG-level outputs; and (2) confidence opacity, where the
+   agent's output carries no indication of how reliable it should be
+   considered.  Both are elaborated below.
 
    For the same high-level intent, an agent may generate different YANG
    instance data due to historical context drift or the probabilistic
@@ -532,14 +555,6 @@ Table of Contents
               "gNMIBuddy", February 2026,
               <https://github.com/jillesca/gNMIBuddy>.
 
-   [I-D.draft-wmz-nmrg-agent-ndt-arch]
-              Wu, Q., Zhou, C., Contreras, L. M., Han, S., and Y. Hong,
-              "Network Digital Twin and Agentic AI based Architecture
-              for AI driven Network Operations", Work in Progress,
-              Internet-Draft, draft-wmz-nmrg-agent-ndt-arch-04, 21 May
-              2026, <https://datatracker.ietf.org/doc/html/draft-wmz-
-              nmrg-agent-ndt-arch-04>.
-
    [I-D.hong-nmrg-agenticai-ps]
               Hong, Y., Youn, J., Wu, Q., and B. Claise, "Motivations
               and Problem Statement of Agentic AI for network
@@ -574,12 +589,12 @@ Table of Contents
 
    [I-D.irtf-nmrg-network-digital-twin-arch]
               Zhou, C., Yang, H., Duan, X., Lopez, D., Pastor, A., Wu,
-              Q., Boucadair, M., and C. Jacquenet, "Network Digital
-              Twin: Concepts and Reference Architecture", Work in
+              Q., Boucadair, M., and C. Jacquenet, "Network Digital Twin
+              (NDT): Concepts and Reference Architecture", Work in
               Progress, Internet-Draft, draft-irtf-nmrg-network-digital-
-              twin-arch-12, 27 February 2026,
+              twin-arch-13, 1 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-irtf-nmrg-
-              network-digital-twin-arch-12>.
+              network-digital-twin-arch-13>.
 
    [I-D.mackey-nmop-kg-for-netops]
               Mackey, M., Claise, B., Graf, T., Keller, H., Voyer, D.,
@@ -649,6 +664,11 @@ Table of Contents
    [RFC8309]  Wu, Q., Liu, W., and A. Farrel, "Service Models
               Explained", RFC 8309, DOI 10.17487/RFC8309, January 2018,
               <https://www.rfc-editor.org/rfc/rfc8309>.
+
+   [RFC8525]  Bierman, A., Bjorklund, M., Schoenwaelder, J., Watsen, K.,
+              and R. Wilton, "YANG Library", RFC 8525,
+              DOI 10.17487/RFC8525, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8525>.
 
    [RFC8969]  Wu, Q., Ed., Boucadair, M., Ed., Lopez, D., Xie, C., and
               L. Geng, "A Framework for Automating Service and Network

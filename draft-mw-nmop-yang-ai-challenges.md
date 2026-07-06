@@ -315,4 +315,13 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors would like to thank the following individuals for reviewing and providing valuable inputs to this document (listed in no particular order):
+
+* Joe Clarke
+* Mohamed Boucadair
+* Roland Schott
+* Luis M. Contreras
+* Oscar Gonzalez de Dios
+* Benoît Claise
+* Kent Watsen
+* Thomas Graf

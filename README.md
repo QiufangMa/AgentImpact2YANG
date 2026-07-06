@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "Rethinking YANG-based Service and Network Management in the Era of Agentic AI".
 
-* [Editor's Copy](https://QiufangMa.github.io/AgentImpact2YANG/#go.draft-xxx-yang-agent-challenges.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-xxx-yang-agent-challenges)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-xxx-yang-agent-challenges)
-* [Compare Editor's Copy to Individual Draft](https://QiufangMa.github.io/AgentImpact2YANG/#go.draft-xxx-yang-agent-challenges.diff)
+* [Editor's Copy](https://QiufangMa.github.io/AgentImpact2YANG/#go.draft-nmop-yang-ai-challenges.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-nmop-yang-ai-challenges)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-nmop-yang-ai-challenges)
+* [Compare Editor's Copy to Individual Draft](https://QiufangMa.github.io/AgentImpact2YANG/#go.draft-nmop-yang-ai-challenges.diff)
 
 
 ## Contributing

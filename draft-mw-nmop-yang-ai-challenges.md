@@ -21,7 +21,7 @@ venue:
 #  mail: WG@example.com
 #  arch: https://example.com/WG
   github: "QiufangMa/AgentImpact2YANG"
-  latest: "https://QiufangMa.github.io/AgentImpact2YANG/draft-xxx-yang-agent-challenges.html"
+  latest: "https://QiufangMa.github.io/AgentImpact2YANG/draft-mw-nmop-yang-ai-challenges.html"
 
 author:
  -

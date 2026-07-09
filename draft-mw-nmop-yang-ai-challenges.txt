@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 7 January 2027                                      6 July 2026
+Expires: 10 January 2027                                     9 July 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 January 2027.
+   This Internet-Draft will expire on 10 January 2027.
 
 Copyright Notice
 
@@ -527,25 +527,25 @@ Table of Contents
               Graf, T., Du, W., Francois, P., and A. H. Feng, "A
               Framework for a Network Anomaly Detection Architecture",
               Work in Progress, Internet-Draft, draft-ietf-nmop-network-
-              anomaly-architecture-07, 18 January 2026,
+              anomaly-architecture-08, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-anomaly-architecture-07>.
+              network-anomaly-architecture-08>.
 
    [I-D.ietf-nmop-network-anomaly-lifecycle]
               Riccobene, V., Graf, T., Du, W., and A. H. Feng, "An
               Experiment: Network Anomaly Detection Lifecycle", Work in
               Progress, Internet-Draft, draft-ietf-nmop-network-anomaly-
-              lifecycle-05, 12 February 2026,
+              lifecycle-06, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-anomaly-lifecycle-05>.
+              network-anomaly-lifecycle-06>.
 
    [I-D.ietf-nmop-network-anomaly-semantics]
               Graf, T., Du, W., Feng, A. H., and V. Riccobene, "Semantic
               Metadata Annotation for Network Anomaly Detection", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              anomaly-semantics-05, 19 January 2026,
+              anomaly-semantics-06, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-anomaly-semantics-05>.
+              network-anomaly-semantics-06>.
 
    [I-D.irtf-nmrg-network-digital-twin-arch]
               Zhou, C., Yang, H., Duan, X., Lopez, D., Pastor, A., Wu,

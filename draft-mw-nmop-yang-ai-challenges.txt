@@ -5,7 +5,7 @@
 Network Working Group                                         Q. Ma, Ed.
 Internet-Draft                                                     Q. Wu
 Intended status: Informational                                    Huawei
-Expires: 11 January 2027                                    10 July 2026
+Expires: 12 January 2027                                    11 July 2026
 
 
    Rethinking YANG-based Service and Network Management in the Era of
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 January 2027.
+   This Internet-Draft will expire on 12 January 2027.
 
 Copyright Notice
 
